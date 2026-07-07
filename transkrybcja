@@ -1,0 +1,2104 @@
+
+ekspert:   0:11
+No dobra siostrze pozbędę tego paska idiotycznego simsa.
+Dobra, to to może tak zacznijmy od jakiegoś rysowanka.
+Dobra, to pierwszy taki case, który który zgłosiliście, jeśli dobrze pamiętam, poprawiajcie mnie, jeżeli bzdury gadam, bo właśnie też po to wam przysłałem ten raport, żebyście.
+Podwójnie zweryfikowali, czy czy zwalidowałem dokładnie te scenariusze, które które wam chodziło, czy też no gdzieś się jednak rozminęliśmy ze zrozumieniem.
+Yy, no ale zakładam, że że te właściwe, no to pierwszy taki case, który podnieśliście, że jest sobie portal i w nim jest blades grafanował.
+Ee, mamy gdzieś menedżer, instancje, menedżer prometeusza.
+Drugą instancję znaczy prometeusza.
+I teraz, dopóki one są te prometeusze, mają public and point otwarte.
+To jest wszystko okej.
+Natomiast kiedy któryś z tych?
+Z którychś z tych prometeusz włączyć e private and point?
+To ten drugi też przestaje działać.
+Ee i.
+Dlaczego tak się dzieje? Bo mogę potwierdzić, że tak się dokładnie dzieje. Nie jest to błąd waszej konfiguracji.
+Jest to wspaniałe.
+Nadpisywanie DNS ów.
+W microsofcie macie w każdy private and point rejestruje się w waszej schabowej subskrypcji tak naprawdę czy tam, gdzie jest w ogóle winet się kończy jako zestaw private linków, czyli powstaje taka taka strefa w priva, DNA się, która się nazywa ta.
+Private private ring.
+West Europa.
+Artur kom. Czy tam była evertal jak ta domena domena jest co jest ważne to ona jest regionalna i teraz niestety Microsoft nie pomyślał, że ktoś może mieć w jednym regionie więcej niż jednego mana, prometeusza czy w ogóle prometeusza, do którego sobie gada, więc.
+I w ogóle taki case, że coś otwartego coś nie otwartego, więc.
+Ta domena zostaje wstrzyknięta do tej.
+Menedżer tej nie wiem jak to nazwać tej grafany w portalu.
+Że to jest strefa, że to jest adresaci, po której gada do prometeusza? Nie.
+Nie ta publiczna, czyli tam ażur public domena.
+Tom tylko po po strefie, więc jak to był powiedzmy prometeusz, jeden tu Mateusz 2, no to teraz wcześniej gadało prometeusz, jeden ażur public prometeusz 2 ażur public po włączeniu private and pointu na którymkolwiek z nich próbuję gadać do do prometeusz, jeden privatelling prometeusz 2 private, a ponieważ ten nie ma włączonego private and poetów, więc nie zarejestrował swojej wewnętrznej w tejże otomenie.
+I dlatego są time out i brak brak dostępu i to jest nawet tam wam w tej dokumentacji. Wklejam linka z dokumentacji Microsoftu, w którym ta sytuacja jest dokładnie opisana, więc jedynym wyjściem z takim rozwiązaniem jest albo posiadanie wszystkich tych prometeuszy private albo albo wszystkich public nie ma.
+Nie ma innej drogi, żeby te portalowe grafany czy menedżer grafanas manager prometeuszami.
+Się dogadała, jeżeli jeden jest prawd public albo drugi jest jest private, możecie mieszać pomiędzy regionami bez problemu, czyli jeżeli będziecie mieli na przykład public w nord Europe a private post Europe, to będzie to działać, ale w tym samym regionie nie.
+
+osoba 1    4:30
+Ale to mówisz, to nadpisywanie jest po stronie grafany nie prometeusza, tak.
+
+ekspert:   4:35
+Jest po stronie tak naprawdę strefy w a żuże są to pokaże.
+
+ekspert:   4:47
+Tak widzicie tutaj powstaje ten private link west European. Może nie to all o z i tutaj w riser.
+
+ekspert:   4:57
+Tej chwili będę miał, nie będę miał chyba żadnego mam jednego wstrzykniętego teraz nie.
+No.
+Ja się tutaj będzie każdej.
+
+ekspert:   5:10
+Dokładnie to jest dokładnie ten ten sam ten sam case, co co prawda można iść usunąć ten rekord albo dopisać coś tutaj na pałę, ale to jest, ponieważ ta żona jest zarządzana automatycznie.
+To to, to nie będą, nie będą trwałe zabiegi.
+Jest jeden hair, który udało mi się trochę znaleźć, bo w menedżer to dotyczy menedżer grafany.
+Menedżer graffa nie można jej wstrzyknąć.
+Strefę kastą ową której się ma posługiwać resorverem swoim i to jest akurat fajny haczar do tego jak chcemy mieć jeszcze.
+Tutaj na przykład prometeusza naszego gdzieś na jakimś premie.
+Tak, żeby potrafiła to to zarezerwować, ale to już jest takie.
+Haksożenie, u którego nie nie polecam robić, więc jeżeli macie taki case, że coś musi być public coś musi być private to.
+Bo przemyślałbym czy na pewno musi być to publik?
+Więc raczej raczej starałbym się robić rzeczy związane z monitoringiem private i nie jednak zmuszać do korzystania. Nie wiem z vpn ów, czy czy czego tam korzystacie do dostępu do Azure dla ludzi.
+No bo jednak jest to jest to jakaś tam forma bezpieczeństwa.
+
+osoba 2   6:37
+Znaczy podobnie chyba wyszło w naszych testach, bo też w tej chwili chłopaki robili testy. Międzyczasie, żeby zobaczyć jak to wygląda, że albo albo wszystko na privat znaczy privet and pointach albo na public nie natomiast. No tak jak mówiliśmy wcześniej, no jeżeli idziemy w privit, no to nie będzie działał działać ten wbudowany dashboard grafanowy nie.
+Bo.
+
+ekspert:   7:00
+Będzie działać, jeżeli wszystkie będą najprywate.
+
+osoba 2   7:05
+To ciekawe.
+
+osoba 1    7:06
+Ale nie nie, a nie nie po to ja tam jest. Chyba wydaje mi się, że tam jest inny problem jeszcze.
+Bo znaczy ten fragment, co co teraz? No to generalnie to jest, wydaje mi się, że po stronie grafany problem tak, że ona ma gdzieś tam bitą tą domenę, bo.
+Jeżeli tak jak to narysowałeś nie że mamy tą menedżer tak tą ażurową.
+I to zrobimy MPE, dlatego na przykład Dolnego, tak, że mam private n point i znaczy prawie jeden ten spięte, tak.
+To coś się przestawia właśnie po stronie grafany, że do tego do tego prometeusza, który jest publiczny, czy ten ta ten u góry.
+Się nie dostaniemy dla niego też musimy zrobić menadżer prawie ten pointag.
+
+ekspert:   7:54
+Tak, bo chodzi o to, że tu w tym adresie pojawia się na to drugie, a to drugie nie istnieje, dlatego przestaje działać.
+To jest dalej na poziomie priva dns o i o w tak działa przeciążenie dns u was, że to jest tak samo jak powiedzmy masz maszki wolta maszki wolta powiedzmy z public internet i dokładasz mu private endpoint i nagle z tej sieci, gdzie ten private endpoint jest dostępny to nawet jak rezerwujesz ten adres.
+Główny ten publiczny to nie dostaniesz publiki, dostajesz efektywniej z privat linku.
+I to jest dokładnie ten sam case.
+No Microsoft zrobił takie.
+Overlord publicznych dns ów na prywatne adresy, żeby sobie ludzie krzywdy nie zrobili, no ale w ten sposób trochę rozwala takie case.
+
+osoba 1    8:55
+Ale dobra, ale no ale to jest.
+To tak generalnie mi się wydaje, że to jest po stronie grafany tak tu jest to przeciążenie zrobione tak.
+
+ekspert:   9:04
+Nie Jestem po stronie sieci, nadal po stronie kontrolujesz tego.
+
+osoba 1    9:06
+No nie no bo ten bo ten ten prometeusz u góry co pokazujesz?
+
+ekspert:   9:12
+No.
+
+osoba 1    9:12
+To inną gra fanom się do niego dostanie, dostaje po publiku.
+
+ekspert:   9:17
+No tak, bo bo wskazujesz konkretny adres.
+
+ekspert:   9:24
+Tak, pamiętaj, że tu jest, że tu jest inny winet tak to jest jakiś winet menedżer tam gdzieś tam w środku i ten winnet ma wstrzyknięte te private NSA twoja grafana którą sobie gdzieś tam posadzisz no to ty kontrolujesz jej del jakie ona ma DNSYW tym widać bo to są wszystko ukryte winety dla was.
+
+osoba 1    9:50
+No dobra, no ale ta druga grafa na też jest wasz dłużej też jest menadżer grafana.
+
+ekspert:   9:55
+Tak, ale ona jest, ona jest connected do waszego winetu, nie.
+
+ekspert:   10:00
+To jest kwestia tego, że to dostajecie tak naprawdę izolowany kawałek środowiska, gdzieś w jakimś winecie zarządzanym przez Microsoft trochę tak jak nie wiem, jak manager dyski kiedyś można było mieć dyski w twoim story czeka oucie albo menedżer dyski i się zmieniało routing w zależności od tego, czy to był twój story jacon, który był podłączony do twojego winnetu, czy to był menedżer story jaccount, w którym miałeś manage dysk i.
+I to jest dokładnie ten sam case tu masz manager vinnet, którego nie widzisz do którego są wstrzykiwane te private DNSYI to jest per region, a twoja grafana jest connector do twojego winetu w którym ty zarządzasz co się dzieje i tu możesz jej wstrzyknąć cokolwiek jeżeli chodzi o ten networking, więc w portalowa grafana będzie się zachowywać inaczej niż menedżer grafana.
+
+osoba 1    10:46
+No ale poczekaj, ale jednak nie nie. Ta druga też jest portalowa.
+
+ekspert:   10:51
+Nie rozumiem teraz.
+
+osoba 1    10:57
+Znaczy tak, bo mamy 2 grafany, tak, jedna to jest ta, czy powiedzmy to jest ta po lewej stronie tak no i mamy tą, która jest po prawej stronie, tak.
+
+ekspert:   11:07
+Ale to mówisz, która jest menedżer, która jest portalowa?
+
+osoba 1    11:10
+Znaczy poczekaj inaczej obydwie są menedżer, nie portal, nie ta tak jakby dostępna z portalu, tylko ta menedżer czy ta aż o grafana tak.
+
+ekspert:   11:17
+No to mi pokazywaliście ostatnio, że ta portalowa wam przestaje działać.
+
+osoba 1    11:22
+Portalowa.
+Też jeżeli jest wyłączone.
+Dostęp publiczny do prometeusza.
+
+ekspert:   11:30
+Tak no to ten dostęp lubię wam teraz wytłumaczyłem, dlaczego to przestaje działać.
+
+osoba 1    11:41
+No dobra, czy czy to był ten drugi przypadek? Tak czy to był tej tej budowanej w portal?
+
+ekspert:   11:50
+Mhm.
+
+osoba 2   11:52
+Czyli ekspert, że jesteś przekonany, że jeżeli będą wszystko.
+W tym manager privat and pointem i prometeuszu będzie privat point, znaczy dostęp publiczny będzie wyłączony. To ta zbudowana gra fana dashboard dashboard będą ich działać.
+
+ekspert:   12:11
+No nawet ten lap, który wam wysłałem jak tam przejdziecie po kolei go jak sobie go i przejrzycie to to tam ma właśnie tak się dzieje, że to działa.
+
+osoba 2   12:21
+O k.
+Teraz mamy miks i właśnie chcemy się, dlaczego to nie działa i przyjść.
+
+ekspert:   12:23
+Często.
+No no tak, więc to jest powód, dlaczego mi nic nie działa, nie?
+
+osoba 2   12:32
+Jasne.
+
+ekspert:   12:32
+To też nawet zrobiłem taki test, że zrobiłem dokładnie taką samą sytuację tylko w 2 regionach i śmigało. Nie więc to potwierdza. Potwierdza, że że właśnie tak jest.
+Dlatego właśnie najlepiej byłoby kurczę, bo szkoda, że nie udało wam się jakoś tam bardziej zapoznać z tym lavem, bo byśmy wtedy o jakiejś rozbieżnościach między tym co zrobiłem przetestowałem a a tym co co macie u siebie pogadali.
+
+osoba 3    12:46
+Ten kot.
+
+ekspert:   13:00
+A tak musimy.
+
+osoba 3    13:01
+Właśnie ja chciałem podpytać o ten nap. Ty go wysłałeś ten kod co zrobiłeś w jakiś sposób, a komu i w jaki?
+
+ekspert:   13:17
+To powinien być jeszcze z nim zgodę.
+
+osoba 3    13:17
+Ja też nie widziałem kodu tylko word widziałem.
+
+ekspert:   13:20
+To powinien być zip z całym te reformem to chyba że wam wycięło załącznik z maila.
+
+osoba 3    13:26
+Mogło wyciąć.
+Albo gdzieś się zgubił po drodze ręcznie.
+
+ekspert:   13:28
+A to.
+A co to trzeba będzie irne spytać bo to jest.
+
+osoba 1    13:36
+Ale.
+Do a Piotra gate? Zobacz, bo to.
+Tamtego maila od właśnie riny czy tam nie masz może jakiegoś przycisku żeby włączyć, może rzeczywiście zablokował ten załącznik.
+
+ekspert:   13:48
+Albo to był powinien być drugi mail, bo ja najpierw jej wysłałem to.
+To ten opis słowno muzyczny, a potem jeszcze.
+Jak się troszkę lepiej poczułem, to po prostu spakowałem tego zipo.
+
+osoba 3    14:18
+Co to leci dalej? A tam ich Piotr szuka ewentualnie, bo to i tak na mnie teraz nic nie pomoże.
+
+ekspert:   14:22
+Mogę spróbować Jeszcze raz wam wysłać to?
+
+Ziarkiewicz Konrad    14:27
+Nie, bo tam nie wiem czy widzieliście panowie, że tam co tam jest wrzucone, że tam załącznik może być niebezpieczny, jeśli chcesz go otrzymać, skontaktuj się tam z zespołem o operacyjnego monitorowania bezpieczeństwa. Nie, bo te reform targi z to była nie zip.
+
+osoba 1    14:34
+Tak.
+
+Ziarkiewicz Konrad    14:43
+Tam jest w tym w samym nagłówku.
+
+osoba 1    14:47
+A jest, ale to w tym oryginalnej wiadomość to piotrka pewnie, bo to.
+
+ekspert:   14:48
+Dobra ten.
+
+osoba 1    14:52
+Poród poszedł to.
+
+Ziarkiewicz Konrad    14:52
+Tak, tak, no co to?
+
+ekspert:   14:53
+Czekajcie, ja ja to zrobię. Ja to zrobię tutaj szybkim, dajcie mi pół sekundy.
+Zrobimy szybciutkie rap na githubie.
+Zaraz usuna.
+Dobra zobacz wam wklejam linka.
+Gdzie jest nasz szokiem co streamson?
+To to to prezentuje, to ma się tutaj zwinęło.
+
+osoba 1    16:41
+Taka wiesz co, nie wiem czy my powierzemy targi zeta z it huba.
+Ale dobrze testujemy.
+
+ekspert:   16:47
+Dobra, zobaczcie jak coś to zaraz tam jeszcze to jakieś binarne plik są zamienie.
+
+osoba 3    17:11
+Udało się pobrać.
+
+osoba 1    17:12
+A patrz poszło.
+
+ekspert:   17:13
+Dobra, to zobaczcie czy czy możecie rozpakowywać i ja skasuję to repo.
+
+osoba 3    17:23
+Pojazd.
+
+ekspert:   17:25
+Dobra, to ja to raport robię na razie na prywatną, żeby było szybciej.
+Tam są nazwy allianz to.
+Głupio by było, żeby to wisiała jako publiczna.
+Dobra, to już powinno zniknąć. Rap po to możemy wrócić do.
+Ee do szorowania trzeba to przegląda.
+No więc, yy, to fajnie, że się dogadaliśmy, że mamy już ten kod.
+Więc tam możecie jak naprawdę cały ten lap po kolei odtworzyć krok po kroku, tam są jeszcze skrypty, które też wykonują te wszystkie.
+Wszystkie akcje.
+Jesteście.
+Halo, halo.
+
+osoba 1    18:59
+Tak, tak.
+
+ekspert:   18:59
+Tak.
+
+Prelegent 1   19:00
+A jesteśmy.
+
+ekspert:   19:01
+Tak uciekliście już nie wiedziałem czy nie z głupio o tym, że coś.
+I teraz chodzi jeżeli chodzi o ten drugi topik, czyli podpięcia własnego prometeusza.
+A to tutaj też w tym labie jak odpalicie macie tutaj podpiętego też prometeusza, który jest uruchomiony na.
+Na kubernecie i zobaczcie to jest taki myk z że jest tutaj u RL prometeusz allianz lab net nie i taki jest stawiany tutaj adres i to jest wstrzyknięte.
+Wstrzyknięte grafonie.
+Poprzez konfigurację.
+Że taka domana istnieje, mimo że ona nigdzie nie jest zarejestrowana, nawet nie jest, nawet nie jest publiczna.
+Już wam pokazuję gdzie ona, gdzie ta konfiguracja jest? Dajcie mi sekundkę, tylko sobie swoje notatki odnajdę.
+
+osoba 1    20:23
+Piotrek coś ten ma jakieś problemy z netem go wywaliło.
+Ale ten powiedział, że jakieś za chwilę się bije.
+
+ekspert:   20:52
+No czekamy tam na kogoś czy nie zrobimy.
+
+osoba 1    20:53
+Nie, nie znaczy nie, no możemy jechać nagrywa. No tylko Piotrek, tak jakby sygnalizował, że że ten, że ma problemy.
+Którego wycięło i spróbuję się dobić. Nie, ale tak, żeby się tylko pewnie, że się nagrywa, tak.
+Jak ktoś odpowiedzi, no jakby.
+Wróci do tego, co stracił.
+Ja myślę, że możemy jechać dalej.
+
+ekspert:   21:29
+Więc generalnie mamy mamy tutaj to zrobione pod taką taką.
+Krzywą domeną prometeusza jak zobaczycie to na działa, mimo że nigdzie nie jest zdefiniowana, a najlepsze jest to, że takiej strefy.
+Nigdzie nie mamy, nie mamy tutaj tego allianz laba ani ani prywatnej strefy, ani publicznej.
+Strefy takiej to istnieje tylko i wyłącznie.
+W konfiguracji.
+W konfiguracji tej menedżer grafany.
+Poprzez prywat link mamy.
+Private link Service.
+Któremu po prostu taką, gdzie to było?
+To jest ten ogólny.
+
+osoba 1    22:56
+No bo prawie link serwisy z dniem to miało być chyba.
+
+ekspert:   22:58
+Tak, tak, tak, tak proszę. Szukam sobie na tacce gdzie miałem Link do tego zasobu.
+
+osoba 1    23:02
+A tu nie masz na liście, to Service sklep nie do ciebie nie.
+I wyświetli wszystkich.
+
+ekspert:   23:11
+Powinno.
+Powinna tylko właśnie to jest do do prometeusza.
+
+osoba 1    23:18
+Ale nie, nie nie to, bo to ten point to z lewej strony. Zobacz, masz trzecia w niżej pozycja o.
+
+ekspert:   23:24
+Tak, ale to nie jest, nie to jest ten tak, to jest, to jest ten tylko szukałem gdzie się ustawiało ten ten wpis DNS owy wspaniałe, a żeby to się zmapowało na to, ale tak to jest, to jest ten private link, który idzie do do prometeusza, który jest na który jest na na na kubernecie on idzie po prostu do.
+
+osoba 1    23:25
+To nie jest to.
+
+ekspert:   23:53
+Do i PK, który.
+Jak sobie pójdziemy do a KSU?
+A i weźmiemy sobie ten a KS od allianz.
+To na ing grasia.
+Będziemy mieli dokładnie wystawiony ten proma ten prometeusz nalot, balans erze i to jest i to jest ten właśnie to jest ten właśnie adres do którego priva link kieruje.
+Natomiast.
+W samej grafanie można ustawić.
+Po prostu w konfiguracji.
+Resover.
+Aa mm chyba sas yy tam w macie też plik konfiguracyjny od grafany mm w którym to jest zaszyte i jak gdyby hard kodujecie, że ten adres to jest tamten adres, tamten adres, adres i p czyli w samej konfiguracji w samej konfiguracji grafany się to to dzieje menedżer grafana.
+Się.
+Czy to się w portalu gdzieś dawało zobaczyć? Na pewno się to da ustawić wstrzykując konfiguracja.
+Ale czy to było gdzieś?
+W końcu do zobaczenia.
+A znaczy private and point dla grafony w finacie to jest tam.
+
+osoba 1    25:43
+To o to wnet workingu chyba tam powinno być nie.
+
+ekspert:   25:45
+Tak właśnie to jest to, czego szukałem cały czas. Manager private and point, wirtualne turpat and points nie jest.
+Oni zawsze w portalu gdzieś to tak chowają, że potem człowiek tego nie może zwalać.
+
+osoba 1    25:59
+Ale to wiesz z poziomu grafana jak networking wejdziesz.
+Wyżej networking.
+
+ekspert:   26:05
+Och, tutaj jest.
+Och.
+A to głównie z celi. Takie rzeczy robię i stara forma, więc potem w portalu czasami siedzę i szukam o i to jest ten i tu mamy ten manage ten manewr private link widzicie, tu jest ten domy inny i przykryty na pałę i co się tylko rezerwuje w obrębie tej sieci, więc teoretycznie tu możecie wstrzyknąć absolutnie cokolwiek chcecie co nie co nawet nie istnieje, co idzie do innego winetu i teoretycznie tym sposobem robiąc takiego ma inaczej private point'a.
+W teorii można obejść ten problem.
+Publiki non public prometeusza z pierwszego z pierwszego zadania. Tak mi się przynajmniej wydaje, bo nie testowałem tego natomiast, no no no nie ma problemu, żeby żeby dostać się z manager fun do waszego customowego prometeusza, który działa na.
+Na grafanie jak mamy tutaj tą grafanę no to możemy sobie pójść do explorera.
+I zobaczcie w tej chwili mogę sobie odpytać prometeusza.
+Prometeusza, pierwszego menedżer Mateusza, drugiego menedżer.
+I o SAZ prometeusza, który jest na na. Na eks owym klastrze z one w tej chwili są wszystkie 3 są.
+Ten jest zupełnie private. Te 2 są te 2 są public i możemy jednego szybciutko zmienić na na na private i powinien przestać, powinien nam przestać działać, ale to sobie możecie w labie ze samodzielnie spróbować tą sytuację odtworzyć, więc jak gdybym nie ma problemu, żeby.
+Żeby tutaj domieszać domieszać waszego prometeusza, gdziekolwiek on nie będzie stał, ważne, żeby było connectivity, tylko więc.
+Czy wstrzyknięcie to do tego czy ten private Link do którego to będzie dalej kierować?
+Czy on będzie jakąś adresem over VPN na waszym one premie, czy też będzie adresem load balancera na cubernecie to jest już wtórna. Ten trafik będzie w stanie dojść, więc jesteście w stanie użyć grofany.
+Nego tej menedżer grafany tak jak chcieliście jako formę przejściową.
+Natomiast dalej uważam, że po prostu czysty jest tak grafa nowy od góry do dołu z własną o s Enterprise na na własnym kubnecie, co jest prostsze rozwiązanie niż niż kombinowanie tutaj z tymi private linkami.
+Cudami dostępami jedyne jeżeli byście chcieli kupować tak jak mówiłem licencje Enterprise poprzez.
+Commitmen żurowy.
+A tak często Enterprise chcą robić.
+Z uwagi na to, że na przykład już mają jakieś commitment w microsofcie i wydanie tam dolarów jest prostsze niż przepychanie się przez komitety sterujące zarządy, zamówienia publiczne i inne.
+Inne.
+Wymagania formalne, żeby kupić nie wiem. 5 licencji od grafany czy czy 10 czy czy jakąś taką śmieszną liczbę, gdzie ten po prostu czas.
+Poświęcony na ten prokument.
+Kosztuje więcej niż te licencje.
+I to jest jedyny tak naprawdę moment, kiedy moim zdaniem ma to sens używać. Natomiast jeżeli nie planujecie używać Enterprise albo planujecie kupić i tak dużą ilość licencję interpretowych od grafany bezpośrednio, no to tam menedżer grafana z ażura nie ma, nie ma żadnych za bardzo zalet, to ona też jest przygotowana dla ludzi, którzy przede wszystkim chcą korzystać z tych datasorów na przykład do żur monitorowych wbudowanych.
+I chcą mieć po prostu zamiast ażurowego monitora mieć ładne dashboard na na na grafanie, ale niekoniecznie chcą utrzymywać w GMKAKSA czy jakiekolwiek inne computing rozwiązanie, żeby tam mu się gra fana kręciła, więc to są takie.
+Takie takie just case'y w waszym przypadku to to nie ma większego sensu.
+
+osoba 1    30:41
+A to jeszcze pytanko teraz do tego prometeusza tak, bo jeżeli to jest to i na kęsie to jak tam patrzyłem no to tam generalnie jest po stronie a kasa coś trzeba zrobić żeby i tam jest jakiś chyba natywna wtyczka, która tak jakby z tym manager ten point and znaczy jak to mi się nazywał?
+
+ekspert:   30:46
+Mhm.
+
+osoba 1    31:01
+Private link serwisem jakoś działa tak jakoś natywnie.
+
+ekspert:   31:05
+Nie.
+
+osoba 1    31:07
+Przynajmniej z tego co?
+
+ekspert:   31:07
+Nie dlaczego? Dlaczego przecież z punktu widzenia prometeusza, to prometeusz jest na kasię z jakimś work clodem? Nie.
+Ee, wystawiasz go przez normalnie lolbaser do sieci, a private link wskazuje na dowolną lipkę czyli jak ma jak mamy powiedzmy tak mamy HKSAI mamy tutaj wystawiony serwis typu load balancer tak na na na i to będzie tam z tą notacją, że to jest internal nie i powiedzmy mamy tu jakąś ekipę 10 4 7.
+13, powiedzmy nie.
+I to jest to jest w tym w tym winecie to jest wina PKS owe.
+Masz?
+Private link Service, który wskazuje ci na tą ipkę.
+I od niego masz private and point?
+Który może być w dowolnym innym, widać tak i teraz masz jeszcze w przypadku grafany masz menedżer private and point?
+Wyląduje w menadżer owanym winecie od grafany.
+Ale tutaj z punktu widzenia prometeusza, on nie ma pojęcia, skąd to jest połączenie wszystkim.
+
+osoba 1    32:16
+Ok no dobra, ale to jest tak jakby dalej w obrębie ksa, jakbyśmy chcieli tutaj sobie nie wiem ząb rema coś podpiąć.
+
+ekspert:   32:25
+Czyli żeby ten prometeusz sięgał do on prema?
+
+osoba 1    32:27
+Znaczy nie grafana sięgała do prometeusza pan premier.
+Postawionego na więcej.
+
+ekspert:   32:35
+Grafana, czyli powiedzmy mamy tutaj grafana.
+
+osoba 1    32:39
+Nie, nie, nie nie, to to menadżer gra fan w ażurową.
+Czy tutaj jakby nic nie zmieniamy, tak mamy cały czas tą mikrofon ażurową, a tutaj zamiast tego prometeusza w a kesie mamy prometeusz.
+
+ekspert:   32:43
+No.
+
+osoba 1    32:50
+On premię napiłem.
+
+ekspert:   32:52
+Czyli to jest ażur i tu jest jakiś prometeusz waszym on premia tak.
+
+osoba 1    32:57
+Tak.
+
+ekspert:   32:58
+Ee no to no to dalej, to niczego nie zmienia, bo ten prywatling Service znaczy dobra, zmienia troszeczkę, bo potrzebujecie mieć ipkę stąd widoczną tutaj, bo inaczej prywatling serwisu nie nie zrobisz nie, ale to nie jest żadne rozszerzenie do a KSA czy do do kuba erna tesa i teraz.
+
+osoba 1    33:16
+No tak.
+
+ekspert:   33:23
+Najprościej jest mieć takiego proxy gateway.
+Czyli macie jakąś? Wiem kę może być to też ab Service albo w instancja front dorowa nawet jak się bardzo uprzemy.
+Gdzie wskazujecie ten private link serwisem, żeby manager private and point? Bo gdybyście mieli tutaj, nie wiem o tu grafona to nie ma żadnego problemu, jeżeli to jest connectivity, to po prostu podajecie tą łapkę nie żaden problem. Natomiast przyprawa langner Service, żeby mieć ten manewr private point dla manager grafony.
+No to musisz mieć jakieś jakiegoś jump hosta, więc na tym tutaj stawiacie Andrzej mixa i tu sobie ten ruch proksujecie wtedy ten private ink Service widzi ipkę tego tej BM Ki ta wiem k proksuje ruch do waszego prometeusza, no niestety nie da się zrobić playering serwisu do arbitralnej ipki poza żurem i to jest jedyny pomysł.
+
+osoba 1    34:16
+Lot balancer, bo gdzieś tam widziałem gdzieś tam jak trochę tam wcześniej, tak jakby jak to obejść. No to była informacja, że można spróbować jeszcze nad balancer postawić tylko.
+
+osoba 5  34:25
+Właśnie nad serem no.
+
+ekspert:   34:27
+Tak można można lot balancer w warstwie warstwie standard postawić i tak można w lot balance, że iść do arbitralnej lipki, tak więc lot balanser też tutaj załatwia to zamiast wiemki.
+
+osoba 1    34:27
+Ty?
+Ale blond balanse, że nie trzeba to po drodze też jakiegoś tam proksować czy coś nie trzeba robić ten balanser jest w stanie mieć.
+
+ekspert:   34:47
+Tak, bo.
+Tak.
+
+osoba 1    34:50
+No tak, ale tam gdzieś czytałem, że lot balancer te pod spodem adresacja musi być taka sama jak adresacja lot balancera.
+
+ekspert:   34:58
+Ale gdzie przecież do was z założenia ma 2 strony wchodzącą i wychodzącą.
+
+osoba 1    35:07
+No bo czyta backendzie można mu dowolne adresy podać, tak.
+
+ekspert:   35:09
+Tak, masz 2 tryby backend masz tryb backendu, który jest wiem skiel setem czyli.
+
+ekspert:   35:17
+Wskazujesz mu skel sezon sobie sam ogarnia rybki albo po prostu podesz listę listę hostów z palucha.
+
+osoba 1    35:19
+Mhm.
+
+ekspert:   35:25
+Więc tak, lot balancer właśnie standard będzie tańszy. Wiem, że nie chcemy albo ab Service wam nie wiem, pozwoli na jakieś jeszcze walidowanie nagłówków motoryzacji czy jakichś innych rzeczy.
+
+ekspert:   35:44
+Na basicu chyba tego nie zrobicie teraz, bo ten basic został strasznie obcięty i chyba nie da się podawać.
+
+ekspert:   35:55
+Tak, ale to wszystko zresztą oni z tego basica chyba będą schodzić, bo wszystko jest teraz wymaga standardu, bo oczywiście za standard celują nie to, ale to jakieś tam grosze są, ale na na the lost balancer standard też tutaj fill to to umożliwi.
+
+osoba 1    36:11
+Dobra, ale tam jeszcze po drodze, by trzeba budzić jakiś ruch, otworzyć, nie.
+
+ekspert:   36:14
+No tak pomiędzy waszczurem waszym on premium, więc tutaj musicie mieć jakiś albo site to side vpn, albo Express rota nie.
+
+osoba 1    36:22
+Znaczy nie, no, ten ruch znaczy ten ruch mamy tak tylko znaczy między pan premier mem a.
+Tym rurem jest tak jakby spięty, tak tylko teraz, powiedzmy jak mamy tego prometeusza, to tak jakby otworzyć ruch clots balancera do tego prometeusza, tak w drugą stronę.
+
+ekspert:   36:42
+No tak, tak dlatego wiem, KS trochę prostsza, bo kontrolujesz out going ip w niemki, bo po prostu dodajesz jej ****.
+I wiesz którędy to wyjdzie? Nie, a przelot balance, że no to masz, nie masz gwarancji, to to wychodzi cała całą szerokością nato, bo to wszystko zależy też jak macie zrobione networking, bo tam pewnie macie jakiś ruch przez caba i przez jakiegoś firewala, a nie wiem czy Express lutomija tego firewalla czy nie omija, więc to jest to są już jakieś sieciowe. No generalnie musicie mieć coś tutaj co jest w stanie zagadać do tego prometeusza.
+Czy to będzie lot balancer z publicznym i p tak żeby ten ten trafic był podpisywany tym ipickiem czy to będzie z publicznym ipickiem to już jest wtórna.
+Oczywiście tego problemu nie macie, kiedy używacie grafanne na KS ie bo tylko wtedy wam ten trafik wystarcza.
+
+osoba 1    37:41
+Tak, że właśnie zauważyliśmy, że ten.
+Ta grafa na na kresie wiele problemów rozwiązuje tak, chociaż niewykluczone, że nie pojawią się nowe.
+
+ekspert:   37:48
+No tak.
+No zgadza się, bo to wszystko całe tutaj widz polega na tym, że to jest jakiś obcy winę, do którego nie macie, nie macie wglądu i dlatego trzeba robić te krzywizny z prywatling serwisami.
+
+osoba 1    38:10
+Dobra, no to mniej więcej to wiadomo o co chodzi, tak?
+
+ekspert:   38:15
+No.
+Kolejnym temat, który tam mieliście, to są te data sources, car and user i nie user, a więc mam tutaj skonfigurowanego data source card your do już monitora i data source'a z manager identity. One oba działają w moim przypadku, akurat to demo za dużo nie nie pokaże, bo.
+Mam jednego u zera w tej chwili skonfigurowanego.
+Ale jak sobie na potem odpalicie na przykład tego laba sobie gdzieś na jakieś nie wiem darmowej subskrypcji czy na powinniście mieć w ogóle jako organizacja w cholerę tych takich visual studio subskrypcji po 150 $ to jako soundboxy to korzystajcie z tego.
+To case jest taki przy karen dius, a oczywiście jest dostęp do do tych danych, które są są dostępne dla danego użytkownika, czyli ten.
+Widać metryki z tych zasobów, do których mam, na których mamy rolę. Monitoring reader.
+Yy lub szerzej lub szerzej, rider ee.
+Natomiast yy nie będą działać wtedy alerty.
+Bo alarty się wykonują jako jako jako grafana i grafana nie ma żadnego identity przypisanego.
+Do siebie, więc nie jesteśmy w stanie.
+Nawet takiego takiej alert Króli.
+Sobie sobie tutaj tutaj zrobić.
+I teraz możemy i to jak widzicie nawet mam tą skonfigurowaną jako menedżer identity i też nie Jestem w stanie tego.
+Tego zrobić to, co musiałoby się zadarzyć, żeby stąd użyć alerting ruli musiałby mieć jeszcze jednego. Musiałbym tak naprawdę mieć data source'a skonfigurowanego trochę inaczej, w którym nie używam nawet menedżera identity, tylko mam przypisanego Service Prince pola w grafonie.
+I tego się nie da zrobić. Nie udało mi się zrobić tego w managera w grafie na kubernetes się jest to rabialne bo bo normalnie tam się podaje autoryzacja menedżer grafana po prostu do wyboru manager albo.
+Albo current user, natomiast mogę wstrzyknąć do całej grafany w na kubernecie i jeszcze osobnego Service Prince pola jako jako Service identity i wtedy gra fana będzie miała do takiego datasourca.
+Dostęp, ale będzie miała dostęp do całego data source'a, a nie tylko do tych zasobów, do których zalogowany Użytkownik ma dostęp, czyli tracimy.
+Tracimy powiązanie pomiędzy zalogowanym użytkownikiem a datasourcem i teraz grafanie Enterprise. Możemy poustawiać tutaj jeszcze permissiony, czyli.
+Mogę ustawić, że nie wiem. Krystian ma dostęp do tego datasource'a, a  nie ma.
+I wtedy.
+
+ekspert:   41:32
+To jest to samo.
+To jest to jest to jest osoba gra fana w tej chwili tu możecie ustawić tylko w i tak dalej, więc nawet z tej osowej możemy dobra, spróbuję wam to narysować, bo to jest dosyć skomplikowane.
+Mamy tak, powiedzmy jest sobie?
+Grafana tak i teraz ta gra fana ma zalogowany jest to powiedzmy .
+I teraz mamy powiedzmy data source ażurowy z car and user.
+No i dostęp do jakichś metryk nie wiem, ze story Jacob tak no i Krystian, Przepraszam, , potem data storcie z car and your będzie widział tylko te z metryki z tych zasobów, do których ma dostęp w portalu orzechowym. Teraz, jeżeli to będziemy mieli jeszcze data source'a.
+Service identities zdefiniowanego.
+No to za pomocą tego data source, jeżeli  mógłby dostęp do tego data source'a, to będzie widział metryki.
+Ze wszystkich story jack cocoutów, a nie do tylko tych, których ma dostęp są farso good.
+Bo będzie się to odbywać jako identity. Zapytanie ażur monitora będzie się odbywać jako identity grafana będzie musiała mieć, że mieć rolę na wszystkich zasobach reader, znaczy oczywiście na tych zasobach, na których będzie miała rolę monitoring. Real, to będzie je w stanie przeczytać, no ale no zakłada się, że się robi ten.
+Ten serwis identity po to, żeby czytać wszystkie i teraz oczywiście możliwe jest zrobienie takiego myku, że.
+ na tym data source.
+Będzie miał na przykład vera, a na tym nie będzie miał żadnej roli, więc jak gdyby tego data source'a nawet nie będzie widział?
+Czyli będzie mógł obejrzeć tylko to co ma, natomiast nie będzie w stanie zrobić alertu, bo ten alert po stronie grafany będzie wymagał tego drugiego data storsa, bo alert znowuż się odbywa. To jest tak naprawdę cron po stronie grafany, który cyklicznie co jakiś czas próbuje wykonać zapisaną zapisaną.
+Queerkę.
+I to się nie dzieje w kontekście żadnego zalogowanego użytkownika, tylko się dzieje w kontekście tego fill tego Service identity fill, które fill, które przypisaliśmy grafanie, więc moglibyśmy mieć drugiego użytkownika, nazwijmy go Paweł, który będzie miał dostęp do tego Service identity będzie mógł podefiniować alerty, ale tych alertów.
+ nigdy nie zobaczy, że są zdefiniowane, bo nie będzie miał do tego dostępu do tego datasource'a.
+I.
+Robimy jakieś dziwne complex city dla dla rzeczy, które tak nie do końca powinna w moim odczuciu być ukryta, czyli jaki problem, żeby wszyscy widzieli wszystkie wszystkie metryki z systemu? One nie niosą żadnych ani personal information, ani ani hide restryb najbardziej.
+Powiedzmy podatną informacją, jaka tam jest niesiona są host, nejme i adresy i p.
+Ee które?
+
+osoba 1    45:03
+Ale wiesz co, jeżeli mówimy o ażur monitorze, na chwilę obecną tam są pięte.
+Tylko inside tak, czyli możesz czytać logi.
+
+ekspert:   45:14
+Mm no tak, ale to jest mówimy teraz o metrykach.
+
+osoba 1    45:21
+Aż on monitor tak mówi masz o monitorze?
+
+ekspert:   45:23
+Tak.
+
+osoba 1    45:24
+No to przesadził. Monitor możesz czytać logi też.
+
+ekspert:   45:29
+Przez log analitics dobra to jest nomenklatura, ale mówimy teraz w tej chwili o data sosie metrykowym.
+
+osoba 1    45:30
+Tak.
+
+ekspert:   45:38
+Więc w przypadku metryk bym bym tego nie nie nie utrudniał w przypadku tak jak mówisz logów.
+No to.
+Na na tą chwilę obecną no to musicie iść z karencji user, ale wtedy nie porobicie alertów po stronie grafany trzeba alerty robić po stronie.
+Log analitics a czyli w, czyli w w Azure.
+Może jest lepszą moim zdaniem, bo ta grafa na to się średnio nadaje tak naprawdę do robienia alertów w dużej skali to jest fajne jak macie? Nie wiem. 40 50 alertów do zdefiniowania, ale jak już macie kilkaset to to będzie po prostu się nie wyrabiać tylko że jeżeli zasoby w przypadku money graffa na to żarcie, zasoby właśnie nie nie boli jakoś specjalnie, ale mogą się nie wiem, te korki nie wyrabiać.
+Będziecie mieli z tym jakieś dziwne problemy?
+Lepiej to zrobić po stronie.
+Po stronie ażurowego serwisu, natomiast jak przejdziecie na lokiego, to możecie sobie robić.
+Organizacja.
+Czyli możecie sobie zrobić zarówno time jak i możecie sobie zrobić.
+Ee zrobić dodatkowe organizacje poza yy poza poza główną organizacją.
+Na tej własnej własnej grafonie i wtedy wszystkie te data source typu lock i mimirtanos mają kiedy się je konfiguruje pójdźmy sobie to connections.
+To tu w nagłówku można.
+To jest.
+A zróbmy to inaczej to obcina mi, że ładnie widać.
+A.
+To możemy nagłówku przekazać cięż to jest.
+Ee, możemy przekazać to identity i wtedy nam się przekażę taki też nagłówek.
+Kurde nie no to to inaczej wygląda. Trochę dobra to jeszcze powinien być taki taki ptaszek.
+O.
+Powinno na na normalnej grafanie takiej zainstalowanej normalnie jest to włączone będzie tutaj przekazywane XX graffa na org header i ten header będzie przekazywany i jest nie nadpisywalny więc potem nagłówku tanos boże loki mimir tempo wiedzą do jakiej organizacji dane Użytkownik należy i z tego z tej organizacji będzie mógł sobie tylko przeczytać logi metryki.
+I czy cokolwiek na nim zrobić? Więc, a gdyby macie multi tenant w jednej gra fajnie, czyli logują się do jednej instancji.
+Ale każdy z tych użytkowników będzie w danym momencie działał w kontekście swojej organizacji i gra gra fanowej, więc wtedy możecie sobie absolutnie wszystko oddzielić.
+
+osoba 5  48:43
+O k to to jest.
+Co to mogło być być przydatne, ale to poczekaj, bo ja trochę Jestem z boku, ale to znaczy, że działało tak, że mamy sobie tam ażura do niego podpinamy lokiego na jakiegoś tam na jakimś, bo chyba nie ma jakiegoś menedżera, tak to, żeby jakoś się skłaniał do tego managera, ale tak czy inaczej robimy sobie lokiego i jego wpinamy do do menedżera, na przykład, albo już później normalnie nie menegafony.
+
+ekspert:   49:01
+Tak.
+Czy macie, powiedzmy lokiego, macie tempo?
+I macie mira tak.
+I teraz robicie robicie tak jak macie jakiś pasowy zasób.
+To na diagnostic settings możecie pisać do loga na logi z niego do loga analitics do story jacoutu albo devent hub więc piszecie je do event huba.
+To ustawiacie jakieś żyjątko typu wektor open telemetrii collector. Wszystko jedno czytacie z tego event huba i pchacie to do do lokiego, więc macie macie logi z pasów lokim i to jest drastycznie tańsze w longtermię niż.
+Niż loga na niż loga analitics.
+Bo de facto płacić tak naprawdę za odrobinę komputingu i storage i storage.
+Story jaccount.
+Więc szczególnie kiedy chcecie mieć długość przeszukiwalne logi, no to to jest drastycznie drastycznie tańsze.
+Dalej tym pasowe żyjątka generują jakieś metryki do ażur monitora.
+Więc sobie stawiacie ażur monitor eksporter?
+I mi.
+
+osoba 5  50:32
+Cześć odrzucamy.
+
+ekspert:   50:33
+Imi od pytuje sobie ten te metryki, bo ważne monitorze macie tam za 90 dni za darmo, no ale to jest 90 dni. Jak chcecie metryki mieć dłużej.
+No to albo je trzeba przekazać do log analytics, a to kosztuje jakieś drogie pieniądze, albo właśnie sobie to ściągnąć do mimira z drugiej strony jak macie jakąś apkę na crasie?
+
+osoba 3    50:54
+A ten eksporter to jeszcze jakbyś mógł trochę rozszerzyć o tym eksporterze to jakie to oprogramowanie jest i w jaki sposób to instalujemy, że co tam będzie na na kontenerze jakiś może być to alo i czy to jest po prostu coś innego?
+
+ekspert:   51:06
+Tak.
+Tak, macie po prostu to jest najbardziej standardowy tul tule bo maxportery w prometeuszu to kojarzycie jaka jest filozofia? Nie.
+Że to jest coś, co z jednej strony gada z jakąś usługą z mojej skóry elem z waszym z waszym o SMAZ drugiej strony wystawia prometeuszowi.
+Metryki, które prometeorze stanie sobie przeczytać, więc jak macie powiedzmy to sobie będzie stało na jakimś tam gubernacie.
+To to jest po prostu jakiś, pod który sobie bieganie, ale na na na kubernecie i łączę się do ażura i ze wskazanych resource'ów pobiera metryki.
+I analogicznie jak macie aplikację jakąś, to ta aplikacja logi może pisać do lokiego. Price może pisać do tempo, a jak wystawia jakiś albo end point z metrykami albo piszę metryki, bo bo też możecie pushować metryki, ale zazwyczaj wystawię jakiś endpoint Matrix, no to mimir może to sobie fill tak naprawdę fill zbierać mimir albo towarzyszący prometeusz, który tak naprawdę zbiera i forwarduje, bo to są różne tam podejścia.
+
+osoba 3    51:55
+K.
+
+ekspert:   52:25
+Jak jak do tego podchodzą?
+
+osoba 5  52:26
+No właśnie.
+Albo musimy dyskutować, ewentualnie robienie tego przez tego jak milt, jak to tam on ma.
+
+ekspert:   52:28
+Ja no.
+Mimir.
+
+osoba 5  52:36
+Emil właśnie, a w kontekście ewentualnie po prostu ekspert:a Mateusz owego.
+No bo.
+
+ekspert:   52:41
+Ale mimir to jest long term story dla prometeusza.
+
+osoba 5  52:42
+No za to zrobili bez specjalnie.
+Jeszcze raz.
+
+ekspert:   52:45
+Mimir to jest long term stores dla prometeusza, ale też który potrafi.
+
+osoba 5  52:48
+A o k jasne.
+
+ekspert:   52:50
+On ma tak naprawdę jego głównym interfejsem Streamu drive, czyli przyjmuje więc jak macie na przykład jako agenty grafana aloya, no to aloj może sięgnąć do normalnego do dowolnego eksportera i zrobić remont right? Nie, ja tam preferuję mieć te pośredniczące prometeusze z małą retencją, bo po prostu łatwiej się to kontroluje, więc więc macie wtedy jakiegoś poda spr meteusza.
+Tamten prometeusz na przykład właśnie czyta sobie metryki z tego ab serwisu fill. Cóż oni z ab Service tylko z waszej aplikacji jawowej ta aplikacja java open telemetrii wysyła trasy do do tempo logi do lokiego. To się koreluje ze sobą tematycznie, wtedy fill, te metryki też jeżeli dobrze skonfigurujemy, to one się fill się skorelują, no i mamy fill mamy grafanę sobie, do której osobie sięga do tych.
+Fill data source of i w ten sposób macie fill?
+Macie fill?
+Cały.
+Całość.
+Staw u siebie, jeżeli to na przykład macie jeszcze apim.
+To wapi mie da się również wskazać customowy adres do wysyłania trasów i logów, więc też można do tego samego tempo.
+Wysłać.
+Wysłać wysłać, wysłać trasy, więc jeżeli przez nie wiem jakaś wasza aplikacja jest z przodu właśnie ażur app managementem sfrontowana, no to to też będzie.
+Będzie działać.
+
+osoba 3    54:25
+Że jeszcze mam jedno pytanko do 2 kroki wcześniej co wspominałeś o tych organizacjach z poziomu grafany i że w lokim też organizacje w jakiś sposób miałyby być to w sensie, że co wtedy jest jako tak musi przyjść z logami ta organizacja czy czy jak to rozumieć to?
+
+ekspert:   54:32
+Mhm.
+Tak musi być musi być header, czyli paszloki.
+Jak masz jak masz tam to twoje two.
+Na twój nagłówek musi przyjść, bo to jest generalnie tam jedzie open telemetr, więc są to jest Jason, nie musimy przyjść na główku ci po prostu x copor gay DI wtedy to wpadnie do.
+
+osoba 3    55:09
+Ale teraz mówimy, że z aplikacji do lokiego musi przyjść taki ich eder, tak?
+
+ekspert:   55:12
+Tak tak, czyli jak masz powiedzmy masz, masz jakąś aplikację, tak niech to będzie działa i masz powiedzmy tutaj tego lock for j.
+W lok ford grzeju konfigurujesz, że to ma być.
+A coraz mózgu.
+Strach czy login, czyli że to ja sony i ustawiasz kastą.
+Jakieś tam kastą kastą field i w kastą fieldzie ustawiasz wtedy, że ma być tam x cop org i tam maili tej organizacji do której ma to iść.
+
+osoba 3    55:51
+I ten aids razem z tamtym hederem podawanym tam w grafach gier musi mieć tą samą wartość tak żeby to się zmarnowało tak dobra.
+
+ekspert:   55:57
+Tak.
+Tak.
+
+osoba 3    55:59
+A tutaj look for j to wtedy on wysyła to na strumień tak, no bo tu zakładamy pewnie jakieś aplikacje KS owe.
+
+ekspert:   56:05
+Tak.
+Tak tak, podajesz po prostu adres gdzie ma wysyłać, bo lok fary może pisać, bo.
+
+osoba 3    56:08
+Aha.
+
+ekspert:   56:14
+Plik jakaś kawka albo HTTP upent elektry tam są różne różne odputy nie no i jednym z outputów możesz mieć właśnie protokół lokiego, natywny ten stary albo pętelem i open telemetr jest absolutnie wszędzie wspierane.
+
+osoba 3    56:16
+No właśnie.
+No no no.
+O k to pewnie na standardowe wyjścia wtedy leci, ale ojem to zbieramy z zaka SAI do lokiego, tak?
+
+ekspert:   56:39
+To jest to jest jedna z metod, czyli, czyli i to jest też metoda, którą ja trochę lubię, bo.
+Masz wtedy jak gdyby zachowanie logera jest takie samo na na powiedzmy lokalnych środowiskach ktoś developuje, czyli nie masz 2 konfiguracji blogera.
+I wtedy pchasz do STD od potu. Faktycznie aloj m to zbierasz i wtedy na poziomie konfiguracji aloya dodajesz sobie ten te ten header dla organizacji, że ten lok zebrany z tego tego kontenera.
+Idzie do tej organizacji, a z innego kontenera do innej organizacji, czyli dev, nie muszą jak gdyby tego kontrolować.
+W konfiguracji natomiast.
+Jest powolutku taka tendencja do tego, żeby jednak kontenery.
+Pisały.
+2 rodzaje logów, czyli to, co idzie strumieniem idzie, powiedzmy jakiś taki bardziej rozbudowany lok natomiast do STD auto idą bardzo takie diagnostyczne logi, no bo w większości przypadków dewini mają też dostępu do do do do do tego, żeby zrobić sobie kipset locks, więc nie ma powodu do pisania logów do SCD auta i tak naprawdę.
+Pasowania jasona-, który mógłby pojechać proto buffem już od razu skompresowany spakowany zminimalizowany żeby go pchać.
+Tekstowego potem żeby go czytać, prasować multi linea fill i i wysyłać ten obiekt fill obiekt znowu dalej proto buffem fill i fill w Google langowym zerologu na przykład jest już tak fajnie zrobione, że właśnie definiujesz shoba strumienie wyjściowe fill i kontrolujesz fill, która informacja jest na którym strumieniu wyjściowym fill i wtedy, kiedy ja ja kocham na przykład admin fill, patrzę sobie, chcę zobaczyć, dlaczego jabłka nie wstała, to mam te najbardziej.
+Informacje a.
+Nie mam całych operacyjnych logów na na klub set lo, bo nie jest mi to potrzebne.
+Ma tak naprawdę i tam output liniowy tekstowy, a nie, a nie ja nie więc jak gdyby to jest bardziej Human redable i szybsze do diagnostyki. Natomiast Jason pełno polowy strukturalny lock leci mi do do zdalnego systemu logowania, więc taka jest tendencja. Czy ta tendencja się przyjmie?
+Zobaczymy natomiast mi się ona strasznie podoba, bo bo jest dużo prostsze dla dla operations do do szybkiej diagnozy, a jednocześnie zachowujesz pełne logowanie strukturalne, które ci idzie do właśnie do do lokiego, lock, skyla czy innych tam systemów logowych, które będą.
+Miały korzyść z tego, że idzie tam to, to to strukturalne logowanie.
+
+osoba 3    59:31
+O k. Dzięki.
+
+osoba 1    59:33
+A jeszcze wiesz co wracałem do tego organizacji? Tak, no, bo on tam po stronie grafany to mówi, żeby tam zdefiniować różne organizacje, tak i w każdej organizacji podpiąć tego.
+Data sosa z tym tagiem, tak?
+Dobrze zrozumiałem czy.
+
+ekspert:   59:49
+Ee znaczy nie no data sourca definiujesz raz i po prostu on jest przekazywany, jest po prostu potem przekazywany z z tym nagłówkiem x co po org d czyli.
+Kiedy?
+Gdy powiedzmy, nie Jestem do grafany zalogowany i jest loguje się Maciek z organizacji pierwszej.
+To i loguje się do tej grafany nie wiem Tomek z organizacji drugiej.
+To oni widzą 2 różne grafalny.
+
+osoba 1    1:00:21
+Ale dobra, ale organizacja dobrze, ale organizacja nomenklaturze.
+
+ekspert:   1:00:26
+Tak w moment teraz służy gra fanowej.
+
+osoba 3    1:00:29
+I odpowiadałaby czemu systemowi na przykład danej aplikacji, czy czemu zazwyczaj by odpowiadała tak z Twojej praktyki.
+
+ekspert:   1:00:35
+To wszystko zależy od tego, jak wasza organizacja jest zbudowana i tutaj prawo conwaya bardzo bardzo często pomaga, czyli to, że struktura waszych systemów it z reguły odpowiada waszej organizacji fill w firmie, więc jeżeli macie na przykład, nie wiem niezależne zespoły, które zajmują się jakąś tam swoją aplikacją, to każdemu z tego niezależnych zespołów fill.
+Dajecie po prostu organizacje, oni będą widzieć wtedy tylko fill, tylko swoje fill swoje rzeczy, które są zaskopowane z tą organizacją.
+Schody się zaczynają, kiedy są jakieś skierowane resource'y.
+I musicie je.
+Udostępnić 2 organizacjom, czyli nie wiem jest wiem k. Na której jest są 2 aplikacje i z 2 różnych zespołów, które wypadałoby, żeby były w 2 różnych organizacjach, ale muszą mieć te same dane z notesportera z tej konkretnej, więc.
+No to wtedy albo trzeba duplikować te dane 2 2 organizacji, czyli mamy więcej więcej metryk.
+Yy, zepchnięte, albo po prostu trzeba rozdzielić, żeby taki zasób nie był jednak szanowany. Problemem zazwyczaj są takie platform inżynieryjnych, na przykład mamy.
+Mam u jednego klienta organizację, która dostarcza platformy VMR owa.
+Ee.
+Wszystkim innym organizacjom, na które potem na tych wiem kach sobie pracują, no to ten.
+Te metryki z VMRA.
+Które z które które sobie zbieram, no to one muszą być dostępne.
+Dla każdego więc mam taki tak to zrobione, że mam sztuczną organizację shared, której takie rzeczy lądują i po prostu wszyscy mają dostęp do tej do do danych swej z tej organizacji, ale ponieważ to są tylko metryki, więc jak gdyby nie mam, nie mam z tym specjalnego.
+Specjalnego problemu, ale jeżeli logi musiały być szczerowane, no to to już.
+Już się robi troszkę trudniejsze, bo w lokim nie macie.
+Indeks level Security ani row lever Security.
+Macie tylko organizacyjną multi tenancję.
+Row level Security macie w elastic sercu w tej najbliższej licencji, a jeśli dobrze pamiętam, czyli do każdej linijki logo, nawet możecie przypisać uprawnienia poszczególne użytkownikom.
+No ale to już jest.
+To już jest karkołomne zadanie, więc tak na dobrą sprawę, no kluczem jest.
+Określenie jak wyglądają właśnie te Security boundary u was i kto ma mieć do do do czego dostęp, no ale na poziomie.
+Takich trendów organizacji.
+Które możecie sobie zamodelować w grafanie?
+Ee.
+
+osoba 3    1:03:40
+Czy także dobrze zrozumiał?
+To też to dokończ.
+
+ekspert:   1:03:44
+No nie, nie skończyłem.
+
+osoba 3    1:03:45
+Yy, bo ten, bo tak jak w elastic u powiedzmy mam uprawnienia rozdzielone per indeksy, data source, data, streamy raczej tak to lokim nie ma de facto chyba tych data streamów indeksów i tu bardziej musielibyśmy implementować tą organizację jako odpowiednik trochę data streamów elastic sercu, tak.
+
+ekspert:   1:03:58
+Nie ma.
+Tak.
+Dokładnie tak tylko, że vlastic masz na przykład 4 data streamy, które do których ma ta sama grupa uprawnienia.
+
+osoba 3    1:04:12
+No właśnie.
+No.
+
+ekspert:   1:04:14
+I potem możesz dać na przykład do data Streamu uprawnienia kilku grupom. To tutaj tak tak nie zrobisz.
+
+osoba 3    1:04:19
+Tak.
+Właśnie plastiku fajnie można do tego podejść i łatwo się z tym zarządza, nawet w tej ma darmowej wersji, a tu się widzę w grafanie sprawa mocno komplikuje, bo mamy nieraz takie przypadki, że jeden zespół utrzymuje aplikację, no i wiadomo on powiedzmy musi mieć wgląd do tych logów, ale inny zespół nie jest związany z aplikacją, a też chcę mieć na przykład podgląd do tych logów i tutaj już by był problem tak trochę.
+
+ekspert:   1:04:46
+Tu będzie problem.
+To jest ograniczenie, ono to się ograniczenie wiąże się z tym, że masz taniej, więc jest tanio bezpiecznie albo szybko.
+
+osoba 1    1:05:01
+A wiesz co? Wracając jeszcze do tych organizacji i data source ów po stronie grafany? Tak, no bo to mówimy o tej organizacja tak czy tam po stronie grafany musimy sobie te organizacje pozakładać.
+Ale data sorce definiujesz per organizacji tak nie nie globalnie.
+
+ekspert:   1:05:19
+Tak.
+
+osoba 1    1:05:19
+Czyli de facto te data source, powiedzmy trzeba.
+
+ekspert:   1:05:19
+Tak.
+
+osoba 1    1:05:24
+Raczej organizacji osobno zdefiniować z innym tagiem, znaczy z takim odpowiadającym organizacji.
+
+ekspert:   1:05:30
+Dokładnie dokładnie tak jest to jest niestety ta wada, no ale przyjmuję założenie, że nie będziecie klikać tego z palucha, tylko zrobicie sobie jakiś onboarding script, który zakładając wam organizację może od razu data sensu.
+
+osoba 1    1:05:45
+No tak, tak tylko, że tylko wiesz co to u nas jest. Wiesz co ten sam problem mamy jeszcze takim taką promową jeszcze z jakimiś tam rzeczami.
+No i generalnie tam jest ten sam problem, że są zespoły.
+No albo osoby, które tak jakby mają pod opieki kilka aplikacji albo.
+Chcą mieć tak jakby dane, bo tam te aplikacje gdzieś tam ze sobą w jakiś tam sposób gadają, nie.
+I chcą mieć jakby problem na na całość. Podzielając to między organizację.
+No tak jakby nie mogą na jednym dasz bodzie zrobić sobie takiego pełnego podglądu, tak.
+
+ekspert:   1:06:25
+No mogą, bo możesz zrobić w query możesz zrobić tak jak masz tutaj nawet dokumentacji możesz włączyć skierowanie po multitel and quarries i wtedy możesz robić my Scope taka lub taka organizacja i jeszcze jest jeden model rozwiązania tego nie nie modelujecie organizacji grafan nowych.
+Per organizacja w firmie tylko per faktycznie.
+Aplikacja czy rola?
+W tej aplikacji i wtedy w tym takim, że macie powiedzmy apkę i macie DW od tej apki.
+I macie macie o psów, którzy by chcieli tam do tych logów też też sobie zajrzeć.
+To to się staje waszą organizacją po stronie lokiego, a po stronie grafony robicie inne organizacje, bo to się nie musi zmapować, w którym robicie, że data source takim morgiem jest dostępny tutaj i data source. Tym samym orgiem jest dostępny dla dla innej grupy użytkowników, nawet można po stronie grafana nie robić.
+Tata nie robić organizacji jak organizacja, tylko dodać ten data sorres wiele razy i zresztą tak jest się robi na przykład jak mamy lock skyla, czyli ten od od scrude strike'a system to też jest tak, że tam macie tam macie repozytoria z danymi i na repozytoriach się ustawia widoki, czyli tak naprawdę tak jak nie wiem jak widok w bazie danych.
+
+osoba 5  1:07:39
+Tak tylko ten, ale wszystko tak.
+Aha.
+
+ekspert:   1:08:00
+I potem do widoku daje się, daje się uprawnienia, więc to też jest ten każdy z tym widokiem jest, jest data sourcem, więc jak ktoś ma?
+Powiedzmy kilka repozytoriów jest i jest kilka widoków i ten ktoś ma mieć dostęp do tego, no to po prostu widzi 3 albo 4 datasource i dokładnie w ten sam sposób możemy to samo na lokiem za zamodelować, więc wtedy ten dostęp, że i de VI opis jest w różnych organizacji, muszą mieć dostęp do tego data source ropy z rogami, czyli robimy, jak gdyby organizacje po stronie lokiego odpowiadającą data streamowi, a nie organizacji, która jest po stronie grafa. No bo to się.
+Zmapować nie.
+No to też da się to zrobić.
+
+osoba 3    1:08:43
+Czy trochę pers? Jedyne sensowne wejścia naszym przypadku, że data source znaczy organizacja po stronie lokiego, odpowiadająca danemu systemowi lub systemowi środowisku nawet fill. No i potem to podpinanie pod dowolne organizacje w grafanie, które będą odpowiadać teamowi aplikacji. Czemu czemukolwiek jako data source, który w każdym będzie dodawany chyba.
+
+ekspert:   1:09:07
+Dokładnie tak, bo i tak musicie dodać wiele razy to data source, ale wtedy macie kontrolę co kto co kto widzi, co kto może konkurować, jak włączycie jeszcze to source, no to ludzie będą mogli sobie.
+
+osoba 3    1:09:12
+No tak.
+O.
+
+ekspert:   1:09:20
+Zrobić na jednym dashboardzie wykres na przykład z 2 data sarsów lockheego.
+
+osoba 3    1:09:24
+To to jest raczej docelowy model dla nas.
+
+osoba 1    1:09:27
+A to co tam ten multi ten asy czy co? Nie wiem taki Użytkownik wqr może sobie nadpisać tego taka.
+
+ekspert:   1:09:35
+A.
+Mm chyba w samym nie, bo to jest na poziomie konfiguracji. Data sarson będzie nawet jakby tam mu się udało, czyli strzeliłby sobie po api do tego data sercu to backend grafento nadpisze na właściwy.
+
+osoba 1    1:09:52
+A to to na czym to w takim układzie to multi polega co to daje?
+
+ekspert:   1:09:57
+Nie rozumiem pytania.
+
+osoba 1    1:09:58
+To co wcześniej pokazywałeś tam?
+Że tam jakiś tak się ustawia przy tym lokim.
+
+ekspert:   1:10:06
+Tak, ale to jest to jest default owy, czyli jak chcesz mieć żeby organizacje były zma powane po po obu stronach no to możesz to ustawić po prze kreowaniu dat znaczy dokładnie pokazywałem kreowanie data sosu.
+Ee.
+Bo wtedy masz po prostu header do do do multinasy i i to jest dokładnie to, że ten data source, czyli to powinno by się nazywać loki. Nie wiem org 15 i wtedy z takim hederem ci to pójdzie do do lokiego, potem dodajesz locky o rok 14 i permissions dla odpowiedniego zespołu.
+
+osoba 1    1:10:45
+Ale dziś coś jakieś multi Lance pokazywałeś jakieś takie parametr?
+Nie pamiętam w czym to było.
+
+ekspert:   1:10:51
+O tym mówisz?
+
+osoba 1    1:10:54
+Nie je to multi ten o to właśnie tak.
+
+ekspert:   1:10:57
+To jest po stronie konfiguracji lokiego, które ci pozwala.
+Wqr c wysłać.
+2 nagłówki, czyli tak na dobrą sprawę, żeby zrobić serca po apilokiego z 2 nagłówków, ale to już to się dzieje wewnętrznie w.
+Dobra, już wiem chyba o co pytasz jak bo do lokiego możesz sobie zagadać po api tak, czyli jeżeli miałbyś wystawiany api lokiego, to możesz do niego sobie zagadać i wtedy w tym getcie.
+Możesz sobie wstawić w, że takie 2 nagłówki, natomiast jeżeli robisz to zapytanie ze scenografany to ten to zapytanie zostanie skonstruowane przez backend grafany.
+I no nie jest w stanie tobie tego.
+Nas.
+Sobie wstrzyknąć, ale jeżeli na jednym wykresie na jednym panelu nie zrobisz zapytania do 2 datasource'ów, więc to się nigdy nie nie wydarzy. Tak naprawdę grafana na jednym panelu zrobisz z jednego datasource'u na jednym panelu z drugiego data sosu nie da się zrobić w grafanie, kiedy powiedzmy idę drobie dashboard.
+A to i wezmę sobie. Nie wiem tutaj tego prometeusza, to nie zrobię to mam. Mam jeden data serc do wyboru, jak to zrobić na tym samym panelu? Drugi wykres muszę sobie dodać drugie QRYI jeszcze gdzieś tu była możliwość zmienienia na różna data soulsy w obu.
+To było gdzie to było?
+
+osoba 1    1:12:35
+Ale tak jak nawet jakbyś tutaj podał tam w tym query nadpisał sobie ten tak to i tak grafa na to przykryje tym co ma zdefiniować.
+
+ekspert:   1:12:42
+Tu nawet nie masz możliwości tutaj wstrzyknięcia, nigdzie tego.
+
+osoba 1    1:12:47
+Znaczy, bo to masz tak jak bilder, ale jak jak w kodzie, jak zrobisz tam jak.
+
+ekspert:   1:12:51
+To też nie, bo to jest koprom quel czy tam loki quel nie przekazujesz nagłówków.
+
+osoba 1    1:12:54
+Aha.
+A no tak radzi.
+
+ekspert:   1:12:57
+Ale gdzieś tu się udało. Pamiętam, że się dało zmienić, żeby mieć na jednym wykresie 2 datasource, ale to i tak są wtedy 2 różne quearki natomiast.
+Ten parametr umożliwia ci po prostu zrobienie api serca w 2 organizacjach naraz w jednym q rhy nie, no to jest to jest fajne jak nie wiem jakieś 3 apki trzeciej wyciągacie, ale grafana z tego nie skorzysta.
+Gdzie to jest? Już mnie tak.
+Ciekawie kiedyś to znalazłam.
+To drugie kury zrobić na tym samym wykresie z innego data salson.
+A mix o dobra no o i tutaj teraz możemy zrobić.
+Możemy zrobić z 2 z 2 promków na jednym panelu.
+To też jest taka ciekawostka, bo czasami czasami się chce na przykład porównać z 2 z 2 źródeł coś.
+I nie chcemy 2 paneli robić.
+No i to chyba były te wszystkie tematy, które które które poruszyliście.
+Zapyta w tamtym zapytaniu.
+Ostatnim był tylko.
+
+osoba 1    1:14:22
+Że to.
+Tam jeszcze temat mailowy jeszcze był nie.
+
+ekspert:   1:14:26
+Mailowe.
+
+osoba 1    1:14:27
+Znaczy w sensie, bo tam coś właśnie zaczniemy, czy to żeśmy dobrze zrozumieli, bo tam było, że w tej menedżer, która fanie.
+
+ekspert:   1:14:33
+A.
+Tak.
+Tak już już już już sobie czeka cię otworzę tą ten materiał, który wam dałem.
+
+osoba 3    1:14:43
+Utrata na szybko pytanie do tego, bo tu rozmawialiśmy o generalnie o każdej wersji grafany, czy na przykład, jak będziemy mieć licencję Enterprise, to temat tych organizacji i innych rzeczy. Wtedy jest łatwiejszy albo się dezaktualizuję, bo airbug bardziej granularny nam to rozwiąże. Jak to jest o k.
+
+ekspert:   1:15:04
+Jedyne co będziesz mógł powiedzieć, że ziutek, a może zarządzać tym data sourcem, a ziutek bez niego czytać, ale to nic więcej się nie zmieni.
+
+osoba 1    1:15:15
+Dobra, ale może być, że z danego do tego do tego sama wybrana grupa osób dostęp tak.
+
+osoba 3    1:15:15
+O k.
+
+ekspert:   1:15:20
+To możesz, bo SA zrobić bez problemu.
+O. Zobacz, masz tutaj tylko na ksiądz.
+A ja mogę tutaj wziąć i tu na mówię już ustawić, że.
+Że team?
+Jakieś tam może z tego protasource?
+A time a gdy dajesz time?
+Możesz zrobić?
+I tutaj może dodać delikwentów do tego teamu.
+I teraz mogę tutaj sobie ustawić, że że ten team ma ma parę miesiąc dokładnie.
+I teraz teamy można też.
+Łączyć z eksterola groupsing i tutaj podajesz jak w przypadku azura podajesz tutaj i d grupy ażurowej i to dzieje się to z z.
+
+osoba 1    1:16:23
+Tak jakie tam.
+
+ekspert:   1:16:27
+Dziękuję.
+
+osoba 3    1:16:31
+I ta synchronizacja działa też w darmowej.
+
+ekspert:   1:16:33
+Po o aucie.
+
+osoba 3    1:16:36
+Hej.
+
+ekspert:   1:16:38
+Mo do samla potrzebujesz interfejs owy?
+
+osoba 3    1:16:45
+No dobra.
+
+ekspert:   1:16:48
+Od darmowej chyba pan z tego co pamiętam ma taką wadę, że że trzeba po stronie jak tutaj macie w n 3.
+Ee tą aplikację, no co, halo?
+Budka.
+Macie tutaj w n trza.
+Co?
+Miałem dostępu do własnej antry, świetnie.
+Wnętrze macie jak macie grafan aplikacje grafonową wnętrze to tam są permissions do tej aplikacji grafonowej.
+I wydaje mi się, że bez Enterprise musicie jawnie użytkowników dodać, czyli to, że ma tutaj grupę takie inne rzeczy, może się zalogować do grafany to ten sens się nie zrobi, jeżeli tam nie będzie dodany ten delikwent jawnie do do tej aplikacji i chyba nie da się.
+Jak macieentrę bezpłatną to się nie da dodać grup można tylko pojedyn pojedynczo użytkowników imiennie dodać, ale jak macie tam chyba p jeden albo p 2 tą płatną entrę no to możecie dodać dodać tam tam teamy przy samlu to nic tam nie trzeba robić.
+No ale sam jest dostępne dopiero w Enterprise.
+
+osoba 1    1:18:24
+Czy wiesz co tam w tej z tego, co zobaczyliśmy w tej menedżer, to mamy teraz?
+Yy to grupy grupami, ale i tak tak jakby wszyscy muszą mieć rida tak.
+Żeby to działało.
+
+ekspert:   1:18:37
+Tak, bo tak, bo chyba, bo to jest najniższy najniższe permisans jakie może zrobić.
+
+osoba 1    1:18:47
+No ale dobra, jak jeszcze wyjście jest, żeby tutaj na poziomie delika jeszcze zrobić jakieś tam?
+Ograniczenia.
+
+ekspert:   1:18:55
+Mhm.
+No bo możecie, zobaczymy. Zobacz, może powstanie data source'a zrobić.
+Dla.
+Ale to się nie da zrobić dna i ale możesz zrobić także w zabrać uprawnienia o i teraz ver nie będzie miał do tego nie będzie tego data serca widział, dopóki nie będzie memberem tego teamu.
+
+osoba 1    1:19:10
+No.
+Tak.
+No właśnie i to też jest.
+Naber hint.
+
+ekspert:   1:19:25
+Tak i to jest i to jest rozwiązanie takie żeby obejść. No widzisz jedno to są rzeczy, które po prostu da się zrobić, ale w enterffice one po prostu działają tak jakoś.
+Jakbyś się spodziewał bez konieczności wyklikiwania tysiąca rzeczy.
+No bo sam jest pod duże organizacje przewidziane.
+Organizacje typu nie wiem dziesięcio 15 pracowników, gdzie?
+Trochę tego wachlowania z uprawnieniami ci niespecjalnie boli.
+Już sobie o tym.
+
+osoba 1    1:20:03
+No no trochę się wyjaśnił.
+
+ekspert:   1:20:03
+Otwieram ten ten dokumencik.
+Świadomie.
+I tak.
+Właśnie gdzieś tam mieliście jeszcze coś z mojej.
+Zgadza się, a już patrzę sobie materiały.
+A dobra e maile ten MP to generalnie aż już nie ma żadnego rileya SNMP.
+I.
+Ee.
+Ile, które zgrafa wychodzą chcą z tej menedżer jako normalna żurowe maila, ale nie kontrolujemy ani którędy, ani z jakiego konta.
+
+osoba 1    1:21:06
+Ale no właśnie nie wychodzą tam, bo musisz zdefiniować ryleja, żeby to poszło.
+Ty nie musisz.
+
+ekspert:   1:21:13
+Ja już sobie sprawdzam.
+
+osoba 1    1:21:19
+Tam nawet z portalu jest tak, że nawet osobno jest zakładka do tego jest np. Nie że że tam trzeba coś jednak podać.
+Tego.
+Też zakładałem, że powinno działać natywnie, skoro tak jakby ażur znaczy ten Microsoft do tego to jakby się zintegrował, no to te maile też powinny wychodzić, ale.
+
+ekspert:   1:21:43
+A.
+A zobaczymy.
+
+osoba 1    1:22:42
+Nie wiem czy oni to pozwalają z poziomu tak jakby same grafany, że to z portalu się tego nie wyklikuje nie bo tam tak do tego i nie mamy dostępu, nie.
+
+ekspert:   1:22:52
+A settings i właśnie to jest tak najwolisza podać.
+Ee trzeba podać rileya.
+I teraz.
+
+osoba 1    1:23:06
+Rileya użytkownika hasła wszystko po kolei.
+
+ekspert:   1:23:09
+Ta, bo to będzie będzie.
+A.
+Coś co nie zadziała, ale zobaczymy, że się gra fana. Czy szczerze mówiąc tego nie sprawdziłem.
+Bo Jeszcze raz co byście chcieli sprawdzić w tym w tej części mailowej?
+To chyba nie to zrobiłem, co chcieliście.
+
+osoba 1    1:24:25
+Znaczy tam 2 tematy były tak, no, jeden tutaj właśnie z tym, czy to musi być serwer, czy to nie da się jakoś natywnie spiąć z arurem jako takim.
+
+ekspert:   1:24:34
+Nie, nie marila nie masz żadnych rela e mailowych, zresztą Microsoft bardzo a w s ma tego swojego mail ghana czyli to się tam nazywa Microsoft.
+
+osoba 1    1:24:43
+No dobra, ale zobacz, ale jak wysyłasz powiadomienia z sobie zdefiniujesz alerty z samego portalu?
+Co to maile przychodzą tam nigdzie pod spodem nie definiujesz.
+
+ekspert:   1:24:54
+Tak, ale tu masz ferd Party aplikacje, w której Użytkownik kontroluje treść maila, nie więc nic ci nie stoi na przeszkodzie. Może by tutaj jak masz kontakt pointy, żeby tu sobie zrobić?
+
+osoba 1    1:24:54
+Ryleja nie.
+
+ekspert:   1:25:07
+Skrypcie, które zrobi test z kastą message i zacząć wysyłać spam nie.
+
+osoba 1    1:25:14
+Nadarza się w sumie.
+
+ekspert:   1:25:17
+Więc do tego Microsoft na.
+Na to na to nie pozwala.
+Czy to się już tam przeładowało?
+Jeszcze nie jest konfigurator.
+Jeszcze się jeszcze się kręci, więc więc nie nie mam Microsoft żadnego rile i oni się bronili rękami i nogami bardzo długo przed jakąkolwiek wysyłką maili nawet było tak, że zwieje się nie dało wysyłać maili.
+Były wszystkie.
+Wszystkie porty.
+Na tam 25 4, 8, 5 poblokowana.
+Więc ja też musiałem robić takie custom myki, że.
+Mieć riley.
+Poza żurem na przykład mam ma jakieś tam email lapsy i mam tylko w małe relacje, które mi do tego e mail lapsa na customowym porcie przerzucają, przerzucają ruch, żeby mi żeby mi poczta z aplikacji wygodziła to był kiedyś bardzo, bardzo, bardzo duży problem, a nawet masz nie wiem, wstawiasz sklep internetowy jakąś prestę i tej presty maile ci nie wychodzą, nie.
+Ee.
+Dzisiaj jeszcze te porty ze 4 8 5 po po po te lasie jest otwarta, natomiast no dalej musisz mieć coś co przyjemnie tego.
+Tego maila i grafana sama w sobie.
+Musi mieć wskazane SNP serwer, ono nie ma samodzielnie, nie obsługuje wysyłki, maila, jest po prostu zwykłym klientem pocztowym, który się musi do jakiegoś MTP podłączyć.
+Więc inną opcją jest zrobić sobie po stronie.
+Po stronie azura robicie na przykład ażur funkcja.
+Nie funkcja.
+Logika.
+Który triggeruje się na web huk?
+I wysyła maila.
+To jest sposób, który możecie zrobić wtedy w w kontakt point'cie robisz?
+Nie kontakt point na email, tylko robisz kontakt point na web hook i tutaj definiujesz tego web booka, tak żeby on trafił do tego logic, do tego logic upsa i teraz ten logic ups może wtedy wysłać waszym waszym officem tego maila.
+
+osoba 1    1:27:49
+No też to jest opcja.
+
+ekspert:   1:27:52
+No albo po prostu zgadzać, nie wiem. Najprostsza droga to jest e mail z darmowe konto.
+I SMT pasi mail labsa wskazać.
+Się zapisało w końcu.
+
+osoba 1    1:28:07
+Też chociaż się wydawało, że to powinno być bardziej natywnie, no skoro oni to przykryli, no to integracja cała zentromis i tak dalej. Czy to w teorii?
+Mogło być to obsługiwane natywnie nie, ale.
+
+ekspert:   1:28:17
+O dzieciach.
+I teraz już będzie próbował wysłać tylko, że tam wsadziłem jakieś krzywe, hos i krzywe hasło, więc to nie wyjdzie nie, ale już teraz się nie fill nie dzweja poszedł tylko time out.
+A więc to chyba to chyba w takim razie jest to o co pytaliście?
+
+osoba 1    1:28:42
+To tam jeszcze było kwestia tych denisa sorsów nie, no ale to chyba żeśmy wyjaśnili także.
+Że tam też w tym będzie problem.
+
+ekspert:   1:28:49
+No no to tak, no tak samo recording rula więc jak gdyby?
+No jest jest to złożone, szczególnie kiedy ja mam takie poczucie, że po prostu te tytule.
+Nie do końca odzwierciedlają takiej platform inżynierii, że ktoś dostarcza tul monitoringowy każdemu zespołowi z osobna, bo nawet nawet jak sobie pomyślicie, jakieś data, data dog czy dayna trace czy splank też jak lecą dane gdzieś do do data doga czy do do dynatrasa to one lecą w obszar jakiejś organizacji i teraz do tych danych albo ktoś ma dostęp.
+Albo nie, ale do do wszystkich, które tam poleciały.
+Dokładnie ten sam model organizacji jest tutaj na, że przypisujecie użytkowników do organizacji data streamy do organizacji też fill. Jeżeli chcecie mieć dostęp w kilku organizacjach do tych samych danych, to trzeba je po prostu kilka razy wysłać fill i fill 99% turi observity zakłada normalne świat, czyli jeden team produktowy monuje sobie.
+Cały swój stos od infry poprzez swoje dane i niespecjalnie interesuje innymi się.
+Rzeczami natomiast Enterprise się pchają bardzo mocno w ten platform inżynier, gdzie dostarczają centralną platformę obserowa bilety.
+I i jest problem z tymi mikro z danymi to się to się będzie rozwiązywać, bo na przykład 2 lata temu w.
+W lock im multiteranci nie istniało 2 albo 3 lata temu.
+To zostaje zostało dodane lockhille.
+Widoki z możliwością dodawania i.
+Widoku na tych samych danych do kilku różnych organizacji.
+I myślę, że to jest droga, którą będzie rynek podążał. No ale to nie powiem wam czy nie wiem, czy w lokim się pojawią widoki za rok 2 czy wcale.
+Mimo tego tego tego to nie wiem, ale gra fana będzie musiała prędzej czy później ten problem też rozwiązać, bo.
+No Enterprise się obudziły i wchodzą w.
+Wchodzą tą drogę wchodzą.
+Zespoły tam dostęp do logów czy metryk jest powszechny dla całego zespołu it, który ma dostęp do observability albo jest jakiś operations, który się tym zajmują, więc jak gdyby nie ma tego za bardzo problemu, czy mam dostęp do blogów tej aplikacji, czy tamtej, to jest dalej nasze nasze podwórko, więc jedna opcja jest mieć po prostu.
+Tak jak podejście microsoftowe, czyli każdy.
+Yy.
+Każdy zespół, każda lating zone, a to jest swój światek ze swoim bloga analyticsem ze swoimi dostępami do monitora.
+Albo twierdzić, że to uwspólniamy i tutaj też z racji tej zacieśniającej się współpracy pomiędzy microsoftem a grafanom myślę, że będą musieli.
+Że grafana będzie musiała przynajmniej na potrzeby integracji ze żużurem jakoś zaadresować ta.
+Te rzeczy związane z.
+Z granulat nym dostępem do logów, ale Jestem w 100 procentach pewien, że to będzie w płatnym Enterprise. Jeśli w ogóle, bo grafa na cloud też tego nie nie rozwiązuje tego problemu. Po prostu masz twoja organizacja nagrafa na cloudzie jest twoją organizacją, kropka, tam nawet multitasy nie masz i każdy zespół powinien mieć ewentualnie swoją.
+Swoją, czyli dana aplikacja dany produkt, obszar firmy. Masz swoją organizację, potrzebujesz mieć dane platformowe, które 10 aplikacji korzysta. Wyślij to 10 razy z chęcią skasujemy was 10 razy za ingeton.
+
+osoba 3    1:33:08
+Czyli w grafana klaucie nie ma tego multi, żeby kilka organizacji stworzyć w grafanie.
+
+ekspert:   1:33:13
+Nie.
+Nie masz tylko takie przeglądanie?
+
+osoba 3    1:33:14
+Bóg to bardzo cenna informacja, to to de facto to nam odpada prawie grafa na cloud przez to.
+
+ekspert:   1:33:21
+Bo tam tak naprawdę definiujesz stos kolejny, który chcesz mieć jako kolejną organizację.
+
+osoba 3    1:33:25
+Czyli wszyscy widzą wszystko po prostu grupanie cloud tak i wyszałuć wiele wiele tych grafun cloud owych, żeby, ale zarazem wtedy nie będzie tak jakby możliwości, żeby.
+
+ekspert:   1:33:32
+Tak.
+No zaraz zobacz na.
+
+osoba 3    1:33:38
+Gdzieś z kilku systemów wrócić syf na jeden darze, bo no bo to będą oddzielne instancje całkowicie.
+
+ekspert:   1:33:44
+O a chyba się dorobili multi multitaantu jednak.
+
+osoba 1    1:33:49
+No ale ta marzeń chyba wtedy w klausie od razu nie wiem czy masz jakby te zaprawnieniami ułatwienie na r baku możesz tamte jakby sporo rzeczy tak jakby ograć nie.
+
+ekspert:   1:33:52
+Tak, tak, może interfejs a.
+
+osoba 3    1:33:59
+Czas uprawnieniami no tak, no ale to jakby mieć w jednej instancji to wtedy tak.
+
+ekspert:   1:34:04
+Tak zrobili zrobili w przyszłym roku, bo wcześniej nie było wstrząśnięci. Mówili jak chcesz mieć multi dynastia to sobie po prostu załóż kolejną organizację, przecież są darmowe.
+
+osoba 3    1:34:05
+O k.
+No to dobrze.
+
+osoba 1    1:34:15
+Znaczy tutaj, wiesz jeszcze tak, jakby wracając do samego gazu, ale bo i tego, bo to jest tak jakby.
+Też takiej.
+Sposób na to, żeby tak jakby ten problem obsłużyć. Tak no bo ktoś kto się loguje i przez a tak no to widzi to co do czego rzeczywiście ma dostęp nie i tutaj jakby sporo problemów rozwiązuje, nie.
+Gorzej gdzieś tam z metrykami czy z jakimiś innymi źródłami danych, gdzie tak jakby nie ma tego przełożenia, tak.
+Chyba, że da się to.
+Jakiś tam jeszcze inny sposób obejście?
+
+ekspert:   1:34:50
+No.
+To prawda.
+
+osoba 1    1:34:52
+No bo to jest fajne, bo ten te karę żebyśmy testowali tam na na na jakieś tam mniejszych uprawnieniach nie i to rzeczywiście to jakby działa tak jak powinno działać nie no ale.
+No ale za to nie można tych alertów robić.
+
+ekspert:   1:35:11
+No dokładnie, tak więc nie bardzo ma się nie bardzo, jest idealne rozwiązanie. Macie dokładnie ten sam kejs, którym się w profesorze bujałem.
+
+osoba 1    1:35:12
+Ale.
+
+ekspert:   1:35:22
+Yy, czyli chcecie mieć centralny team, który wspomaga mniej ogarnięte teamy aplikacyjne klienckie i dostarcza rozwiązanie dla wszystkich pasujące dla wszystkich? No niestety no nie będzie pasować dla wszystkich, więc.
+Jakąś jakąś koncesję trzeba.
+Zrobić w przypadku proktora no to tą koncesją było metryki widoczne dla wszystkich.
+A logi po prostu pierdyliard dotasoursów na co klienci narzekają strasznie, że tam widzą 5 czy 6 czy 17 czasami datasoursów z logami.
+Natomiast no.
+Nie, nie, nie przeskoczymy tego.
+
+osoba 1    1:36:12
+A przecież wracając tam do tych rysunków swoich tamten tak jakby.
+Jakbyś trochę wyżej tam, bo temat jeszcze chyba wyżej.
+O tak ten, bo tutaj było tak, że z pasów tam przez event huba, tak.
+A z zarząd monitora przez eksportera? Tak?
+
+ekspert:   1:36:30
+Mhm.
+Ażur Matrix ekspert:em no tak, bo w sensie bo dobra, bo teraz tak nie musicie tego robić. W sensie możecie mieć dalej tutaj ażur metry monitor, data source i korzystać bezpośrednio z z ażur monitora, no ale będziecie mieli 90 dni dane no i macie ten problem ze zrobieniem.
+
+osoba 1    1:36:36
+No ale to.
+
+ekspert:   1:36:56
+Alertów czy po stronie lokiego, czy po stronie mimira na rulerze w w grafanie bo wtedy te alerty musiałyby być.
+Nie związane z tylko dziać się po stronie ażur monitor, a natomiast kiedy sobie prześlecie te dane? A owszem macie i wasz w monitorze i w mimirze, ale w mimirze macie je long term możecie sobie zrobić fill na nich agregację natywnie metryki grafana prometeuszowe i natywnie możecie sobie zrobić na tym fill alerty, które nie są fill, nie są utrzymywane po stronie ażura, więc macie gdyby centralizacja.
+Kosztem przesłania danych z pasów do lokiego, imimira.
+
+osoba 1    1:37:39
+No może, ale ten eksport on jest tak jakby po stronie aksa tak to nie jest jakby jakiś natywny ten to jest.
+
+osoba 3    1:37:39
+Tylko mówiłeś.
+
+ekspert:   1:37:43
+Tak.
+Nie, to to jest, to jest dokładnie to narzędzie.
+Tu jest ten czat nieszczęsny.
+
+osoba 1    1:37:54
+A z pasów, bo tam mówiłeś i went huba, a to to musi być i went hub czy czy to jakoś jeszcze inny sposób można pędzić?
+
+ekspert:   1:38:02
+Nie, bo zobacz jak sobie pójdziemy. Na przykład weźmy sobie o. Weźmy sobie tego, a CRA.
+Jak masz tutaj monitoring masz diagnostic settings.
+To jedyna.
+Co?
+Czemu nie mogę tutaj nic dodać?
+A dobra coś mu się tutaj za to w diagnostic setting jak chcesz wysłać gdzieś logi to masz do wyboru log analitics workspace, no to tego nie chcemy, bo to kosztuje story. Jacob to też nam niewiele daje, więc masz Stream, to event hub to jest najprostsza opcja, bo możesz sobie to kupować, albo sen to partner solution, ale to jak masz na przykład nie wiem z planka przez.
+Ażur marketplace kupiony czy coś takiego, no to wtedy będziesz miał tutaj taki.
+Private and point tutaj dostanę, czy na przykład nie wiem, kupisz sobie rabbita od tego cloutem ku firmy przez ażur marketplace to wtedy ci się pojawi tutaj, że możesz sen to rabbit zrobić.
+Więc wysyłasz to do event huba i no.
+Po po drugiej stronie masz jakiś kawałek żyjątka, który ci.
+Będzie to czytał i dorokiego wkładał i polecam albo korzystanie.
+Wektora no i to jest od data daga narząd co napisane wreszcie, w którym.
+Ee, w którym ma cies konfiguracja?
+O konflikt.
+I tutaj macie podobnie jak w locksta szu macie source transformery i sing i czyli source to jest input.
+I na przykład macie tutaj input będzie gdzieś w małym PQ, żeby to albo kawka, żeby to sobie ciągnąć z event huba transformery, no to możecie coś tam zrobić z tymi danymi i sinki to jest output i na przykład tutaj outputem będzie.
+Albo loki loki protokołem, albo będzie też open telemetry gdzieś to na pewno.
+Ee i ee i generalnie wtedy wektor szczytuje z event huba i pcha do do lokiego, ale to samo może być lock staż.
+Po prostu wektor zapierdziela i mało ramu, że gra albo może być po prostu zwykłe open element i collector z jakimś pluginem do do czytania kawki czy czy MPQ, bo event hp może z tymi 2 protokołami gadać.
+I wtedy sobie to pchacie.
+Pchacie do do lokiego i macie wtedy logi long term bez bez konieczności pchania ich do loga analitics a.
+Przeszukiwalne analizowane zrzucalne do jakichś kolejnych systemów, no i znacznie taniej niż lok niż log analytics no wada taka, że vlog analytics się mieliście permission.
+PRL.
+Zmapowane do pery miszanów do zasobu na vlog im macie permissiony per.
+Tenat perthant lockheego.
+
+osoba 3    1:41:38
+Ale i też się tu sprawdzi, bo tam kiedyś polecałeś tego aloya do wielu rzeczy to zamiast wektora.
+
+ekspert:   1:41:42
+Ale to jest tak naprawdę open metry collector, więc, ale i też ma czytanie z event huba i pytanie i pchanie do do lokiego, tylko że aloj to jest już duża koza. Wektor jest wektor jest mikro, bardzo.
+
+osoba 3    1:41:45
+No tak, tak właśnie ok.
+O k.
+Aha, czyli wektor zmniejszy dobra?
+
+ekspert:   1:41:56
+Tak no wektor jest dużo mniejszy i dużo szybszy.
+
+osoba 3    1:41:58
+A też.
+Chciałem zapytać w kontekście tych czujek alarmów i tak dalej, bo tu wspomniałaś, że tam grafana i spółka się słabo sprawdzają.
+Czyli bo gdzieś tam u nas były jakieś głosy, że a nóż może tam jak wybierzemy jakieś rozwiązania, to zastąpimy nim na biosa, czyli raczej wrzucanie tam nie wiem.
+Kilkuset czy kilku 1000 czujek albo nawet kilkudziesięciu 1000 czujek to zdecydowanie nie.
+
+ekspert:   1:42:22
+Nie, nie, nie, nie.
+Jeszcze raz dobra są 2. Jak macie macie tutaj, ale w turla.
+To są 2 rzeczy. Masz alert króla, która jest po stronie grafany.
+I to jest po prostu tak, jakbyś sobie napisał skrypcik i odpalił go w kronie.
+Zadaj zapytanie do data sourcu.
+I.
+Zareaguj na na na ten wynik.
+I teraz zauważ tutaj, masz na przykład co 10 minut sprawdzenie tego takie domyśl tam można to zmniejszyć, ale to po prostu powoduje.
+Takie samo zapytanie jakbyś tutaj sobie na dashboardzie coś wyrysował i odświeżą ten ten dashboard i w przypadku logów.
+Niespecjalnie ma to znaczenie, jeżeli robisz takie typu, zrób mi alert. Jeżeli w ostatnich 10 minutach pojawiło się więcej niż 15 linii je glogów, no to i tak musisz odpytać te te ostatnie 10 minut i zrobić counta na tych logach. Czy ostatnie te 10 minut przeszukać nie ma to znaczenia. Natomiast jeżeli masz typu alert, jeżeli w logu pojawiło się słówko error, to zrób mi alert, albo jeżeli metryka CPU przekroczyła.
+80% zużycia to zrób mi, ale.
+To te zapytania dalej robią query w jakiegoś tam obszaru czasu, natomiast natywne alerty prometeuszowe.
+Działają także dana metryka, która której dotyczy aler czy dany zapis w logu, do której dotyczy alert, są monitorowane na ingron time, czyli kiedy są dane wkładane do lokiego czy do prometeusza. One są w tym momencie weryfikowane, czy pasują do któregoś śledzonego, do której śledzony alerting ruli i teraz różnica jest taka, że jak na mimi, że na mimirze jest coś takiego, co się nazywa roular?
+I wygra fanie. Możesz tutaj zrobić jak robisz, a Reding rola to robisz data source mana School i tu wtedy wybierasz mimira mimi rural.
+Yy mm rooler wtedy ten alert jest trigger owany po stronie mimira tam jest i tam jest jak gdyby monitorowany nie że gra fana robi tam co w 5 czy co 10 minut query tylko w ingrestion time, więc jeżeli macie se 15 sekund datę sample na przykład wkładane, czy to o każdej pełnej minucie?
+To alerting rula na podstawie tych 4 ostatnich sampli zostanie.
+Zewnowana i stwierdzona, czy wysyłacie różnica?
+Jest taka, że jak po stronie grafany zrobicie sobie te grafana menedża.
+To przy 100 200 dużych query, które się naraz będą odpalać tej samej minucie co 5 czy co 10 minut to możecie mimira ostro przy ciura, natomiast po stronie rulera możecie mieć 10000 takich ruli 100000. Żaden problem.
+
+osoba 3    1:45:29
+Ale ten ruler to jak on to robi na ingeście to on tego nie wkłada jakoś w ram, no bo jak będzie na przykład czujka, która co 3 minuty coś tam bada?
+A tam wpada no dużo danych załóżmy do takiego mimira zakładając, że tam będą 1000 podów na przykład.
+
+ekspert:   1:45:46
+No.
+
+osoba 3    1:45:46
+No to to się jakoś nie wykrzaczy przez to.
+
+ekspert:   1:45:48
+Nie.
+Szczerze mówiąc nie dnia niedobrze, bałam się nigdy, jak to jest dokładnie, jak to jest dokładnie robione. Miałem nawet długą kłótnie z kolegą z zespołu, który twierdził, że w kodzie jest to dalej. Takie samo quarry do data sourcu, ale.
+Jest zauważalna różnica pomiędzy zrobieniem QRY przez api, czyli tak jak grafana robi.
+A krakowanie traktowaniem alertu i nawet z grafana ci pozwala na cloudzie zrobić ograniczoną ilość alertów tych graffa na manager.
+I znacznie większą ilość alertów na na rulerze i na przykład my mamy na poszczególnych promkach alerty.
+No i tam mamy, no no setki 1000 tych tych tych monitorowanych time serii kilkanaście 1000 alerting ruli takich dosyć szerokich i to zapierdziela bez najmniejszego najmniejszego problemu.
+
+osoba 3    1:46:43
+O k.
+
+ekspert:   1:46:44
+Jedyne co po prostu jak grafana w wersji siódmej wprowadziła ten grafana unifiedl learning, żeby bo kiedyś promotor miałaś taki problem, że musiałeś to pisać learning rula w osobnym pliku ładować i to jest dla ludzi już jest no go, bo trzeba napisać kawałek jamla nie więc chcieliby klikać sgraffa nadrobiła takie klikadło tylko to klikadło robiło query zamiast konfigurować.
+Metodę i potem dorobili właśnie mimira i zrobili w nim rulera, który z którym grafana potrafi się komunikować.
+W tanosie na przykład rulera nie ma i tanos ma w tanosie takiego mykanie zrobimy natomiast mimir graffa na ten stos działa bardzo dobrze, więc ważne żeby po prostu robić data store's manager solaring rule a nie alerting roole tutaj takie o.
+Czasami będziecie mieli data source, który po prostu nie obsługuje manewru, jak na przykład nie wiem. Fill prometeusz nie obsługuje fill, nie obsługuje fill data Stars manager, bo nie umie.
+Ee natomiast mimir ma rola, ja napisałem w ramach takiego eksperymentu małe żyjątko, które udaje przed grafanom, że gada z rulerem, a tak naprawdę w tle przyjmowało definicję alertu zapisywało go tam do do reddita i z reddita generowało prometeuszowi piks z rolami alertów, więc grafana myślała, że gada z mimirem jeśli chodzi o alerting, a pod spodem obsługiwał to prometeusz, bo akurat mam taki case, że mam prometeusza a nie mimira i.
+I i ta nosa, więc jak gdyby obszedłem to to rozwiązanie po prostu emulując and point i mimirowe.
+
+osoba 3    1:48:29
+Ok, czyli ogólnie z mirem to da radę dużo, jeśli to właśnie będzie na metrykach, no bo sama sama specyfika mira to to taka wynika, ale czyli jeśli byśmy budowali stos taki do użytku przez bardzo wielu klientów, bardzo wielu aplikacji i tak dalej i chcieli alertowani uzupełnić.
+
+ekspert:   1:48:32
+Tak.
+Tak.
+
+osoba 3    1:48:50
+I uzupełnić tylko udostępnić.
+To danie użytkownikom możliwości pisania takich zwykłych ról na logach.
+Jadących to zajedzie ten klaster. Krótko powiedziawszy bardzo szybko.
+
+ekspert:   1:49:03
+Nie, bo loki też wspierać im.
+Data sars manage rola.
+Do tak mi się przynajmniej wydawała ja.
+Tak.
+Loki też ma rolera, więc to się będzie jeżeli.
+Jeżeli tutaj delikwent pójdzie i zrobi rolę na logach, która będzie w.
+Loki, manager.
+To wtedy to się też będzie działo w momencie ingestu. Oczywiście, jeżeli to jest rola, zresztą loki ma dużo więcej powodów za po stronie po stronie read, który możesz się łatwo skalować.
+Więc jak gdyby tego problemu nie ma, to masz znacznie więcej komputingu niż zwykle grafa nie dajesz i teraz jak masz taką alert typu, pojawiło się słówko, którego szukasz vlogu, no to to jest w momencie wczytania tej linijki czy tego?
+Tego wpisu w logu, więc możesz od razu to zareagować w trigger Robert to nawet nie musisz robić query do.
+Do swojego read pufa z tyłu, więc ten grafana grafana menedżer grafana menedż alerty.
+Robicie tylko wtedy, kiedy data source nie obsługuje. Natomiast jeżeli data source obsługuje, robicie to po stronie data source. Jest to dużo dużo wydajniejsze, więc niestety nie da się tego tak zablokować.
+Znaczy jest przełącznik w Enterprise, który pozwala ci wyłączyć to alerting roole, które nie są data source manager i teraz gdzie tu jest jeszcze jeden schodek, na który się łatwo odbić.
+Jak powiedzmy będziesz chciał sobie zrobić ha w grafanie, czyli mieć na przykład, nie wiem 2 instancje, no to myślę sobie dobra, zamiast PWCAW dużej skali też jak będziecie doplanować grafane to koniecznie zamiast BBC postgressa grafana w backendzie może zamiast BBC trzymać wszystko w postgressie i w pewnym momencie BBC przestaje wyrabiać, bo tam jest scholit tak naprawdę pod spodem jakaś tam.
+Wersja.
+I to przestaje być wydajne. Jak masz tak 200 300 dashboard'ów plus i tak setkę użytkowników to zaczyna to zamulać się zauważalnie.
+Więc w waszym przypadku od razu bym kładł post grasa pod spodem.
+Może być pasowy może być po prostu podbujający się na klastrze ważne żebyście tylko sobie baka pogarnęli w razie czego.
+W grafanie też włączacie sobie od razu polecam synk do githuba tak żeby dashboard wam się jasne synchronizowały do githuba, bo to potem sobie jakiś delikwent coś skasuje i jest płacz no to zamiast odwijać backup z bazy danych to można po prostu przywrócić z githuba dane dashboard nawet po prostu wyciągnąć ja sho na wykopiować i wgrać Jeszcze raz.
+Ee.
+No i do czego tutaj przy przy h dochodzimy.
+Macie tylko i robicie sobie dobra, no to zrobię sobie skype'a na na 2 albo 3.
+Fill i grafana nie rozumie, znaczy w sensie to są te pody są identyczne, więc fill na wszystkich się odpali to samo i grafana nie ma żadnego klastra, który by stwierdzał, że na przykład pod pierwszy to jest ten primary a reszta to jest tylko HA czy coś innego sn, więc jak macie te alerting role poefiniowane sn i zrobicie sobie skate to 2 to będą wam się 2 razy toalety trigerować.
+Więc 2 razy bardziej obciążycie data source, 2 razy więcej żartów wyślecie?
+Przy 3, 3 razy i tak dalej, więc, a przy data start manager, menedżer recording mrulach, nie macie tego problemu?
+
+osoba 3    1:53:01
+Ok, a ten dotas managing król, on jest zdefiniowany na poziomie lokiego, czy tu z poziomu grafany też ktoś to klika?
+
+ekspert:   1:53:07
+Nie z poziomu grafany, ale to się wykonuje na na loki.
+
+osoba 3    1:53:10
+O k dobra i jak loki nie ma furtek serca to bo tamże jeden event, no to tam pół biedy, ale załóżmy, że ktoś chce czy padło słówko error w mesy ju? Nie wiem więcej niż 50 razy w ciągu ostatnich 5 minut to takie coś też jest możliwe i on to będzie ogarniał w miarę wydajnie.
+
+ekspert:   1:53:31
+Nie.
+W sensie nie będzie nie będzie to wydajne.
+Znaczy dobra w ruli musisz wskazać w jakim polu szukasz, więc jeżeli to jest pole message czy jakieś tam inne pole i my chcesz w nim znaleźć tekst, a jeżeli to pole indeksujesz, to znajdziesz w nim.
+Ten, bo był tak jak główne nieporozumienie, to jest ludzie myślą o full text.
+
+osoba 3    1:53:53
+Szymon Majewski, czy to chyba z założenia nie jest indeksowany, co nie w tym blokiem?
+
+ekspert:   1:53:57
+Bo.
+Dobra Jeszcze raz to jak masz masz powiedzmy masz tą strukturalną wiadomość tak, czyli masz jakiś tam Times tab.
+Właśnie, a mnie i załóżmy najprostszy przypadek masz tylko message.
+I jeszcze dajmy jakieś tam pola host.
+Załóżmy masz, masz taki mecz tak i teraz ten full texter, którego nie ma to, że masz jakieś okienko w którym wpisujesz nie wiem.
+400.
+Zrobimy to inaczej.
+O jest my wpisałeś w sercu coś takiego.
+Bo dobra jeszcze może troszkę zmodyfikuję ten przykład, żeby wam to wyjaśnić.
+I teraz tak to, co to co wam nie zadziała wpiszecie sobie w serca w normalnym nie wiem plastic sercu byś pisał w sercach 4 0, 0 4 i znalazłby ci to obie wiadomości.
+Lokim.
+Musisz wpisać.
+Masę 404 i znajdziecie tylko to.
+Albo host znajdziecie tylko to drugie i to jest ten brak full texers, który który jest włoskim, a nie że nie da się wyszukać kawałka stringów indeksowanym czy tokiozowanym polu.
+
+osoba 3    1:55:48
+Ale loki w ogóle indeksuje token izoluje message mi się wydawało, że jak tam coś czytałem o nim wzorze, on przede wszystkim bazuje na tagach, żeby mu trzeba tam każdy event jakoś tam sobie otagować, a że sam mesy czy to niekoniecznie?
+
+ekspert:   1:56:00
+Możesz dowolna pola wskazać mu do.
+Możesz mu dowolnie wskazać, to się wiąże z tym, że będziesz więcej zasobów zużywał, ale możesz dowolne pola z indeksować.
+
+osoba 3    1:56:10
+Aha o k.
+
+ekspert:   1:56:12
+Bo to też jest tak, że pamiętaj, że to.
+A że to ten brak interesacji wynika z tego, że historycznie ludzie pchali logi jako liniowe teksty, gdzie miałeś tak naprawdę jedno pola teraz, jeżeli to już porozrzucasz.
+
+osoba 3    1:56:25
+Bo i tak to wiesz, to historycznie to jest teraźniejszość. allianz w większości systemów.
+
+ekspert:   1:56:30
+Tak tak, tylko, że kiedyś pamiętaj jak ten twój mecz wygląda tak, że tu miałeś wszystko w tej jednej linijce, nie.
+I teraz, jeżeli tak twój mecz wyglądał i teraz jak miałeś, powiedzmy jakiegoś.
+To wyprodukowała twoja apka jako jedna linijka i teraz jak masz jakiegoś nie wiem fail bita czy czy prom taila czy nawet aloja to możesz sobie napisać regułę żeby to rozbić na pola.
+Wtedy już masz generalnie dużo tych rzeczy w osobnych w osobnych polach, jak taki typowy strukturalny lok. Dlatego loki historycznie nie indeksował tego głównego tego głównego pola, bo tam był po prostu cały cały śmietnik i musiałby tak naprawdę całą bazę mieć zaindeksowaną i na tym polegało. Nie mamy full tekst full tekst search, więc 99% przypadków.
+Znajdziesz to, co znajdziesz to co potrzebujesz, bo reagujesz na to, nie wiem, że się mi w error kodzie pojawiły.
+No nie wiem, że jeżeli masz akces loga, to że interesują cię.
+Error kody 503, tak.
+Zawsze jesteś w stanie sobie nawet nie wiem po stronie aplikacji dodać jakieś Polek, po którym będziesz w stanie sobie zrobić taką alerting roola, no no no wymaga to pracy po obu stronach nie jest to idealne, coś za coś macie tanio i szybko, ale no nie, nie uniform wpiszę cokolwiek i wszędzie znajdzie, nie.
+To jest tak samo. Nie wiem jak bazach danych też mówisz u r kolumna się równa coś a nie.
+
+osoba 3    1:58:06
+Czyli w momencie, gdy po prostu no.
+No tak, tak, ale nie, bo bardziej myślałem, że full text serge rozumiany jako że że że nie jako że po wszystkich polach szuka tylko, że nawet w samym polu message po prostu on nie przeszuka, bo tak jakby nie indeksuje tego. No bo domyślnie chyba nie indeksuje, a i jak nie indeksuje to to znajdzie tylko, że długo czy w ogóle nie znajdzie jak to jest.
+
+ekspert:   1:58:26
+Domyślnie indeksem.
+Ze według mnie znajdzie.
+Tylko długo mogę wam to na jutro sprawdzić, bo mam lokielu gdzie mi się tam trochę danych zbiera do jakiegoś czasu tylko się w tej chwili nie dostanę do tego lokiego, ale mogę wam na to na jutro sprawdzić, możemy pobawić się.
+
+osoba 3    1:58:46
+Z tym prawie pewny, bo tak chyba chyba gra fana tak mówiła, tylko zastanawiało mnie, że w kontekście alertów, czy to w ogóle wtedy ma rację bytu, bo wiesz, no bo właśnie jest ten problem, że większość. No niestety właśnie takich czujek, jeśli bazują na logach no to jest na zasadzie szukania w tekście. No i nieraz właśnie w message'u. No co, prawda tam.
+Odnosi ażura no to będziemy tam pałować aplikację między innymi po to jest ta druga część tego zamówienia, powiedzmy aktualnego do ciebie z tym.
+Do tych logów, więc że tam ma być Jason, no ale to też się mam obawy znając naszych tu programistów i tak dalej, że to będzie Jason, ale właśnie podobny do tego, które mamy tutaj na ekranie, czyli po prostu jedynie Times tam będzie w innym polu i tak będziemy jechać po całym maseczu.
+
+ekspert:   1:59:33
+No ale to słuchaj, to pamiętaj, że to wy też macie po drodze jeżeli jabłka.
+Te stara apki pewnie walą i tak do SCD auta więc i tak to musicie jakimś aloesem tailem.
+Czy czegokolwiek zbierać to możecie to spróbować sobie na polskich rolach rozbić na coś mniejszego.
+
+osoba 3    1:59:51
+Znaczy, wiesz, to zawsze się da, poza tak jak ja w elastic u losem ogarniam wiele rzeczy, tylko, że no chcemy w ażurze uniknąć, tak jakby w ogóle tego tematu i na tej zasadzie, że no albo aplikacja loguje prawidłowo i ma to co chce i działa tak jak powinno, albo jak nie loguje. No to po prostu im nie działa, nie działa i nie ma tematu. No i dopóki nie zrobią dobrze to nie będą mieć dobrze.
+
+ekspert:   2:00:08
+No nie ma alertów no.
+No to.
+No to to też jest też jest jeżeli masz taką siłę sprawczą, no to to jest też dobra metoda, bo w innym przypadku tylko to jest tak, że to jest jak do zerwania gwintu nie, czyli jak pierwsza aplikacja przez jakiegoś prezesa wymusi, że macie im zrobić tak jak oni chcą, bo bo nie ma czasu, a miliony monet dowożą, no to to to to twój Plan się wtedy zepsuł.
+
+osoba 3    2:00:36
+A to tak tak, ale po wiesz, chcemy uniknąć tego, no bo przy iluś tam aplikacjach, które będą robić byle jak no to my nie będziemy tutaj ogarniać naprawiania całego świata, no bo się zakopiemy w tym.
+Ale dobra.
+
+ekspert:   2:00:48
+No.
+
+osoba 3    2:00:50
+Co dzięki tutaj za wyjaśniania?
+
+ekspert:   2:00:52
+No dobra, to co?
+Coś jeszcze tutaj mamy, czy chcecie przejść do tej drugiej części?
+Z no z tym zamówieniem.
+
+osoba 1    2:01:04
+To jeszcze na szybko jedną pytanko odnośnie tego i tak, bo tam w tym pierwszym wariancie dla pasów ten event hap tam musiałby być po drodze, żeby to.
+Szczyty wać.
+
+ekspert:   2:01:16
+Mhm.
+
+osoba 1    2:01:16
+No ale tam z tymi wychowan było jakieś znaczy raz, że on tam kosztuje, a 2, że może drąkować dane tak.
+
+ekspert:   2:01:25
+Nie będziecie mieli tyle danych, to się spokojnie, ale zrobicie event hub kosztuje jakieś tam w miarę grosze, znaczy to jest tak jeden myk tutaj trzeba zrobić, ziewam, bo event huby mają provision struputa, czyli ten najtańszy najbardziej bieda basic event hub bierzecie i tam są te trupu duncnie one są od jeden do 40 i jest taki ptaszek autoinf light.
+I teraz, kiedy wasz pasowy oczywiście też tych event hubów, pewnie będziecie mieli tam pewnie kilka warto podzielić po różnych typach zasobów.
+Ee, robicie je na na Jedynki i teraz jak czasami jakieś pasowe resort zrzygnie jakąś większą ilością logów i tam się to ze skaluje do 3 4.
+Tych trupud unitów czasami do 40 dobrze mieć taką ażur funkcję.
+Która się nie wiem raz dziennie odpali i ustawi ten trup od limit na jeden bo to nie boli w sensie jak jak mu coś tam przyjdzie więcej to się z powrotem szybko zeskaluje potem waszym ze skalowaniu.
+I nologii będzie gubił dopiero, kiedy tu się mu to trupot Unity skończą, więc dlatego mówię, że prawdopodobnie będziecie musieli się przygotować na to, że jest kilka.
+Ale nas cafe proktora na przykład gdzie mam tam 120000 pasowych ażurowych resursów podpiętych to mam chyba 20 event hubów.
+Więc myślę, że to.
+Jak dojdziecie do tej skali to koszt tego i będzie waszym najmniejszym zmartwieniem.
+
+osoba 3    2:03:09
+20 i want hubów to to jest co innego niż te 20 truput unitów. Tak, bo te Unity są w ramach.
+
+ekspert:   2:03:15
+Tak 20 event hubów, które tam mają po te 30 tryb od unitów, że razy.
+
+osoba 3    2:03:18
+O KOKA ta, który podjął nity.
+
+ekspert:   2:03:20
+Bo to są serwisy, które są bardziej gadatliwe, jak na przykład nie wiem. Ab Service jest bardzo gadatliwy, ale na przykład story, jaconty czy kivolty absolutnie nic nie piszą do tych logów, nie więc takie.
+Możecie też popatrzeć ile średnio logów produkują różne typy zasobów i na przykład wziąć sobie meventhub pierwszy przeznaczone na te na przykład nie wiem zasoby typu keval streżacka od a CR, które prawie nic nie piszą o innej h przeznaczone na nie wiem na ab Service tylko.
+
+osoba 3    2:03:49
+I to trupocjonity się chętnie w górę skalują, ale same w dumie tak i trzeba je samemu tam wy skalować w dół, a płatność jest za ilość trójpodwórnitów czy czy po co o k. Dobra to już wszystko jasne.
+
+ekspert:   2:03:52
+Tak.
+Tak.
+Za ilość to podium mitów.
+Więc.
+
+osoba 1    2:04:01
+Znaczy za zdefiniowane, czy za ten wykorzystany?
+
+ekspert:   2:04:05
+Zdefiniowane znaczy się, bo to jest tak, że jak masz ten auto in flight, to on ci przeskoczy na przykład na 3, ale nie zeskaluje w dół, nie więc będziesz potem płacił od nas, bo tam masz biling masz godzinowy, więc za każdą kolejną godzinę płacisz tyle, ile masz tutaj de facto zdefiniowane, nie więc jak ci podskoczyło do 3, to tak jakbyś zdefiniował w te reformie na 3.
+Więc.
+
+osoba 1    2:04:25
+O k ale znaczy, ale po drodze nic nie zgubi. Tak znaczy zorientował się, że ma więcej ruch ruchu. Tak sobie to przeliczył, że trzeba dorzucić ileś tam tych unitów.
+
+ekspert:   2:04:29
+Nie.
+Tak.
+
+osoba 1    2:04:34
+I tej Unity dorzuca tak.
+
+ekspert:   2:04:36
+Tak.
+
+osoba 1    2:04:37
+No ale jak nie masz tego tego włączonej tej opcji, to co wtedy przycina?
+
+ekspert:   2:04:42
+Tak, masz wtedy odrzucacie 400 tam 400 piątkami czy 400 siódemkami.
+
+osoba 1    2:04:51
+A jak jest z tymi? On jest, bo teraz tak, bo one zrobione tak, że mamy, yy jakby.
+Podział jest przez riser z grupy zrobione także riser grupa to jest tak jakby odpowiednik środowiska jakieś tam aplikacji, no i tam w środku takiej liso w grupie nie wiem, mamy tego jakiegoś tam pasa.
+
+ekspert:   2:05:07
+I.
+No.
+
+osoba 1    2:05:11
+Tak.
+
+ekspert:   2:05:12
+No.
+
+osoba 1    2:05:13
+Mamy.
+Standardowo każdy taki reacher z grupą ma.
+
+ekspert:   2:05:19
+No.
+
+osoba 1    2:05:19
+I co i takiego event huba on też powinien być taki risus grupie czy to powinno?
+
+ekspert:   2:05:23
+Możecie mieć tego w Research grupie i wtedy będziesz miał tyle tych event hubów. Ile masz tych risercz Group, czyli to jest też spoko, bo wtedy jak na przykład przerzucacie kost tego event huba pewnie od razu na na właściciela tej resources grupy i cost Central z nim związany, albo możecie mieć drugą metodę i mieć centralny event huby, które wtedy.
+Organizacji kosztowo wychodzą pewnie taniej, bo powiedzmy nie wiem nawet jak weźmiesz jeden trup ult units najmniej ile możesz to na przykład na tym jednym trupu unicie to jest.
+Chyba musiał trzeba czekać, zaraz zobaczą od razu, a event hub.
+
+osoba 1    2:06:14
+A za samego i wędkę właśnie nie płać tylko za tą definicję tą tą propozycją czy za to i za to.
+
+ekspert:   2:06:20
+Tak za ilość prowizją owanych trybun i teraz.
+Będzie to jest.
+Ee, 1000 evantów persa pr sekundy na sekundę lub do mega bajta danych naraz.
+Ee i to jest, to jest ingres, nie jak raz będziecie mieli tyle samo więc to, że gra to jest większa, to własna mnie interesuje specjalnie, więc jeżeli.
+Jeżeli nie wiem, macie na przykład Research grupa, w której jest nie wiem absurvister jaką dicky volt to tam niekoniecznie to wygeneruje. 1000 message nam na sekundę, więc prawdopodobnie takim jednym tru pod unitem będziecie w stanie obsłużyć wiele takich takich zasobów, szczególnie tych mało gadających dlatego.
+W dużej skali lepszym rozwiązaniem są te centralne event huby.
+Bo jest też mniej zasobów do zarządzania, lepiej jest mieć, nie wiem jednego event huba z czterdziestą a trupu dynitami niż 40 z jednym nie.
+
+osoba 1    2:07:25
+Mhm, ale tam jeszcze problem, no to to wtedy problem się pojawi znowu z jakimiś uprawnieniami, także aplikacja w grupie takiej musi pisać do ojca, ba winy i grupy.
+
+ekspert:   2:07:26
+Ee.
+Z dnia nie, absolutnie nie ma tutaj problemu, bo tutaj wskazujesz to na poziomie diagnostic settingsów danego serwisu to nie ma nic wspólnego z listu z grupą, w której to jest.
+
+osoba 1    2:07:44
+No tak, no ale no tak, ale tutaj nie trzeba mieć uprawnień do tego, żeby sobie tego.
+
+ekspert:   2:07:50
+Nie nie, bo to się.
+
+osoba 1    2:07:50
+Inaczej ktoś ma inaczej ktoś mając.
+
+ekspert:   2:07:52
+Co się dzieje na to się dzieje na poziomie ażura.
+
+osoba 1    2:07:55
+Tak, ale zobacz, bo u nas jeszcze podział taki, że ktoś tam dostał listę grupę ma dostęp tak jak ma kontrola na tej liście roz grupie powyżej nie wyjdzie z grupy.
+Czy on mają?
+
+ekspert:   2:08:07
+No ale nie musi.
+Nie musiło to aż do ustawia w sensie nie musi. No nie autoryzuje się dane delikwent do tego event huba ażur się autoryzuje.
+
+osoba 1    2:08:10
+No tak.
+De facto, jak tam będzie 10, to kolesiowi się tam wyświetli 10 tak sobie wybierze, które chce tak.
+
+ekspert:   2:08:25
+Tak.
+Tak.
+
+osoba 1    2:08:32
+A tam oprócz event huba tam pewnie jeszcze jakiś jakieś coś tam dodatkowe rzeczy się też pojawiają nie, no to.
+
+ekspert:   2:08:41
+Mm nie rozumiem.
+
+osoba 1    2:08:45
+No bo jest event hub tak, ale no żeby do niego uderzyć to, a to się podaje tak jakby jego nazwę.
+
+ekspert:   2:08:50
+A z nim space event huba i polisy, które ma być, ma być użyte do autoryzacji, więc teraz my też tak robimy, że.
+Wydajecie po prostu gołego kontrybutora my mamy customowe role zdefiniowane gdzie uneży tych Research z Group dostają.
+Rolę tożsamą z kontrybutorem, ale mają niektóre uprawnienia wycięte, czyli na przykład diagnostic settings mają tylko readera na diagnostic settings.
+Andrzej na na na na na tej konkretnej akcji, tak samo jak na przykład do chost Centre nie mają, nie mają dostępu dla danego zasobu, wtedy nie ma problemu, że tutaj coś pozmieniają, bo już jak powiedzmy wszystko jest reforma z błogosławionych modułów, które są zarządzane centralnie, czyli jak taki.
+Zespół jeden z drugim sobie buduje infrastrukturę, to musi ją zbudować używając błogosławionych modełów i ten błogosławiony moduł od razu ustawia.
+Odpowiednie te konfiguracje diagnostic settingsów także zespół nie stanie tego zmienić ani odpisać sobie.
+
+osoba 1    2:10:01
+No tak.
+A jeszcze tam coś było nie wiem. Konrad, ty pamiętasz, jak tam z chłopakiem żeśmy rozmawiali, że tam z apimem coś było, że tam.
+Tymi węchowym, że ten nie wiem, komunikat za duży był, że to nie przychodziło czy coś.
+
+ekspert:   2:10:15
+A bo to.
+
+osoba 3    2:10:15
+Adam tak mieli jakiś limit komunikatu, zgadza się?
+
+ekspert:   2:10:17
+Tak, bo masz megabajtowy i teraz w łapim jest są 2 rzeczy, bo teraz tu mówimy o diagnostic settings, czyli o prześlij mi logi z api mu dotyczące działania apimu, natomiast w apimie możesz jeszcze przez łać requesty, które wchodzą.
+
+osoba 3    2:10:36
+Tak i o tym była mowa właśnie o tym, co przełazi przez api.
+
+ekspert:   2:10:37
+To i venthuba tak i to na przykład się robi w apimie robisz taki myk, że jak masz błędy na apimie?
+To możesz wyłapać i wsadzić je do event huba, żeby móc taki obsłużyć na przykład służby, zorientować się, co tam było. Czyli to jest taki request capture, nie i teraz jeżeli ktoś ci wyślę, nie wiem obrazek, który ma 2 omega, no to tego dave huba nie wsadzisz. Możesz to tylko do premium wsadzić do do standard nie wsadzisz, bo standard ma.
+Limit jednego megabajta na wiadomość.
+
+osoba 3    2:11:15
+Dobra, dobra, czy jak nie mamy innych tematów to ja jeszcze chyba na koniec, ewentualnie chciałem to dobry pomysł czy nie co tam reszta się wypowie.
+Jakbyś mógł nam tak krótko omówić trochę kod tego laba, bo tam widzę, że jest kilka skryptów, ssh i parę innych rzeczy to w jakiej kolejności? Na przykład chcę uruchomić i w ogóle jak się z tym obejść.
+Żeby sobie postawić to środowisko, które tu przygotowałeś.
+
+ekspert:   2:11:37
+A już wam mówię o, tworzę tylko to w inteligenu sobie, żeby wam to pokazać też.
+A.
+Czyja to?
+O już to zbun się znaleźć tego timesa, żeby wam zmienić.
+Okienko pokazywana dobra to będzie chyba prościej na screenie całym.
+Dobra, to macie, to macie tak macie tutaj tak na dobrą sprawę.
+Zrobiony.
+Skrypt.
+Czy ja Jestem skrypcik?
+A dobra robicie po prostu te reform Plan i ta forma play tutaj gdzieś tylko musicie ewentualnie sobie Research z grupy pozmieniać i w variable subskrypcja, bo to to jest moja jakaś tam subskrypcja MVP, na której sobie sobie testuję, więc tutaj stawiacie sobie swoją subskrypcję i robicie normalnie te reform, Plan i te reformę.
+I te reforma play.
+Tutaj żadnej filozofii, żadnej filozofii nie ma i wstaje wam lapi, teraz ten tutaj configure grafana script cich odpalacie i on za TD po konfiguruje te wszystkie data, te wszystkie data.
+Datasource.
+Ee i w k po drodze jeszcze macie tutaj ten ko 8, ale z który wam deploye na kubernecie, który powstanie deploye prometeusza?
+Ee i deploy u je.
+Tego.
+Ażur Matrix.
+Jest jak to się nazywało?
+Ażur Matrix no a to co do manager Mateusz a wysyła metryki.
+
+osoba 3    2:13:46
+A ma ten agent, tak?
+
+ekspert:   2:13:47
+Taka ma agent tak uciekło mi słowo, więc jak gdyby odpalacie czyli folklor i te reform Plan the play cubernet EZI configure grafana i macie kompletnego.
+Kompletne kompletne konkretnego laba i ja wam jeszcze wyślę taką instrukcję, którą sobie zrobiłem to złam dorzucę.
+A nienawidzę tipsów, ee to jest. To jest ten dokument, który macie, ale jeszcze jeden powinien być otwarty.
+Ale macie tu jeszcze taki taki taki rant book, którego wam zaraz wyślę, gdzie macie po kolei skrypty jak zepsuć?
+Więc jak na przykład właśnie jak sobie odpalić na tym na tym labie, czyli włączamy tego privata i i jak sobie na przykład właśnie z tego resovera sprawdzić jak potwierdzić dokładnie, że to jest ten ten najlepszy Adrian, gdyby te wszystkie.
+Case'y ze skryptami konkretnymi do do.
+Do do do przejścia.
+Przez prze klikania co go całego domu ja tam.
+Nie lubię strasznie klikać, więc szczególnie do domu sobie przygotowuję takie skrypty do wklejenia.
+
+osoba 3    2:15:11
+O k dobra i a potem jak jak się dostać do takich rzeczy to po prostu przez portal tam sobie odpowiednie linki, porty, wszystko by nam się wyświetlą tak.
+
+ekspert:   2:15:18
+Taki tutaj, w tym run buku, w tym run buku macie znaczy dobra ten runbox jest z moimi tutaj subscription it z moimi Research it, ale de facto, jeżeli się podmieni się tutaj waszego ten data na.
+
+osoba 3    2:15:26
+No do.
+
+ekspert:   2:15:32
+Na.
+I waszą subskrypcję i DW tych linkach. No to jeżeli resources się tak samo nazywają, no to tak samo, ale to jest wszystko zdayowane w jednej Research z grupie tym labie i tar resources grupa się nazywa.
+Po prostu.
+Bo RG allianz gra w MON lab.
+Więc tutaj w niej wszystkie zasoby są w niej i tak nie.
+
+osoba 3    2:15:56
+I wysokie uprawnienia analizy z grupy nam wystarczą. Czy muszę mieć jeszcze wyższe na jakiś szerszych rzeczach?
+
+ekspert:   2:16:02
+No musicie mieć na no jakiegoś Network contributora bo bo właśnie bo te menedżer prometeusza się muszą dodać te tata jak to się nazywa?
+
+osoba 3    2:16:03
+To coś było chyba o networkingu chyba było coś tak, no właśnie.
+
+ekspert:   2:16:16
+Private link Service się muszą utworzyć no kubernetes będzie chciał tą swoją manager grupę zrobić.
+Ee więc najlepiej mieć do tego jakąś.
+Demo subskrypcja, dlatego po prostu.
+
+osoba 3    2:16:29
+No mamy jakieś środowisko sandbox, nie wiem jak tam z uprawnieniami jest, no ale będzie trzeba to spróbować tam jakoś.
+
+ekspert:   2:16:33
+No a jak nie no to robisz tak, że.
+Wchodzisz na ruską stronę, podajesz kradzienne numery karty kredytowej i zakładasz ażurowe konto.
+Demo, bo to tylko potrzeba podać jakikolwiek yy sprawny numer karty kredytowej i zakładasz sobie ten miesięczne.
+Miesięczne ażur freedom masz 150 $ ten lab ciągnie 25 $ tygodniowo mniej więcej, więc na miesiąc to wystarczy.
+
+osoba 3    2:17:06
+Spoko, dobra.
+
+ekspert:   2:17:08
+I oczywiście się śmieje z tymi numerami kart nie, ale no nawet na prywatną kartę można założyć sobie takiego ażur free coś potestować.
+
+osoba 1    2:17:18
+Znalazłem ten nad tym naszym sand boksie, zobaczyć. No w sumie tam się powinno dodać i odpalić.
+
+ekspert:   2:17:20
+No.
+No więc w zasadzie tyle już mam, zaraz wyślę ten jeszcze ten ten rant bóg, żebyście mieli też te wszystkie skrypty pod ręką, no ale to to jest tylko teraz Plan i potem macie też tear down, który to wszystko sprzątanie.
+
+osoba 3    2:17:40
+Bo to u ciebie jest tak jakby czyściej trochę, bo to co nam podesłałeś ma jeszcze dużo plików, kropka, coś tam innych to to są robocze, to zakładam, że to jest do wykasowania, tak.
+
+ekspert:   2:17:50
+A.
+Mina arnych plików.
+
+osoba 3    2:17:55
+Przynajmniej mi to się tak rozpakowało, że właściwie odpowiednik wszystkich tych, które tu widzimy jeszcze jest taki z kropką.
+
+ekspert:   2:18:03
+Z kropką.
+
+osoba 3    2:18:05
+O.
+Tak.
+Dobra, to ja podeślę kto u mnie wygląda?
+
+ekspert:   2:18:12
+Ogólnie pokazać screen.
+
+osoba 1    2:18:16
+A rzeczywiście.
+
+ekspert:   2:18:17
+Czekałem już sobie, a to.
+
+osoba 3    2:18:18
+Wysłałam na czata.
+
+osoba 1    2:18:21
+Ale jak wejdziesz w tego zipa, no to tam będzie.
+
+osoba 3    2:18:29
+To pewnie jest wynik tego te reforma, że sobie to.
+
+ekspert:   2:18:44
+Nie, nie ma tutaj żadnych skorup komplików.
+Zobacz.
+
+osoba 3    2:18:47
+Ta dziwna gra może się to źle rozpakowało, no a jak zerkniesz na screena w czacie? Nie wiem czy to dochodzi do ciebie chyba tak.
+
+ekspert:   2:18:51
+A.
+Już przestać czerować.
+To jest jakieś cudo? Zobacz po prostu do tego folderu. Ja obstawiam, że to co widzisz to jest jakieś.
+Widzimisie.
+
+Ziarkiewicz Konrad    2:19:14
+To są znaczniki jakby z appla tak jak ten de stor widzę w środku jest tylko.
+
+osoba 3    2:19:18
+O k no w folderze też tak mam.
+
+ekspert:   2:19:18
+Te stop tak.
+A to dziwne, albo to jest jakieś windowsowe i moim zdaniem to coś dorobił visual studio.
+Ee kołt a nie ee a nie nie, nie mam pojęcia co sądzę, czego są te prawdziwymi?
+
+osoba 3    2:19:32
+O k no dobra to czyli można wywalić to najważniejsze.
+
+ekspert:   2:19:35
+Tak.
+Szczerze mówiąc, nigdy w życiu czegoś takiego nawet nie widziałem.
+Moim zdaniem to wierzyłam studio koło coś zrobił.
+
+osoba 3    2:19:43
+Czy daty są takie same jak tych innych plików, więc nie wiem, ale to mniejsza o to.
+
+osoba 1    2:19:50
+A to, ale to nie jakieś apelowe rzeczywiście, bo tam jest maga s coś tam.
+Atrybuty, a może to są atrybuty pliku są prze pisane tak na maka czy coś?
+
+osoba 3    2:19:58
+A chyba że.
+
+ekspert:   2:19:58
+Może może może.
+Sobie Windows nie radzi z atrybutami po spakowaniu na.
+Ciekawostka, no ale w każdym razie tylko te piki normalne potrzebujecie. Zresztą wkleję wam listę co ja widzę po swojej stronie po rozpakowaniu więc.
+Wiesz generalnie.
+
+osoba 1    2:20:17
+Mianowicie, że to jest kropką teoretycznie, to nawet ukryte powinny być tak standardowo, tak.
+
+ekspert:   2:20:22
+No właśnie, aż nawet sprawdzałem czy.
+
+osoba 1    2:20:23
+Przy alesie z takim zwykłą.
+
+ekspert:   2:20:25
+Nie ma jakichś ukrytych plików, ale nie ma więc generalnie tylko to co widzicie jest potrzebna.
+Dobra to co?
+
+osoba 1    2:20:39
+Mam też jakieś uprawnienia z małpą, są jakieś takie? To pewnie może tutaj przez to jakieś jakieś.
+
+ekspert:   2:20:46
+No to pewnie jest jak standard extended.
+Uprawnienia i NTFS tego nie nie rozumie.
+To teoretycznie mogę w sumie zamiast RG zeta do repozytorium to mogę po prostu repozytorium grać i jak dacie mi na przykład nie wiem o.
+Yy, to zróbmy inaczej.
+Dajcie mi macie jakieś githubowe konto któreś z was nie?
+
+osoba 3    2:21:12
+Tak, ale nawet nie pamiętam prywatnego w sumie tak pod ręką.
+
+ekspert:   2:21:14
+To dobra, to ogarnijcie jakieś jedno git schabowe, konto podeślijcie a ja po prostu to prywatne repo tam w Grand to do tego repozytorium razem z tymi wszystkimi.
+I jak mi dacie?
+Jakieś konto to po prostu dodam te zapraszam to konto do tego repozytorium i wtedy będziecie mogli to po prostu zrobić normalnego grid clona jak ludzie.
+
+osoba 3    2:21:40
+No dobra.
+
+ekspert:   2:21:41
+Bo nie chcę tego wrócić. Wiecie, do publicznego repozytorium? Nie.
+
+osoba 3    2:21:42
+No wiadomo.
+
+ekspert:   2:21:47
+No to podeślijcie tam po prostu i linie i tyle. I to będzie chyba na na najwygodniejsze nie i sobie sklonujecie to raport gdzieś.
+I i wtedy będzie ominiemy to kontra Windows.
+
+osoba 2   2:22:07
+No dobra ostatnie pytanko tego wektora, bo tam pokazałeś tego wektora, że jest lżejszy od aloya on nie jest darmowy czy czy czy o właśnie tak.
+
+ekspert:   2:22:13
+Darmowy.
+Darmowy jest open source i teraz.
+Główna różnica pomiędzy wektorem o telem.
+Doktorem czy czy open telemetrii collectorem jest taka, że open the open telematic collectora możecie sobie dokładać?
+Pluginy i sobie robić własne dystrybucje do aloya też jest w miarę łatwo wstrzyknąć dodatkowy kod jak się bardzo uprzecie natomiast do wektora jeżeli nie ma jakiegoś plagi na do wektora.
+To sorry, nie ma i na przykład takim case śmiesznym jest, bo wektory stosowałem do zbierania logów z VM ek w sensie jak aplikacja pisze sobie logi do pliku jakiegoś no to taki po prostu agent zamiast failbitowy.
+To na windowsach jest ten problem, że nie ma Windows event loga inputo.
+Trzeba było robić fail, Windows event beats, który pchał czytał z z Windows event loga PH do wektora, żeby wektor wysłał, wysłał, wysłał dalej nie bo w przypadku hotela bym sobie po prostu dopisał taki progin i tyle. Natomiast do takich case'ów jak właśnie czytanie event huba pub saba google'owego.
+Takie typowe case'y to to to po prostu jest bardzo szybkie. Jeszcze wektor ma na transformera jak ma bardzo fajny język.
+Ryk.
+Tych transformacji, więc można na przykład wypasować sobie z logów metryki i wypchnąć je do prometeusza jak jak macie jakieś starodawny system, który pisze pisze metryki w formie w formie logu.
+
+osoba 5  2:23:59
+A co się myślę, że znajdzie?
+
+ekspert:   2:24:00
+Tak więc więc pod tym względem wektor jest bardzo fajny, bo nie musicie pisać tylko z tam kodu, tylko piszecie kastą konfigurację którą się ładuje jako konflikt, mapę w vamlu i i w i możecie na tym bardzo dużo fajnych transformacji.
+Fajnych transformacji porobić.
+Że jest to napisane wreszcie to to naprawdę zapierdziela i bardzo mało zasobów wciąga, więc jedyna wada dla mnie jest to, że nie wymyślili jakiegoś systemu pluginu, żeby coś Party mogło dopisać.
+I powiedzmy nowe pluginy, bo tego event hub, no tego Windows event loga to ludzie już tak z 5 lat pisz procom proszą data doga jakoś nie dorobili, do dzisiaj jest nawet jakiś tam puer request otwarty od 2 lat, ale czy się to wydarzy, czy się nie wydarzy, to nie wiem. Fajną rzeczą w ektorze też jest, że jest input typu exek, czyli możecie wykonać dowolny inny dowolny skrypt, czyli powiedzmy macie na BMC zainstalow.
+W ogóle wektora i on może wykonać jakąś inną aplikację i na przykład mam taki case aplikacji, która ma własny jakiś tam system logowania Property i tak dalej nie jest jakiś tam klient, który te logi potrafi odczytać, czyli robisz tam.
+Get me the looks i on ci ją wypluwa, więc wektor odpala tego get me looks.
+I i czy to output i wysyła ten out food?
+To noteboot dalej.
+Więc to jest też fajne w wektorze, że zawsze jest taki jeszcze falbac, czyli teraz się mógłbym sobie napisać powershellowy skrypt do przeczytania Windows, event loga i i złapać ten ten notebook, tylko oczywiście musiałbym wtedy wiedzieć. Jego wcześniej zacząłem, gdzie go skończyłem, tam jakoś przechowywać stan tego, od której linijki przeczytałem.
+Yy, no ale do 99 k procent hajsów aktor jest super.
+
+osoba 2   2:26:05
+No dla mnie jest kluczowe, żeby nie było tak, żeby on się, że jakby dostawca się zwinie na przykład za pół roku, nie.
+
+ekspert:   2:26:11
+No nie, to jest data doctor, no a poza tym jest open source.
+
+osoba 2   2:26:13
+Grzany.
+No to raczej bym sugerował, że w którejś wersji zaczną chcieć zarabiać na nim pewnie.
+
+ekspert:   2:26:21
+No to to w takich wypadkach community robi fork, ale to wtedy worstka scenariusz macie open telem, bo i tak 90% rzeczy będzie wam gadać. Z drugiej strony opentel materia nawet 100% bym powiedział, więc tak naprawdę to potem narzędzi integracyjne wymienić. Nie wiem wektora na na otela czy na coś innego się pojawi to jest to jest też trywialne, bo to jest tak naprawdę warstwa integracji, nawet lockstasha możecie mieć w tym samym miejscu.
+I te plastik chciał zarabiać na lockstation to się pojawiło.
+Pan serdecznie też z z otwartym lockstas-em.
+
+osoba 2   2:26:56
+No dobra.
+Ode mnie tyle znaczy, w sensie nie chcę pytać, bo mnie szlag trafił z internetem. Oczywiście play me tak zrobił, że urwało mi połączenie jakąś awarię zgłosili, więc nie wiem co mówiłeś, muszę sobie w dużej mierze muszę sobie to niestety odgrać, więc dobrze, że puściłem nagrywanie.
+Ale to tak dlatego mnie wycięło.
+
+osoba 1    2:27:19
+A jeszcze mam pytanie wszystko odnośnie, bo teraz mówimy o tak jak tych.
+Że to jakby z związanych z tymi agentami, a jeżeli z jakiegoś powodu by się okazało, że u nas.
+To powiedzmy, nie możemy czegoś zainstalować i musi być ten agent ama, tak, który gdzieś tam jest inna wirtualka, jak ma być i na gdzieś tam.
+Jego jakoś możemy zdefiniować, żeby te dane pobierać bezpośrednio czy tam muszą być już te de cerki czy jakieś tam inne wynalazki.
+
+ekspert:   2:27:52
+No ten am agent to tylko będzie współpracował z monitorem, więc.
+Side, więc to już jest.
+
+osoba 1    2:28:00
+Znaczy no właśnie nie, no to znaczy tam można mu definiować, a ma to wysłać nie tam, niekoniecznie, to musi być.
+Ten condinesa czy coś tam tak?
+
+ekspert:   2:28:09
+No może do własnego prometeusza to wysłać nie, ale to jest.
+Jest to jakaś proteza tak, bo to da ci mniej informacji trochę niż niż jakbyś sobie zainstalował tam zwykłego pod monitora i zbierał z z cuberix serwera informacje.
+Natomiast nie widzę powodu, dlaczego po stronie kubernetes'a dlaczego po stronie kubernetes, a nie moglibyście zainstalować sobie cube Matrix serwera, który jest normalnie z cubertem dostarczany i po prostu zbierać tego prometeusza ma po stronie wiem jak no o k dobra, może się ktoś uprzedzić, że nie chce nudexportera.
+No bo bo nie wiem, bo nie mamy go wokół tego, a nie macie pewnie jakiegoś czy czegoś co centralnie zarządza instalacjami.
+A że tutaj ten na maes pluginem, no to.
+Będzie to działać, tylko będziecie mieli uboższe tematyki.
+
+osoba 1    2:29:08
+Im.
+
+ekspert:   2:29:10
+Bo zresztą ten ażur obecna wersja tego ażur Matrix agenta to jest stara wersja prometeusz agenta, czyli takiego trochę.
+Pierwowzoru na od eksportera Windows eksportera.
+Więc kiedyś Microsoft dojrzeje do tego, żeby to było po prostu nodex porter, tak jak w walloniu też jest nudex porter zęba do vane.
+Albo pójdą wola, bo to mają to partnerstwo z graffa, no to dlaczego by nie to rozwiązuje bardzo dużo problemów im też.
+We wszystkim idą do w open celem metry, więc.
+Tak też jakbym miał zgadywać, to tak to się skończy, bo po co utrzymywać kod, który może ci community rozwijać nie.
+
+osoba 1    2:30:05
+Zobaczymy no tam się wszystko zmienia cały czas.
+
+ekspert:   2:30:08
+No to prawda, ciężko nad tym nadążyć.
+
+osoba 2   2:30:12
+No dobra pytanie, czy jeszcze jakieś tematy mamy?
+Poza.
+Zakresem zamówienia.
+Panowie, coś jeszcze mam przyjść do głowy?
+
+osoba 1    2:30:25
+Na razie chyba żeśmy sporo rzeczywiście udało ten wyjaśnić omówić.
+
+ekspert:   2:30:38
+Jak się nie obrazicie to bym poprosił o 5 minut przerwy. Ja sobie zjem po prostu.
+
+osoba 2   2:30:42
+No właśnie dlatego pytam, bo wiesz, bo jesteśmy formalnie na dwunastą omówienie, ale może właśnie potrzeby szkic przerwy.
+
+ekspert:   2:30:47
+Nie, to zróbmy 5 minut przerwy. Ja sobie szybko zjem buła i szybciej zaczniemy szybciej skończymy. No mi też to pasuje, żeby szybciej skończyć.
+
+osoba 2   2:30:55
+Dobra, czyli tyle potrzebuje.
+
+ekspert:   2:30:58
+45, zróbmy.
+
+osoba 1    2:30:58
+45.
+
+osoba 2   2:30:59
+45, że było jakaś porówna godzina. Dobra to.
+
+ekspert:   2:31:01
+Dobra.
