@@ -1,0 +1,28 @@
+---
+# Debug pod for S1.3 / S1.3b white-box DNS probes and S1.4 public-access checks.
+# Has dig, nslookup, curl, and other network tools (nicolaka/netshoot).
+# Usage:
+#   kubectl exec -it debug -- bash
+#   dig +noall +answer <amw-a-fqdn> @168.63.129.16
+#   dig +noall +answer <amw-b-fqdn> @168.63.129.16
+# See test-plan.md dns-probe.sh for the full probe script.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug
+  namespace: default
+  labels:
+    app: debug
+spec:
+  containers:
+    - name: debug
+      image: nicolaka/netshoot
+      command: ["sleep", "infinity"]
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          memory: 128Mi
+  terminationGracePeriodSeconds: 0
+  restartPolicy: Never

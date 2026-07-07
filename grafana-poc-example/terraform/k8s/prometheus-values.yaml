@@ -1,0 +1,61 @@
+# Helm values for prometheus-community/prometheus
+# deploy-k8s.sh patches PLACEHOLDER_REMOTE_WRITE_URL before install.
+#
+# Auth model: pods authenticate to AMW-B via the node kubelet managed identity
+# (IMDS at 169.254.169.254). Prometheus 2.45+ supports the `azuread` remote_write block.
+# The kubelet identity already has Monitoring Metrics Publisher on DCR-B (Terraform RBAC).
+# NOTE: the block is `azuread` (no underscore) and client_id MUST be the kubelet identity's
+# client_id — empty would select a system-assigned MI the nodes do not have. deploy-k8s.sh
+# substitutes PLACEHOLDER_KUBELET_CLIENT_ID from `terraform output aks_kubelet_client_id`.
+
+server:
+  remoteWrite:
+    - url: "PLACEHOLDER_REMOTE_WRITE_URL"
+      azuread:
+        cloud: "AzurePublic"
+        managed_identity:
+          client_id: "PLACEHOLDER_KUBELET_CLIENT_ID"
+      queue_config:
+        max_samples_per_send: 1000
+        min_backoff: 30ms
+
+  # For S1.6: internal LoadBalancer + AKS-managed Private Link Service.
+  # AKS auto-creates the PLS (pls-prometheus) in the node RG from these annotations.
+  # Requires: snet-aks private_link_service_network_policies_enabled=false (Terraform) and
+  # the AKS identity having Network Contributor on the VNet (Terraform).
+  # Grafana MPE → this PLS + connection approve + refresh is the demo step (configure-grafana.sh / runbook).
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+      service.beta.kubernetes.io/azure-pls-create: "true"
+      service.beta.kubernetes.io/azure-pls-name: "pls-prometheus"
+      service.beta.kubernetes.io/azure-pls-ip-configuration-subnet: "snet-aks"
+      service.beta.kubernetes.io/azure-pls-ip-configuration-ip-address-count: "1"
+      service.beta.kubernetes.io/azure-pls-visibility: "*"
+    # externalTrafficPolicy stays Cluster (default) — avoids the PLS/pod subnet-separation rule.
+
+  # Persist data across pod restarts (optional for a short-lived lab).
+  persistentVolume:
+    enabled: false
+
+  # Give the server enough memory for node_exporter scrapes + remote_write buffer.
+  resources:
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      memory: 1Gi
+
+nodeExporter:
+  enabled: true
+
+# Disable components not needed for this lab.
+alertmanager:
+  enabled: false
+
+pushgateway:
+  enabled: false
+
+kube-state-metrics:
+  enabled: true
