@@ -1,3 +1,18 @@
+# =============================================================================
+# rbac.tf — Nadania ról (RBAC) spinające cały system uprawnieniami
+# -----------------------------------------------------------------------------
+# To tutaj rozstrzyga się "kto może co". Najważniejsze przydziały:
+#   - Tożsamość Grafany  -> Monitoring Data Reader na AMW-A i AMW-B (odczyt metryk)
+#                        -> Monitoring Reader na grupie zasobów (źródło Azure Monitor)
+#   - Service principal  -> Monitoring Reader na RG (źródło "usługowe" w Grafanie)
+#   - Tożsamości AKS     -> Monitoring Metrics Publisher na DCR-A/DCR-B (zapis metryk)
+#                        -> Network Contributor na vnet-lab (tworzenie wewn. LB / PLS)
+#   - Osoba wdrażająca   -> Grafana Admin (zarządzanie źródłami danych w Grafanie)
+#   - (opcjonalnie) użytkownik testowy -> Grafana Viewer + Monitoring Reader
+# =============================================================================
+
+# ── Tożsamość systemowa Grafany → Monitoring Data Reader na każdej AMW ────────
+# Wymagane, aby źródła Prometheus w Grafanie mogły odpytywać obie przestrzenie.
 # ── Grafana system MI → Monitoring Data Reader on each AMW ───────────────────
 # Required so the Prometheus data sources in Grafana can query both workspaces.
 
@@ -31,6 +46,11 @@ resource "azurerm_role_assignment" "sp_monitoring_reader_rg" {
   principal_id         = azuread_service_principal.sp.object_id
 }
 
+# ── AKS → Monitoring Metrics Publisher na DCR-A (zapis metryk z dodatku Prometheus) ──
+# Nie było pewności, której tożsamości używa agent ama-metrics (MI płaszczyzny
+# sterowania vs MI kubeleta), a powiązanie DCR może i tak autoryzować automatycznie.
+# Dla pewności nadajemy rolę OBU tożsamościom (nadmiarowo, ale bezpiecznie), aby
+# zapis do AMW-A nie zakończył się błędem 403 przez złego principala.
 # ── AKS → Monitoring Metrics Publisher on DCR-A (managed-Prometheus add-on ingestion) ──
 # Reviewers disagreed on which identity the ama-metrics add-on uses (control-plane MI vs
 # kubelet MI), and the DCR association may auto-authorize anyway. Grant BOTH (harmless if

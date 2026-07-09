@@ -1,4 +1,11 @@
 ---
+# =============================================================================
+# debug-pod.yaml — Pod diagnostyczny do prób sieci/DNS
+# -----------------------------------------------------------------------------
+# Prosty pod z obrazem nicolaka/netshoot (dig, nslookup, curl itp.), używany do
+# testów rozwiązywania DNS (scenariusze S1.3 / S1.3b) oraz sprawdzania dostępu
+# publicznego (S1.4). Wejście do powłoki: kubectl exec -it debug -- bash
+# =============================================================================
 # Debug pod for S1.3 / S1.3b white-box DNS probes and S1.4 public-access checks.
 # Has dig, nslookup, curl, and other network tools (nicolaka/netshoot).
 # Usage:

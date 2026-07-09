@@ -1,3 +1,15 @@
+# =============================================================================
+# prometheus-values.yaml — Wartości Helm dla samodzielnego Prometheusa (AMW-B)
+# -----------------------------------------------------------------------------
+# Konfiguracja chartu prometheus-community/prometheus. Placeholdery
+# (PLACEHOLDER_*) są podmieniane przez deploy-k8s.sh na dane z outputs Terraforma
+# tuż przed instalacją. Kluczowe elementy:
+#   - remoteWrite : wysyłka metryk do AMW-B; auth przez blok "azuread" i tożsamość
+#                   kubeleta (client_id) — pobieraną z IMDS na węźle.
+#   - service     : wewnętrzny LoadBalancer z adnotacjami tworzącymi Private Link
+#                   Service (pls-prometheus) potrzebny do prywatnej ścieżki S1.6.
+#   - wyłączone alertmanager/pushgateway; włączone node-exporter i kube-state-metrics.
+# =============================================================================
 # Helm values for prometheus-community/prometheus
 # deploy-k8s.sh patches PLACEHOLDER_REMOTE_WRITE_URL before install.
 #

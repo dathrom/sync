@@ -1,8 +1,21 @@
+# =============================================================================
+# aks.tf — Klaster Kubernetes (AKS) + podpięcie do managed Prometheus
+# -----------------------------------------------------------------------------
+# Klaster AKS pełni podwójną rolę:
+#   - hostuje dodatek "managed Prometheus" (agent ama-metrics), który zasila AMW-A,
+#   - uruchamia samodzielny Prometheus (instalowany później Helmem), zasilający AMW-B.
+# Konfiguracja jest minimalna/laboratoryjna: 1 węzeł, SKU Free (bez SLA na API).
+# Sieć: Azure CNI w trybie "overlay" — Pody dostają adresy z osobnej puli
+# (pod_cidr), niezależnej od adresacji VNet.
+# Na końcu pliku: powiązania AKS -> DCR-A, które faktycznie kierują strumień
+# metryk do przestrzeni AMW-A.
+# =============================================================================
+
 resource "azurerm_kubernetes_cluster" "aks" {
-  name                = "aks-pzu-grafmon-lab"
+  name                = "aks-xyz-grafmon-lab"
   location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
-  dns_prefix          = "pzu-grafmon-lab"
+  dns_prefix          = "xyz-grafmon-lab"
 
   # Free = no SLA on API server; acceptable for lab.
   sku_tier = "Free"
@@ -33,6 +46,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip = "10.240.0.10"
   }
 
+  # Włącza dodatek managed-Prometheus (agent ama-metrics). Pusty blok = ustawienia domyślne.
   # Enable managed-Prometheus add-on (ama-metrics agent). No extra config needed.
   monitor_metrics {}
 
@@ -41,6 +55,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags = local.tags
 }
 
+# ── Połączenie AKS → DCR-A (przepływ metryk managed-Prometheus do AMW-A) ──────
 # ── Wire AKS → DCR-A (managed-Prometheus metrics flow to AMW-A) ───────────────
 
 resource "azurerm_monitor_data_collection_rule_association" "dcra_aks_dcr_a" {

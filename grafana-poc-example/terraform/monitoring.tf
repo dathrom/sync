@@ -1,3 +1,23 @@
+# =============================================================================
+# monitoring.tf — Rdzeń monitoringu: dwie przestrzenie Azure Monitor Workspace
+# -----------------------------------------------------------------------------
+# Projekt świadomie tworzy DWA niezależne źródła metryk Prometheus, aby pokazać
+# dwie różne ścieżki zbierania danych:
+#
+#   AMW-A  <- dodatek "managed Prometheus" w AKS (agent ama-metrics zbiera metryki
+#             automatycznie i wysyła je przez DCR-A). Ta przestrzeń jest później
+#             prywatyzowana (dostęp przez Private Endpoint) — patrz dns.tf.
+#
+#   AMW-B  <- samodzielny Prometheus (Helm) używający "remote_write" przez DCR-B.
+#             Pozostaje publiczna; instalowana po `terraform apply` skryptem
+#             k8s/deploy-k8s.sh.
+#
+# Każda przestrzeń potrzebuje pary:
+#   DCE (Data Collection Endpoint) — punkt wejścia do przyjmowania danych,
+#   DCR (Data Collection Rule)     — reguła mówiąca "skąd strumień -> dokąd zapis".
+# =============================================================================
+
+# ── AMW-A: zasilana przez dodatek managed-Prometheus w AKS ───────────────────
 # ── AMW-A: fed by AKS managed-Prometheus add-on ──────────────────────────────
 
 resource "azurerm_monitor_workspace" "amw_a" {
@@ -15,6 +35,9 @@ resource "azurerm_monitor_data_collection_endpoint" "dce_a" {
   tags                = local.tags
 }
 
+# DCR-A: kieruje strumień "Microsoft-PrometheusMetrics" z dodatku AKS do AMW-A.
+# Pole "kind" celowo pominięte: reguły DCR dla Prometheusa nie używają rodzajów
+# Linux/Windows/AgentDirectToStore.
 # DCR-A: routes the Microsoft-PrometheusMetrics stream from the AKS add-on into AMW-A.
 # kind is intentionally unset: Prometheus DCRs do not use the Linux/Windows/AgentDirectToStore kinds.
 resource "azurerm_monitor_data_collection_rule" "dcr_a" {
@@ -45,6 +68,7 @@ resource "azurerm_monitor_data_collection_rule" "dcr_a" {
   tags = local.tags
 }
 
+# ── AMW-B: zasilana przez samodzielny Prometheus (remote_write, krok Helm po apply) ──
 # ── AMW-B: fed by self-hosted Prometheus remote_write (post-apply Helm step) ──
 
 resource "azurerm_monitor_workspace" "amw_b" {
@@ -62,6 +86,8 @@ resource "azurerm_monitor_data_collection_endpoint" "dce_b" {
   tags                = local.tags
 }
 
+# DCR-B: punkt remote_write dla samodzielnego Prometheusa; uwierzytelnianie
+# tożsamością kubeleta (węzła AKS) pobieraną z IMDS (169.254.169.254).
 # DCR-B: self-hosted Prometheus remote_write endpoint; auth via kubelet IMDS identity.
 resource "azurerm_monitor_data_collection_rule" "dcr_b" {
   name                        = "dcr-amw-b"

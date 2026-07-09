@@ -1,4 +1,17 @@
 #!/usr/bin/env bash
+# =============================================================================
+# deploy-k8s.sh — Instalacja samodzielnego Prometheusa w AKS (po terraform apply)
+# -----------------------------------------------------------------------------
+# Krok wykonywany po `terraform apply`. Co robi:
+#   1. Pobiera z outputs Terraforma dane potrzebne do remote_write (endpoint DCE-B,
+#      immutableId DCR-B, client_id tożsamości kubeleta) i buduje z nich URL.
+#   2. Podstawia je (sed) do prometheus-values.yaml zamiast placeholderów.
+#   3. Instaluje Prometheusa Helmem do namespace "monitoring" — zapisuje metryki
+#      do AMW-B przez remote_write (auth: azuread / tożsamość kubeleta z IMDS).
+#      Adnotacje usługi tworzą też Private Link Service (pls-prometheus) do S1.6.
+#   4. Wdraża pod diagnostyczny (netshoot) do prób DNS/łączności (scenariusz S1.3).
+# Wymagania: kubectl, helm >= 3, jq, zalogowany az CLI.
+# =============================================================================
 # Post-apply: install self-hosted Prometheus (feeds AMW-B) and a debug pod.
 # Run from the terraform/ directory after `terraform apply`.
 # Prerequisites: kubectl, helm >= 3, jq, az CLI authenticated.
@@ -24,6 +37,8 @@ DCE_B_METRICS=$(az resource show --ids "$DCE_B_ID" --api-version "$API" \
 DCR_B_IMMUTABLE=$(az resource show --ids "$DCR_B_ID" --api-version "$API" \
   --query "properties.immutableId" -o tsv)
 
+# Zabezpieczenia: `set -e` NIE wychwytuje pustej zmiennej (az zwraca 0 dla pól null).
+# Pusta wartość zbudowałaby błędny URL remote_write → AMW-B nigdy nie przyjęłaby metryk.
 # Guards: `set -e` does NOT catch a var that is merely empty (az exits 0 on null fields).
 # An empty value here would silently build a malformed remote_write URL → AMW-B never ingests.
 [ -n "$DCE_B_METRICS" ]    || { echo "FATAL: DCE-B metricsIngestion.endpoint is empty (api-version $API?)"; exit 1; }

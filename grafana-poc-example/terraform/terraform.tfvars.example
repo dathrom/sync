@@ -1,0 +1,28 @@
+# =============================================================================
+# terraform.tfvars.example — Szablon zmiennych wejściowych
+# -----------------------------------------------------------------------------
+# Skopiuj do terraform.tfvars i dostosuj wartości do swojego środowiska:
+#     cp terraform.tfvars.example terraform.tfvars
+# Terraform automatycznie wczytuje terraform.tfvars podczas init/plan/apply.
+# Wartości poniżej to domyślne z variables.tf (laboratorium xyz).
+# =============================================================================
+
+# Azure subscription ID, w której powstaną wszystkie zasoby.
+subscription_id = "ac74f09f-f550-4aa6-b41f-0fbf419c85fd"
+
+# Region Azure dla wszystkich zasobów.
+location = "westeurope"
+
+# Tag: nazwa projektu (używany tylko do tagowania — patrz locals.tf).
+project = "xyz-grafmon-lab"
+
+# Tag: właściciel.
+owner = "sebastian"
+
+# Tag: TTL / oznaczenie do sprzątania.
+ttl = "destroy-after-demo"
+
+# Opcjonalnie: AAD object ID użytkownika testowego.
+# Po ustawieniu otrzyma rolę "Grafana Viewer" na zasobie Grafany
+# oraz "Monitoring Reader" na grupie zasobów. Puste = pomijamy nadanie ról.
+test_user_object_id = ""
