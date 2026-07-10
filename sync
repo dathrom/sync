@@ -1,14 +1,8 @@
-powershell -ExecutionPolicy Bypass -File .\scripts_ps\resolve_object_ids.ps1
-[03:29:53] [resolve_object_ids.ps1] katalog skryptów : C:\repo\managed_grafana_internal\scripts_ps
-[03:29:53] [resolve_object_ids.ps1] katalog roboczy  : C:\repo\managed_grafana_internal
-[03:29:53] [resolve_object_ids.ps1] tfvars           : C:\repo\managed_grafana_internal\terraform.tfvars
-[03:29:53] [resolve_object_ids.ps1] START — uzupełnianie entra_object_id z Entra ID
-[03:29:53] [resolve_object_ids.ps1] plik CSV: C:\repo\managed_grafana_internal\rbac_input.csv
-[03:29:53] [resolve_object_ids.ps1] Entra: pobieram object_id dla grupy 'namespace_app-ocmsk-dev_gpzu-ck1-ra0643-aks-nonprd-1_writer'…
-[03:29:56] [resolve_object_ids.ps1]   → namespace_app-ocmsk-dev_gpzu-ck1-ra0643-aks-nonprd-1_writer = 7e8fc3c9-757e-4361-a41a-e75a1365167a
-Method invocation failed because [System.String] does not contain a method named 'ContainsKey'.
-At C:\repo\managed_grafana_internal\scripts_ps\resolve_object_ids.ps1:21 char:9
-+     if (-not $script:OID.ContainsKey($Name)) {
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : InvalidOperation: (:) [], ParentContainsErrorRecordException
-    + FullyQualifiedErrorId : MethodNotFound
+PS C:\repo\managed_grafana_internal> powershell -ExecutionPolicy Bypass -File .\scripts_ps\plan.ps1
+[07:07:42] [plan.ps1] katalog skryptów : C:\repo\managed_grafana_internal\scripts_ps
+[07:07:42] [plan.ps1] katalog roboczy  : C:\repo\managed_grafana_internal
+[07:07:42] [plan.ps1] tfvars           : C:\repo\managed_grafana_internal\terraform.tfvars
+[07:07:42] [plan.ps1] START — podgląd zmian (terraform plan)
+[07:07:42] [plan.ps1] Grafana: 'gpzuck1ra0661grafadev1' (RG: 'gpzu-ck1-ra0661-resougroup-dev-1'), service-account: 'poc-tf-sa', TTL: 1h
+[07:07:42] [plan.ps1] tworzę konto usługowe (jeśli nie istnieje)…
+[07:07:44] [plan.ps1] sprzątam: usuwam token 'poc-tf-token-11276-1923418534'…
