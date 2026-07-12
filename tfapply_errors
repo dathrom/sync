@@ -1,0 +1,211 @@
+grafana_folder.system["RA0395-OCMS_KLIENT"]: Still creating... [01m50s elapsed]
+╷
+│ Error: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/datasources": context deadline exceeded
+│
+│   with grafana_data_source.testdata,
+│   on content.tf line 2, in resource "grafana_data_source" "testdata":
+│    2: resource "grafana_data_source" "testdata" {
+│
+╵
+╷
+│ Error: failed to create folder: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/folders": context deadline exceeded
+│
+│   with grafana_folder.system["RA0766-OLIMPS"],
+│   on folders.tf line 2, in resource "grafana_folder" "system":
+│    2: resource "grafana_folder" "system" {
+│
+╵
+╷
+│ Error: failed to create folder: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/folders": context deadline exceeded
+│
+│   with grafana_folder.system["RA0395-OCMS_KLIENT"],
+│   on folders.tf line 2, in resource "grafana_folder" "system":
+│    2: resource "grafana_folder" "system" {
+│
+╵
+╷
+│ Error: failed to create folder: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/folders": context deadline exceeded
+│
+│   with grafana_folder.system["RA0341-DINGO"],
+│   on folders.tf line 2, in resource "grafana_folder" "system":
+│    2: resource "grafana_folder" "system" {
+│
+╵
+╷
+│ Error: unexpected status 403 (403 Forbidden) with error: AuthorizationFailed: The client 'f0279d5c-25e1-495d-b3e8-7e352813c9c0' with object id '804a085a-4007-42f7-91cc-cbe742b7afd7' does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/0c31f129-5f19-464d-a277-e1c8c35e6899/resourceGroups/gxyz-ck1-ra0661-resougroup-dev-1/providers/Microsoft.Dashboard/grafana/gxyzck1ra0661grafadev1/providers/Microsoft.Authorization/roleAssignments/7b3f76aa-575c-512a-69ca-9d9031eaf016' or the scope is invalid. If access was recently granted, please refresh your credentials.
+│
+│   with azurerm_role_assignment.grafana["self_prod_ra0395-dev_owner"],
+│   on rbac_azure.tf line 4, in resource "azurerm_role_assignment" "grafana":
+│    4: resource "azurerm_role_assignment" "grafana" {
+│
+╵
+╷
+│ Error: unexpected status 403 (403 Forbidden) with error: AuthorizationFailed: The client 'f0279d5c-25e1-495d-b3e8-7e352813c9c0' with object id '804a085a-4007-42f7-91cc-cbe742b7afd7' does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/0c31f129-5f19-464d-a277-e1c8c35e6899/resourceGroups/gxyz-ck1-ra0661-resougroup-dev-1/providers/Microsoft.Dashboard/grafana/gxyzck1ra0661grafadev1/providers/Microsoft.Authorization/roleAssignments/5699238c-5f98-822a-f340-fd960912dea2' or the scope is invalid. If access was recently granted, please refresh your credentials.
+│
+│   with azurerm_role_assignment.grafana["self_prod_ra0395-dev_user"],
+│   on rbac_azure.tf line 4, in resource "azurerm_role_assignment" "grafana":
+│    4: resource "azurerm_role_assignment" "grafana" {
+│
+╵
+╷
+│ Error: unexpected status 403 (403 Forbidden) with error: AuthorizationFailed: The client 'f0279d5c-25e1-495d-b3e8-7e352813c9c0' with object id '804a085a-4007-42f7-91cc-cbe742b7afd7' does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/write' over scope '/subscriptions/0c31f129-5f19-464d-a277-e1c8c35e6899/resourceGroups/gxyz-ck1-ra0661-resougroup-dev-1/providers/Microsoft.Dashboard/grafana/gxyzck1ra0661grafadev1/providers/Microsoft.Authorization/roleAssignments/e07e0f1b-b7d3-a4c5-4113-af926162e1d1' or the scope is invalid. If access was recently granted, please refresh your credentials.
+│
+│   with azurerm_role_assignment.grafana["self_prod_ra0395-dev_admin"],
+│   on rbac_azure.tf line 4, in resource "azurerm_role_assignment" "grafana":
+│    4: resource "azurerm_role_assignment" "grafana" {
+│
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-olimps-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["self_prod_ra0395-dev_admin"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0766-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0395-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["self_prod_ra0395-dev_owner"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0341-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-din-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-ocmsk-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-din-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0766-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["self_prod_ra0395-dev_user"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-olimps-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0766-resougroup-dev-2"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0341-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0395-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0766-resougroup-dev-2"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-ocmsk-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": context deadline exceeded
+╵
+Releasing state lock. This may take a few moments...
