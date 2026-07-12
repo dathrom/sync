@@ -3,6 +3,6 @@ PS C:\repo\managed_grafana_internal> powershell -ExecutionPolicy Bypass -File .\
 [07:07:42] [plan.ps1] katalog roboczy  : C:\repo\managed_grafana_internal
 [07:07:42] [plan.ps1] tfvars           : C:\repo\managed_grafana_internal\terraform.tfvars
 [07:07:42] [plan.ps1] START — podgląd zmian (terraform plan)
-[07:07:42] [plan.ps1] Grafana: 'gpzuck1ra0661grafadev1' (RG: 'gpzu-ck1-ra0661-resougroup-dev-1'), service-account: 'poc-tf-sa', TTL: 1h
+[07:07:42] [plan.ps1] Grafana: 'gxyzck1ra0661grafadev1' (RG: 'gxyz-ck1-ra0661-resougroup-dev-1'), service-account: 'poc-tf-sa', TTL: 1h
 [07:07:42] [plan.ps1] tworzę konto usługowe (jeśli nie istnieje)…
 [07:07:44] [plan.ps1] sprzątam: usuwam token 'poc-tf-token-11276-1923418534'…
