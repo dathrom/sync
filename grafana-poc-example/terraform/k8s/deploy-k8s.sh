@@ -38,14 +38,22 @@ DCE_B_ID=$(terraform -chdir="$TF_DIR_WIN" output -raw dce_b_id)
 DCR_B_ID=$(terraform -chdir="$TF_DIR_WIN" output -raw dcr_b_id)
 KUBELET_CLIENT_ID=$(terraform -chdir="$TF_DIR_WIN" output -raw aks_kubelet_client_id)
 
+# Pin the subscription to the one Terraform actually deployed into — it's embedded
+# in every resource ID (/subscriptions/<id>/...). Passing it explicitly to az stops
+# it from falling back to the SPN's default subscription context (which may differ).
+SUBSCRIPTION_ID="${DCE_B_ID#/subscriptions/}"; SUBSCRIPTION_ID="${SUBSCRIPTION_ID%%/*}"
+[ -n "$SUBSCRIPTION_ID" ] || { echo "FATAL: could not parse subscription from dce_b_id: $DCE_B_ID"; exit 1; }
+
 API="2023-03-11"  # DCE/DCR API version that reliably exposes metricsIngestion + immutableId
 
 # DCE-B metrics ingestion endpoint (where prometheus POSTs remote_write data).
 DCE_B_METRICS=$(MSYS_NO_PATHCONV=1 az resource show --ids "$DCE_B_ID" --api-version "$API" \
+  --subscription "$SUBSCRIPTION_ID" \
   --query "properties.metricsIngestion.endpoint" -o tsv)
 
 # DCR-B immutable ID (embedded in the remote_write URL path).
 DCR_B_IMMUTABLE=$(MSYS_NO_PATHCONV=1 az resource show --ids "$DCR_B_ID" --api-version "$API" \
+  --subscription "$SUBSCRIPTION_ID" \
   --query "properties.immutableId" -o tsv)
 
 # Uwaga: `set -e` NIE łapie samej pustej zmiennej (az zwraca 0 przy polach null).
@@ -58,6 +66,7 @@ DCR_B_IMMUTABLE=$(MSYS_NO_PATHCONV=1 az resource show --ids "$DCR_B_ID" --api-ve
 
 REMOTE_WRITE_URL="${DCE_B_METRICS}/dataCollectionRules/${DCR_B_IMMUTABLE}/streams/Microsoft-PrometheusMetrics/api/v1/write?api-version=2023-04-24"
 
+echo "subscription:      $SUBSCRIPTION_ID"
 echo "AKS:               $AKS_NAME"
 echo "DCE-B endpoint:    $DCE_B_METRICS"
 echo "DCR-B immutableId: $DCR_B_IMMUTABLE"
@@ -65,7 +74,8 @@ echo "kubelet client_id: $KUBELET_CLIENT_ID"
 echo "remote_write URL:  $REMOTE_WRITE_URL"
 
 # ── 2. Kubeconfig ─────────────────────────────────────────────────────────────
-az aks get-credentials --resource-group "$RG" --name "$AKS_NAME" --overwrite-existing
+az aks get-credentials --subscription "$SUBSCRIPTION_ID" \
+  --resource-group "$RG" --name "$AKS_NAME" --overwrite-existing
 
 # ── 3. Prometheus (prometheus-community/prometheus, not kube-prometheus-stack) ─
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts 2>/dev/null || true

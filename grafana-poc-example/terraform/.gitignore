@@ -1,0 +1,56 @@
+# ─── Terraform ────────────────────────────────────────────────────────────
+# Katalog roboczy (pluginy, cache, lokalny wrapper backendu)
+.terraform/
+.terraform.tfstate.lock.info
+
+# Pliki stanu — mogą zawierać sekrety. Stan trzymamy zdalnie (azurerm backend),
+# więc lokalne pliki stanu nie powinny NIGDY trafić do repo.
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Zapisany plan może zawierać wrażliwe wartości
+*.tfplan
+*.tfplan.*
+plan.out
+
+terraform.tfvars
+
+.terraform.lock.hcl
+
+# Pliki override (lokalne nadpisania konfiguracji)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Logi awarii / debugowania Terraforma (TF_LOG)
+crash.log
+crash.*.log
+*.tflog
+
+# UWAGA: NIE ignorujemy .terraform.lock.hcl — ma być commitowany (spójność wersji providerów).
+# UWAGA: terraform.tfvars jest tu świadomie wersjonowany (konfiguracja bez sekretów).
+#        Sekrety (tokeny, klucze) przekazujemy przez zmienne środowiskowe / *.auto.tfvars poniżej.
+*.auto.tfvars
+*.auto.tfvars.json
+secrets.tfvars
+secrets.auto.tfvars
+
+# ─── Sekrety / poświadczenia ──────────────────────────────────────────────
+.env
+.env.*
+*.pem
+*.key
+*_token
+azure.auth
+
+# ─── Systemowe / edytor ───────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
