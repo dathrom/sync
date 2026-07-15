@@ -7,5 +7,6 @@ locals {
     project = var.project
     owner   = var.owner
     ttl     = var.ttl
+    createdBy = var.owner
   }
 }
