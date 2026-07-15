@@ -1,15 +1,10 @@
-# =============================================================================
-# grafana.tf — Azure Managed Grafana (warstwa wizualizacji)
-# -----------------------------------------------------------------------------
-# Zarządzana usługa Grafana, do której podpinamy oba źródła Prometheus (AMW-A,
-# AMW-B) oraz Azure Monitor. Ważne decyzje projektowe:
-#   - SKU "Standard": wymagane, aby móc tworzyć Managed Private Endpoints (MPE),
-#     czyli prywatną ścieżkę Grafana -> AMW-A / self-hosted Prometheus.
-#   - Tożsamość SystemAssigned: to za jej pomocą Grafana odpytuje przestrzenie
-#     monitoringu (role nadawane w rbac.tf).
-#   - public_network_access_enabled = true: samą Grafanę zostawiamy publiczną
-#     (prywatyzujemy dane/źródła, nie interfejs Grafany).
-# =============================================================================
+# Zarządzana Grafana. To tu wpinamy oba Prometheusy (AMW-A, AMW-B) i Azure Monitor.
+# Parę rzeczy, na które warto uważać:
+#   SKU Standard bierzemy nie bez powodu — bez niego nie da się tworzyć Managed
+#   Private Endpointów, a to one robią prywatną ścieżkę do AMW-A i self-hosted Prometheusa.
+#   Tożsamość SystemAssigned to ta, którą Grafana odpytuje monitoring (role siedzą w rbac.tf).
+#   Samej Grafany celowo nie chowamy za prywatną sieć: public_network_access zostaje na true.
+#   Prywatyzujemy dane i źródła, nie sam interfejs.
 
 resource "azurerm_dashboard_grafana" "grafana" {
   name                          = "grafana-xyz-lab"

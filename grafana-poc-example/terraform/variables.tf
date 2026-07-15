@@ -1,11 +1,6 @@
-# =============================================================================
-# variables.tf — Zmienne wejściowe konfiguracji
-# -----------------------------------------------------------------------------
-# Parametry sterujące wdrożeniem. Wartości domyślne pasują do laboratorium xyz;
-# faktyczne wartości "zablokowane" znajdują się w pliku terraform.tfvars.
-# Zmienne "project", "owner", "ttl" służą wyłącznie do tagowania zasobów
-# (patrz locals.tf) — ułatwiają identyfikację i późniejsze sprzątanie.
-# =============================================================================
+# Parametry wdrożenia. Domyślne wartości pasują do labu xyz, a te "na sztywno"
+# siedzą w terraform.tfvars. Zmienne project/owner/ttl idą tylko do tagów
+# (patrz locals.tf) — służą do identyfikacji i sprzątania.
 
 variable "subscription_id" {
   description = "Azure subscription ID (MVP Lab)."
@@ -37,9 +32,9 @@ variable "ttl" {
   default     = "destroy-after-demo"
 }
 
-# Opcjonalny użytkownik testowy. Po podaniu jego ID obiektu w Azure AD
-# otrzyma on rolę "Grafana Viewer" (logowanie do Grafany) oraz "Monitoring Reader"
-# na grupie zasobów (scenariusze z Obszaru 2). Pusta wartość = pomijamy nadanie ról.
+# Opcjonalny user testowy. Jak wrzucisz jego object ID z Azure AD, dostanie rolę
+# "Grafana Viewer" (żeby w ogóle wejść do Grafany) i "Monitoring Reader" na grupie
+# zasobów (pod scenariusze z Obszaru 2). Puste = pomijamy nadania ról.
 variable "test_user_object_id" {
   description = "AAD object ID of a test user. If set, grants Grafana Viewer on the Grafana resource and Monitoring Reader on the RG. Leave empty to skip."
   type        = string

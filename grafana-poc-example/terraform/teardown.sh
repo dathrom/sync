@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
-# =============================================================================
-# teardown.sh — Sprzątanie zasobów tworzonych ręcznie (przed terraform destroy)
-# -----------------------------------------------------------------------------
-# Scenariusze S1.x tworzą zasoby poza Terraformem (przez az CLI): dodatkowe
+# teardown.sh - sprząta zasoby robione ręcznie, PRZED terraform destroy.
+# Scenariusze S1.x dorzucają rzeczy poza Terraformem (przez az CLI): dodatkowe
 # Private Endpointy, Grafana Managed Private Endpoints, grupy reguł Prometheus,
-# prywatyzację AMW. Te "obce" zasoby blokują `terraform destroy`
-# (np. PE trzymający podsieć -> błąd 409). Ten skrypt je usuwa i przywraca
-# publiczny dostęp do AMW, aby destroy przeszedł czysto.
+# prywatyzację AMW. Te "obce" zasoby potrafią zablokować destroy (np. PE trzymający
+# podsieć = 409). Skrypt je kasuje i przywraca publiczny dostęp do AMW, żeby destroy
+# przeszedł gładko.
 #
-# URUCHOM PRZED `terraform destroy`, jeśli wykonywano jakikolwiek krok S1.x z CLI.
-# Zasoby zarządzane Terraformem (PE→AMW-A, strefa DNS) pozostawia do destroy.
-# =============================================================================
+# ODPAL PRZED `terraform destroy`, jeśli robiłeś jakikolwiek krok S1.x z CLI.
+# Zasoby zarządzane Terraformem (PE→AMW-A, strefa DNS) zostawiamy dla destroy.
 # Removes the CLI-created "variables under test" so `terraform destroy` can complete.
 # MUST run BEFORE `terraform destroy` whenever any S1.x CLI step has been executed:
 # a leftover PE in vnet-b's subnet makes destroy fail (409, subnet in use), and a leftover

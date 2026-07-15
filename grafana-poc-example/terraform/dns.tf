@@ -1,19 +1,14 @@
-# =============================================================================
-# dns.tf — Prywatny DNS i Private Endpoint do AMW-A
-# -----------------------------------------------------------------------------
-# Realizuje prywatną ścieżkę dostępu do AMW-A:
-#   1. Prywatna strefa DNS "privatelink.<region>.prometheus.monitor.azure.com"
-#      — tworzona jawnie (a nie automatycznie przez PE), aby `terraform destroy`
-#        czysto usuwał wszystko, bez osieroconych rekordów.
-#   2. Powiązanie strefy z siecią vnet-lab — aby zasoby w AKS rozwiązywały
-#      prywatny rekord A wskazujący na AMW-A.
-#   3. Private Endpoint (pe-amw-a) w podsieci snet-pe, z grupą stref DNS, dzięki
-#      czemu Azure sam utrzymuje rekord A dla AMW-A w powyższej strefie.
+# Tu robimy prywatną ścieżkę do AMW-A:
+#   1. Prywatna strefa DNS "privatelink.<region>.prometheus.monitor.azure.com".
+#      Deklarujemy ją jawnie, a nie zostawiamy automatowi z PE — dzięki temu
+#      terraform destroy sprząta po sobie czysto, bez osieroconych rekordów.
+#   2. Spinamy strefę z vnet-lab, żeby zasoby w AKS rozwiązywały prywatny rekord A do AMW-A.
+#   3. Private Endpoint (pe-amw-a) w snet-pe, z grupą stref DNS — wtedy Azure sam
+#      pilnuje rekordu A dla AMW-A w tej strefie.
 #
-# WAŻNE: celowo NIE tworzymy tu Private Endpointu do AMW-B — brak DNS na PE→AMW-B
-# jest tym, co pozwala zademonstrować błąd NXDOMAIN (scenariusz S1.3). Tamten PE
-# powstaje ręcznie przez az CLI i jest oznaczany tagiem lab=cli.
-# =============================================================================
+# I teraz rzecz ważna: świadomie NIE robimy tu PE do AMW-B. Właśnie brak DNS na tym
+# PE pozwala pokazać błąd NXDOMAIN (S1.3). Ten drugi PE stawiamy ręcznie z az CLI
+# i tagujemy go lab=cli.
 
 # Jawna prywatna strefa DNS dla poddomeny privatelink metryk Prometheus (AMW).
 # Explicit private DNS zone for the AMW Prometheus privatelink subdomain.

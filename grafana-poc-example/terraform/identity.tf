@@ -1,14 +1,10 @@
-# =============================================================================
-# identity.tf — Tożsamość aplikacji (Azure AD) dla Obszaru 2
-# -----------------------------------------------------------------------------
-# Tworzy rejestrację aplikacji + service principal + sekret. Ta "tożsamość
-# usługowa" (client_id + client_secret) służy jako drugie źródło danych w Grafanie
-# (scenariusz S2.3: reguły alertów/nagrywania korzystające z poświadczeń usługi,
-# a nie zalogowanego użytkownika).
-# UWAGA: wygenerowany sekret trafia do stanu Terraform i do outputs.tf (sensitive).
-# =============================================================================
+# Tożsamość aplikacji (Azure AD) na potrzeby Obszaru 2. Robimy rejestrację aplikacji,
+# service principal i sekret. Ta para (client_id + client_secret) idzie jako drugie
+# źródło danych w Grafanie — scenariusz S2.3, gdzie reguły alertów/nagrywania jadą
+# na poświadczeniach usługi zamiast zalogowanego użytkownika.
+# Uwaga: wygenerowany sekret ląduje w stanie Terraform i w outputs.tf (sensitive).
 
-# Informacje o bieżącym koncie (używane m.in. jako właściciel app-reg i do nadania ról).
+# Dane bieżącego konta — użyjemy ich jako właściciela app-reg i przy nadaniach ról.
 data "azuread_client_config" "current" {}
 
 # Area-2 app-reg auth identity (S2.3 second data source for alerting/recording rules).

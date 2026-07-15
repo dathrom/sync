@@ -1,11 +1,7 @@
-# =============================================================================
-# terraform.tfvars — Konkretne wartości zmiennych dla tego wdrożenia
-# -----------------------------------------------------------------------------
-# Plik automatycznie wczytywany przez Terraform. Nadpisuje wartości domyślne
-# ze zmiennych (variables.tf) rzeczywistymi danymi laboratorium.
-# =============================================================================
+# Konkretne wartości dla tego wdrożenia. Terraform wczytuje ten plik sam i nadpisuje
+# nim domyślne wartości z variables.tf.
 
-# Wartości zablokowane — infra-plan rev3
+# Ustalone wartości, infra-plan rev3
 # Locked values — infra-plan rev3
 subscription_id     = "ac74f09f-f550-4aa6-b41f-0fbf419c85fd"
 location            = "westeurope"

@@ -1,15 +1,10 @@
-# =============================================================================
-# aks.tf — Klaster Kubernetes (AKS) + podpięcie do managed Prometheus
-# -----------------------------------------------------------------------------
-# Klaster AKS pełni podwójną rolę:
-#   - hostuje dodatek "managed Prometheus" (agent ama-metrics), który zasila AMW-A,
-#   - uruchamia samodzielny Prometheus (instalowany później Helmem), zasilający AMW-B.
-# Konfiguracja jest minimalna/laboratoryjna: 1 węzeł, SKU Free (bez SLA na API).
-# Sieć: Azure CNI w trybie "overlay" — Pody dostają adresy z osobnej puli
-# (pod_cidr), niezależnej od adresacji VNet.
-# Na końcu pliku: powiązania AKS -> DCR-A, które faktycznie kierują strumień
-# metryk do przestrzeni AMW-A.
-# =============================================================================
+# AKS gra tu podwójną rolę:
+#   hostuje dodatek managed Prometheus (agent ama-metrics), który karmi AMW-A,
+#   i odpala self-hosted Prometheusa (doinstalowanego później Helmem) pod AMW-B.
+# Konfiguracja jest labowa i oszczędna: jeden węzeł, SKU Free (bez SLA na API).
+# Sieć na Azure CNI w trybie overlay, więc Pody dostają adresy z osobnej puli
+# (pod_cidr), niezależnej od adresacji VNetu.
+# Na dole pliku powiązania AKS -> DCR-A — to one faktycznie kierują metryki do AMW-A.
 
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = "aks-xyz-grafmon-lab"
@@ -46,7 +41,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     dns_service_ip = "10.240.0.10"
   }
 
-  # Włącza dodatek managed-Prometheus (agent ama-metrics). Pusty blok = ustawienia domyślne.
+  # Włącza dodatek managed-Prometheus (ama-metrics). Pusty blok = ustawienia domyślne.
   # Enable managed-Prometheus add-on (ama-metrics agent). No extra config needed.
   monitor_metrics {}
 
@@ -55,7 +50,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
   tags = local.tags
 }
 
-# ── Połączenie AKS → DCR-A (przepływ metryk managed-Prometheus do AMW-A) ──────
+# Spięcie AKS → DCR-A (tędy metryki z managed-Prometheusa lecą do AMW-A)
 # ── Wire AKS → DCR-A (managed-Prometheus metrics flow to AMW-A) ───────────────
 
 resource "azurerm_monitor_data_collection_rule_association" "dcra_aks_dcr_a" {

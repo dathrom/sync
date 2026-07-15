@@ -1,18 +1,14 @@
-# =============================================================================
-# rbac.tf — Nadania ról (RBAC) spinające cały system uprawnieniami
-# -----------------------------------------------------------------------------
-# To tutaj rozstrzyga się "kto może co". Najważniejsze przydziały:
-#   - Tożsamość Grafany  -> Monitoring Data Reader na AMW-A i AMW-B (odczyt metryk)
-#                        -> Monitoring Reader na grupie zasobów (źródło Azure Monitor)
-#   - Service principal  -> Monitoring Reader na RG (źródło "usługowe" w Grafanie)
-#   - Tożsamości AKS     -> Monitoring Metrics Publisher na DCR-A/DCR-B (zapis metryk)
-#                        -> Network Contributor na vnet-lab (tworzenie wewn. LB / PLS)
-#   - Osoba wdrażająca   -> Grafana Admin (zarządzanie źródłami danych w Grafanie)
-#   - (opcjonalnie) użytkownik testowy -> Grafana Viewer + Monitoring Reader
-# =============================================================================
+# Tutaj rozstrzyga się kto może co. Najważniejsze nadania:
+#   Tożsamość Grafany  -> Monitoring Data Reader na AMW-A i AMW-B (odczyt metryk),
+#                         Monitoring Reader na grupie zasobów (źródło Azure Monitor)
+#   Service principal  -> Monitoring Reader na RG (źródło "usługowe" w Grafanie)
+#   Tożsamości AKS     -> Monitoring Metrics Publisher na DCR-A/DCR-B (zapis metryk),
+#                         Network Contributor na vnet-lab (tworzenie wewn. LB / PLS)
+#   Osoba wdrażająca   -> Grafana Admin (zarządzanie źródłami danych)
+#   (opcjonalnie) user testowy -> Grafana Viewer + Monitoring Reader
 
-# ── Tożsamość systemowa Grafany → Monitoring Data Reader na każdej AMW ────────
-# Wymagane, aby źródła Prometheus w Grafanie mogły odpytywać obie przestrzenie.
+# ── Tożsamość systemowa Grafany → Monitoring Data Reader na każdej AMW.
+# Bez tego źródła Prometheus w Grafanie nie odpytają obu przestrzeni.
 # ── Grafana system MI → Monitoring Data Reader on each AMW ───────────────────
 # Required so the Prometheus data sources in Grafana can query both workspaces.
 
@@ -46,11 +42,11 @@ resource "azurerm_role_assignment" "sp_monitoring_reader_rg" {
   principal_id         = azuread_service_principal.sp.object_id
 }
 
-# ── AKS → Monitoring Metrics Publisher na DCR-A (zapis metryk z dodatku Prometheus) ──
-# Nie było pewności, której tożsamości używa agent ama-metrics (MI płaszczyzny
-# sterowania vs MI kubeleta), a powiązanie DCR może i tak autoryzować automatycznie.
-# Dla pewności nadajemy rolę OBU tożsamościom (nadmiarowo, ale bezpiecznie), aby
-# zapis do AMW-A nie zakończył się błędem 403 przez złego principala.
+# ── AKS → Monitoring Metrics Publisher na DCR-A (zapis metryk z dodatku Prometheus).
+# Nie mieliśmy pewności, którą tożsamość bierze ama-metrics: MI płaszczyzny sterowania
+# czy MI kubeleta. Do tego samo powiązanie DCR potrafi autoryzować z automatu.
+# Żeby się nie bawić, nadajemy rolę OBU tożsamościom — nadmiarowo, ale bezpiecznie,
+# i zapis do AMW-A nie wywali się na 403 przez złego principala.
 # ── AKS → Monitoring Metrics Publisher on DCR-A (managed-Prometheus add-on ingestion) ──
 # Reviewers disagreed on which identity the ama-metrics add-on uses (control-plane MI vs
 # kubelet MI), and the DCR association may auto-authorize anyway. Grant BOTH (harmless if

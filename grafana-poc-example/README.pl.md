@@ -1,12 +1,12 @@
-# Grafana PoC — laboratorium monitoringu na Azure (opis po polsku)
+# Grafana PoC — lab monitoringu na Azure
 
-Ten katalog zawiera kompletny przykład (PoC) wdrożenia **Azure Managed Grafana**
-podłączonej do **dwóch przestrzeni Azure Monitor Workspace (AMW)** z metrykami
-Prometheus, uruchamianego w oparciu o **Terraform** + kilka skryptów pomocniczych.
-Celem laboratorium jest zademonstrowanie różnych ścieżek zbierania metryk oraz
-prywatnej (Private Link) i publicznej łączności między komponentami.
+Ten katalog to gotowy przykład (PoC), jak wdrożyć **Azure Managed Grafana** wpiętą
+w **dwie przestrzenie Azure Monitor Workspace (AMW)** z metrykami Prometheus. Całość
+stoi na **Terraformie** plus kilka skryptów, które dokańczają robotę już po `apply`.
+Chodziło o pokazanie różnych ścieżek zbierania metryk oraz prywatnej (Private Link)
+i publicznej łączności między poszczególnymi klockami.
 
-## Co powstaje (architektura w skrócie)
+## Co z tego wychodzi (architektura w skrócie)
 
 ```
                        ┌──────────────────────────┐
@@ -28,15 +28,15 @@ prywatnej (Private Link) i publicznej łączności między komponentami.
    └────────────────────────────────────────────────────┘
 ```
 
-- **AMW-A** — zasilana automatycznie przez dodatek *managed Prometheus* w AKS
-  (agent `ama-metrics`, kierowanie przez regułę DCR-A). Prywatyzowana za pomocą
-  Private Endpointu i prywatnej strefy DNS.
-- **AMW-B** — zasilana przez *samodzielny Prometheus* (instalowany Helmem po
-  wdrożeniu) mechanizmem `remote_write` przez DCR-B. Pozostaje publiczna.
-- **Grafana** — sama pozostaje publiczna; prywatyzujemy jedynie źródła danych
-  (przez Managed Private Endpoints).
+- **AMW-A** — leci automatycznie z dodatku *managed Prometheus* w AKS (agent
+  `ama-metrics`, kierowanie regułą DCR-A). Tę przestrzeń prywatyzujemy Private
+  Endpointem i prywatną strefą DNS.
+- **AMW-B** — karmiona przez *self-hosted Prometheusa* (doinstalowanego Helmem już
+  po wdrożeniu) mechanizmem `remote_write` przez DCR-B. Zostaje publiczna.
+- **Grafana** — sama zostaje publiczna. Prywatyzujemy tylko źródła danych (przez
+  Managed Private Endpoints), a nie sam interfejs Grafany.
 
-## Struktura katalogów i plików
+## Co gdzie leży
 
 ```
 grafana-poc-example/
@@ -52,11 +52,11 @@ grafana-poc-example/
     ├── monitoring.tf       # AMW-A, AMW-B oraz ich pary DCE/DCR
     ├── grafana.tf          # Azure Managed Grafana
     ├── identity.tf         # Rejestracja aplikacji + SP + sekret (Obszar 2)
-    ├── rbac.tf             # Wszystkie nadania ról (RBAC) spinające uprawnienia
+    ├── rbac.tf             # Wszystkie nadania ról (RBAC)
     ├── outputs.tf          # Wartości wyjściowe (czytane przez skrypty)
     │
     ├── configure-grafana.sh  # Po apply: tworzy źródła danych w Grafanie (az grafana)
-    ├── teardown.sh           # Przed destroy: usuwa zasoby tworzone ręcznie (CLI)
+    ├── teardown.sh           # Przed destroy: usuwa zasoby robione ręcznie z CLI
     │
     └── k8s/
         ├── deploy-k8s.sh          # Po apply: instaluje self-hosted Prometheus (→ AMW-B)
@@ -64,25 +64,25 @@ grafana-poc-example/
         └── debug-pod.yaml         # Pod diagnostyczny (netshoot) do prób DNS/sieci
 ```
 
-> Pliki zaczynające się od `._` to metadane systemu macOS (AppleDouble) — nie są
-> częścią projektu i można je zignorować.
+> Pliki zaczynające się od `._` to śmieci macOS (AppleDouble). Nie mają nic wspólnego
+> z projektem, można je spokojnie olać.
 
-## Kolejność użycia
+## Kolejność
 
-1. `terraform init && terraform apply` — tworzy całą infrastrukturę.
-2. `k8s/deploy-k8s.sh` — instaluje samodzielny Prometheus i pod diagnostyczny.
-3. `configure-grafana.sh` — konfiguruje 4 źródła danych w Grafanie.
-4. (demo) scenariusze S1.x / S2.x wykonywane ręcznie przez `az CLI`.
+1. `terraform init && terraform apply` — stawia całą infrastrukturę.
+2. `k8s/deploy-k8s.sh` — instaluje self-hosted Prometheusa i pod diagnostyczny.
+3. `configure-grafana.sh` — dokłada 4 źródła danych w Grafanie.
+4. (demo) scenariusze S1.x / S2.x robione ręcznie z `az CLI`.
 5. Sprzątanie: `teardown.sh <rg> <grafana>` **przed** `terraform destroy`.
 
-## Model uwierzytelniania (kto jak się loguje)
+## Kto się jak loguje
 
 - **Grafana → AMW-A / AMW-B**: tożsamość zarządzana Grafany (MSI) z rolą
   *Monitoring Data Reader*.
 - **Dodatek AKS → AMW-A**: tożsamość AKS z rolą *Monitoring Metrics Publisher* na DCR-A.
-- **Self-hosted Prometheus → AMW-B**: tożsamość kubeleta (węzła) pobierana z IMDS,
-  blok `azuread` w remote_write, rola *Monitoring Metrics Publisher* na DCR-B.
-- **Źródło Azure Monitor (Obszar 2)**: tożsamość zalogowanego użytkownika, a
-  zapasowo service principal z pliku `identity.tf`.
+- **Self-hosted Prometheus → AMW-B**: tożsamość kubeleta (węzła) brana z IMDS, blok
+  `azuread` w remote_write, rola *Monitoring Metrics Publisher* na DCR-B.
+- **Źródło Azure Monitor (Obszar 2)**: tożsamość zalogowanego użytkownika, a awaryjnie
+  service principal z pliku `identity.tf`.
 
-Szczegółowe wyjaśnienia znajdują się w komentarzach (po polsku) w poszczególnych plikach.
+Więcej szczegółów siedzi w komentarzach po polsku, w poszczególnych plikach.

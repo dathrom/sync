@@ -1,12 +1,8 @@
-# =============================================================================
-# outputs.tf — Wartości wyjściowe wypisywane po `terraform apply`
-# -----------------------------------------------------------------------------
-# Te wartości są odczytywane głównie przez skrypty (configure-grafana.sh,
-# k8s/deploy-k8s.sh), które pobierają je poleceniem `terraform output -raw <nazwa>`
+# Wartości wypluwane po `terraform apply`. Czytają je głównie skrypty
+# (configure-grafana.sh, k8s/deploy-k8s.sh) przez `terraform output -raw <nazwa>`
 # i wstrzykują do konfiguracji Grafany oraz Prometheusa.
-# Sekret aplikacji (app_reg_secret) jest oznaczony jako "sensitive" — aby go
-# podejrzeć: terraform output -raw app_reg_secret
-# =============================================================================
+# app_reg_secret jest oznaczony jako sensitive, więc żeby go podejrzeć:
+# terraform output -raw app_reg_secret
 
 output "resource_group_name" {
   description = "Resource group containing all substrate."
