@@ -30,7 +30,7 @@ crash.*.log
 *.tflog
 
 # UWAGA: NIE ignorujemy .terraform.lock.hcl — ma być commitowany (spójność wersji providerów).
-# UWAGA: terraform.tfvars jest tu świadomie wersjonowany (konfiguracja bez sekretów).
+# UWAGA: terraform.tfvars jest ignorowany (patrz wyżej) — konfigurację lokalną trzymamy poza repo.
 #        Sekrety (tokeny, klucze) przekazujemy przez zmienne środowiskowe / *.auto.tfvars poniżej.
 *.auto.tfvars
 *.auto.tfvars.json
