@@ -1,12 +1,6 @@
-"prometheus-community" already exists with the same configuration, skipping
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "prometheus-community" chart repository
-Update Complete. ⎈Happy Helming!⎈
-E0717 07:51:15.921866   21056 memcache.go:265] "Unhandled Error" err="couldn't get current server API group list: Get \"https://xyz-grafmon-lab-zynzauef.hcp.westeurope.azmk8s.io:443/api?timeout=32s\": tls: failed to verify certificate: x509: certificate signed by unknown authority"
-error: unable to recognize "STDIN": Get "https://xyz-grafmon-lab-zynzauef.hcp.westeurope.azmk8s.io:443/api?timeout=32s": tls: failed to verify certificate: x509: certificate signed by unknown authority
-FATAL: 'kubectl apply namespace monitoring' zakonczone kodem 1
-At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:33 char:9
-+         throw "FATAL: '$What' zakonczone kodem $LASTEXITCODE"
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : OperationStopped: (FATAL: 'kubectl...onczone kodem 1:String) [], RuntimeException
-    + FullyQualifiedErrorId : FATAL: 'kubectl apply namespace monitoring' zakonczone kodem 1
+terraform : ÔĽĚ
+At C:\repo\sync\grafana-poc-example\terraform\configure-grafana.ps1:33 char:12
++     $val = terraform -chdir="$TfDir" output -raw $Name 2>$null
++            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ÔĽĚ:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
