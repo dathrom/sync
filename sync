@@ -1,13 +1,14 @@
-prometheus-community" already exists with the same configuration, skipping
-Hang tight while we grab the latest from your chart repositories...
-...Successfully got an update from the "prometheus-community" chart repository
-Update Complete. ⎈Happy Helming!⎈
-I0715 09:21:15.911096   14204 versioner.go:119] Right kubectl missing, downloading version 1.36.2
-I0715 09:21:15.993994   10296 versioner.go:119] Right kubectl missing, downloading version 1.36.2
-Downloading https://dl.k8s.io/release/v1.36.2/bin/windows/amd64/kubectl.exe
-kubectl1.36.2.exe 100% |████████████████████████████████████████| (2.1/2.1 kB) done.
-Error on download attempt #1: SHA mismatch for URL https://dl.k8s.io/release/v1.36.2/bin/windows/amd64/kubectl.exe: expected '69289f3702f7bb25107744bdc5d171c33f96464b9130cb80ca8df389412617bc7d2cb9687078211459ec68dcc2db1578499743edf75519387d65adbeec8afac3', got '259e6680af41a10e37b0c0a90616b37a5ff4388707036a760cf571cc1fd78948f7cb9527244eac222d23e5b3087fd3a99e59e7b131f26d5aa1a78b7e8b43b945'
-Downloading https://dl.k8s.io/release/v1.36.2/bin/windows/amd64/kubectl.exe
-kubectl1.36.2.exe 100% |████████████████████████████████████████| (2.1/2.1 kB, 3.7 MB/s) done.
-Error on download attempt #1: SHA mismatch for URL https://dl.k8s.io/release/v1.36.2/bin/windows/amd64/kubectl.exe: expected '69289f3702f7bb25107744bdc5d171c33f96464b9130cb80ca8df389412617bc7d2cb9687078211459ec68dcc2db1578499743edf75519387d65adbeec8afac3', got '6727602a9a4f075909d8222a82f72c6edc59c16644b543d8051cc1e09457d0c7e96ee613a12ad0e8f35761bc378d392ab00ef167ae5f7e224cbf7627ae0efbe4'
-Downloading https://dl.k8s.io/release/v1.36.2/bin/windows/amd64/kubectl.exe
+At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:33 char:37
++         throw "FATAL: '$What' zakoĹ„czone kodem $LASTEXITCODE"
++                                     ~~~~~
+Unexpected token 'czone' in expression or statement.
+At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:32 char:30
++     if ($LASTEXITCODE -ne 0) {
++                              ~
+Missing closing '}' in statement block or type definition.
+At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:30 char:26
++ function Assert-ExitCode {
++                          ~
+Missing closing '}' in statement block or type definition.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedToken
