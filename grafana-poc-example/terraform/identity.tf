@@ -1,24 +1,15 @@
-# Tożsamość aplikacji (Azure AD) na potrzeby Obszaru 2. Robimy rejestrację aplikacji,
-# service principal i sekret. Ta para (client_id + client_secret) idzie jako drugie
-# źródło danych w Grafanie — scenariusz S2.3, gdzie reguły alertów/nagrywania jadą
-# na poświadczeniach usługi zamiast zalogowanego użytkownika.
-# Uwaga: wygenerowany sekret ląduje w stanie Terraform i w outputs.tf (sensitive).
+# Tożsamość bieżącego konta (Azure AD).
+#
+# Wcześniej ten plik tworzył też rejestrację aplikacji "xyz-grafmon-lab-area2" +
+# service principal + sekret, jako drugie ("service credential") źródło danych w
+# Grafanie dla scenariusza S2.3 (reguły alertów/nagrywania na poświadczeniach
+# usługi, nie zalogowanego użytkownika). USUNIĘTE: środowisko nie ma uprawnień do
+# tworzenia rejestracji aplikacji (brak roli typu Application Administrator /
+# "Users can register applications" wyłączone dla zwykłych userów) —
+# `terraform apply` na te zasoby się nie powiedzie. Reszta PoC (wszystkie S1.x,
+# k8s/deploy-k8s.sh) w ogóle nie zależy od tej tożsamości. Jedyna strata: brak
+# fallbacku w źródle AzMon-CurrentUser (patrz configure-grafana.sh/.ps1) — S2.3 w
+# tej postaci nie jest dziś demonstrowalne.
 
-# Dane bieżącego konta — użyjemy ich jako właściciela app-reg i przy nadaniach ról.
+# Dane bieżącego konta — używane jako właściciel roli Grafana Admin (rbac.tf).
 data "azuread_client_config" "current" {}
-
-# Area-2 app-reg auth identity (S2.3 second data source for alerting/recording rules).
-resource "azuread_application" "app_reg" {
-  display_name = "xyz-grafmon-lab-area2"
-  owners       = [data.azuread_client_config.current.object_id]
-}
-
-resource "azuread_service_principal" "sp" {
-  client_id = azuread_application.app_reg.client_id
-  owners    = [data.azuread_client_config.current.object_id]
-}
-
-resource "azuread_application_password" "app_password" {
-  application_id = azuread_application.app_reg.id
-  display_name   = "lab-secret"
-}

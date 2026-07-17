@@ -4,7 +4,8 @@
 # usługowe, więc provider Grafany nie ma jak się zalogować). Dlatego lecimy przez
 # `az grafana` (na Twoim `az login`) i tworzymy 4 źródła danych:
 #   AMW-A, AMW-B      : Prometheus, uwierzytelnianie tożsamością zarządzaną (MSI)
-#   AzMon-CurrentUser : Azure Monitor (zalogowany user + zapasowo SP)
+#   AzMon-CurrentUser : Azure Monitor (zalogowany user; BEZ fallbacku SP — środowisko
+#                       nie ma uprawnień do tworzenia app registration, patrz identity.tf)
 #   OSS-Prometheus-PLS: prywatna ścieżka do self-hosted Prometheusa przez MPE→PLS (S1.6)
 # Skrypt jest idempotentny - najpierw kasuje źródło o tej samej nazwie, potem tworzy.
 # Kolejność: `terraform apply` -> k8s/deploy-k8s.sh -> ten skrypt.
@@ -23,9 +24,6 @@ RG=$(terraform -chdir="$TF_DIR" output -raw resource_group_name)
 EP_A=$(terraform -chdir="$TF_DIR" output -raw amw_a_query_endpoint)
 EP_B=$(terraform -chdir="$TF_DIR" output -raw amw_b_query_endpoint)
 SUB=$(az account show --query id -o tsv)
-TEN=$(az account show --query tenantId -o tsv)
-CID=$(terraform -chdir="$TF_DIR" output -raw app_reg_client_id)
-SEC=$(terraform -chdir="$TF_DIR" output -raw app_reg_secret)
 NODE_RG=$(terraform -chdir="$TF_DIR" output -raw aks_node_resource_group)
 OSS_DOMAIN="${OSS_DOMAIN:-prometheus.xyzlab.net}"   # arbitrary; Grafana resolves it internally to the MPE IP
 
@@ -40,8 +38,8 @@ echo "== AMW-A / AMW-B (managed Prometheus, managed-identity auth) =="
 ds_recreate AMW-A "{\"name\":\"AMW-A\",\"type\":\"prometheus\",\"access\":\"proxy\",\"url\":\"$EP_A\",\"jsonData\":{\"httpMethod\":\"POST\",\"azureCredentials\":{\"authType\":\"msi\"}}}"
 ds_recreate AMW-B "{\"name\":\"AMW-B\",\"type\":\"prometheus\",\"access\":\"proxy\",\"url\":\"$EP_B\",\"jsonData\":{\"httpMethod\":\"POST\",\"azureCredentials\":{\"authType\":\"msi\"}}}"
 
-echo "== AzMon-CurrentUser (Azure Monitor, Current User + fallback service credentials) =="
-ds_recreate AzMon-CurrentUser "{\"name\":\"AzMon-CurrentUser\",\"type\":\"grafana-azure-monitor-datasource\",\"access\":\"proxy\",\"jsonData\":{\"azureAuthType\":\"currentuser\",\"subscriptionId\":\"$SUB\",\"azureCredentials\":{\"authType\":\"currentuser\"},\"fallbackCredentials\":{\"authType\":\"clientsecret\",\"azureCloud\":\"AzureCloud\",\"tenantId\":\"$TEN\",\"clientId\":\"$CID\"}},\"secureJsonData\":{\"fallbackClientSecret\":\"$SEC\"}}"
+echo "== AzMon-CurrentUser (Azure Monitor, Current User; brak fallback SP — patrz identity.tf) =="
+ds_recreate AzMon-CurrentUser "{\"name\":\"AzMon-CurrentUser\",\"type\":\"grafana-azure-monitor-datasource\",\"access\":\"proxy\",\"jsonData\":{\"azureAuthType\":\"currentuser\",\"subscriptionId\":\"$SUB\",\"azureCredentials\":{\"authType\":\"currentuser\"}}}"
 
 echo "== S1.6: Grafana MPE -> self-hosted Prometheus PLS, approve, refresh =="
 PLS_ID=$(az network private-link-service show -g "$NODE_RG" -n pls-prometheus --query id -o tsv 2>/dev/null || true)

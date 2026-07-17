@@ -7,7 +7,8 @@
   uslugowe, wiec provider Grafany nie ma jak sie zalogowac). Dlatego lecimy przez
   `az grafana` (na Twoim `az login`) i tworzymy 4 zrodla danych:
     AMW-A, AMW-B      : Prometheus, uwierzytelnianie tozsamoscia zarzadzana (MSI)
-    AzMon-CurrentUser : Azure Monitor (zalogowany user + zapasowo SP)
+    AzMon-CurrentUser : Azure Monitor (zalogowany user; BEZ fallbacku SP - srodowisko
+                        nie ma uprawnien do tworzenia app registration, patrz identity.tf)
     OSS-Prometheus-PLS: prywatna sciezka do self-hosted Prometheusa przez MPE->PLS (S1.6)
   Skrypt jest idempotentny - najpierw kasuje zrodlo o tej samej nazwie, potem tworzy.
   Kolejnosc: `terraform apply` -> k8s/deploy-k8s.ps1 -> ten skrypt.
@@ -47,9 +48,6 @@ $Rg     = Get-TfOutput -Name resource_group_name
 $EpA    = Get-TfOutput -Name amw_a_query_endpoint
 $EpB    = Get-TfOutput -Name amw_b_query_endpoint
 $Sub    = az account show --query id -o tsv
-$Ten    = az account show --query tenantId -o tsv
-$Cid    = Get-TfOutput -Name app_reg_client_id
-$Sec    = Get-TfOutput -Name app_reg_secret
 $NodeRg = Get-TfOutput -Name aks_node_resource_group
 
 # arbitrary; Grafana resolves it internally to the MPE IP
@@ -79,18 +77,14 @@ $defAmwB = [ordered]@{
 } | ConvertTo-Json -Compress -Depth 10
 Invoke-DsRecreate -Name 'AMW-B' -Definition $defAmwB
 
-Write-Host "== AzMon-CurrentUser (Azure Monitor, Current User + fallback service credentials) =="
+Write-Host "== AzMon-CurrentUser (Azure Monitor, Current User; brak fallback SP - patrz identity.tf) =="
 $defAzMon = [ordered]@{
     name = 'AzMon-CurrentUser'; type = 'grafana-azure-monitor-datasource'; access = 'proxy'
     jsonData = [ordered]@{
         azureAuthType    = 'currentuser'
         subscriptionId   = $Sub
         azureCredentials = [ordered]@{ authType = 'currentuser' }
-        fallbackCredentials = [ordered]@{
-            authType = 'clientsecret'; azureCloud = 'AzureCloud'; tenantId = $Ten; clientId = $Cid
-        }
     }
-    secureJsonData = [ordered]@{ fallbackClientSecret = $Sec }
 } | ConvertTo-Json -Compress -Depth 10
 Invoke-DsRecreate -Name 'AzMon-CurrentUser' -Definition $defAzMon
 

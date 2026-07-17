@@ -1,8 +1,6 @@
 # Wartości wypluwane po `terraform apply`. Czytają je głównie skrypty
 # (configure-grafana.sh, k8s/deploy-k8s.sh) przez `terraform output -raw <nazwa>`
 # i wstrzykują do konfiguracji Grafany oraz Prometheusa.
-# app_reg_secret jest oznaczony jako sensitive, więc żeby go podejrzeć:
-# terraform output -raw app_reg_secret
 
 output "resource_group_name" {
   description = "Resource group containing all substrate."
@@ -52,17 +50,6 @@ output "aks_name" {
 output "aks_node_resource_group" {
   description = "Auto-created MC_ node resource group (contains node VMs, disks, NICs)."
   value       = azurerm_kubernetes_cluster.aks.node_resource_group
-}
-
-output "app_reg_client_id" {
-  description = "Client ID (app ID) of the Area-2 app registration."
-  value       = azuread_application.app_reg.client_id
-}
-
-output "app_reg_secret" {
-  description = "App registration client secret. Sensitive — use: terraform output -raw app_reg_secret"
-  value       = azuread_application_password.app_password.value
-  sensitive   = true
 }
 
 output "private_dns_zone_name" {

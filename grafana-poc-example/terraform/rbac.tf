@@ -34,13 +34,10 @@ resource "azurerm_role_assignment" "grafana_monitoring_reader_rg" {
 }
 
 # ── App-reg SP → Monitoring Reader on RG ──────────────────────────────────────
-# Area-2 S2.3: service-identity data source for alerts / recording rules.
-
-resource "azurerm_role_assignment" "sp_monitoring_reader_rg" {
-  scope                = azurerm_resource_group.rg.id
-  role_definition_name = "Monitoring Reader"
-  principal_id         = azuread_service_principal.sp.object_id
-}
+# USUNIĘTE: environment nie ma uprawnień do tworzenia app registration/SP
+# (patrz identity.tf), więc nie ma komu nadać tej roli. Był to fallback dla
+# scenariusza S2.3 (patrz configure-grafana.sh/.ps1) — bez SP ten scenariusz nie
+# jest demonstrowalny, reszta RBAC działa bez zmian.
 
 # ── AKS → Monitoring Metrics Publisher na DCR-A (zapis metryk z dodatku Prometheus).
 # Nie mieliśmy pewności, którą tożsamość bierze ama-metrics: MI płaszczyzny sterowania
