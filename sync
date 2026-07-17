@@ -1,51 +1,63 @@
-$H = @{ Authorization = "Bearer $env:GRAFANA_AUTH" }
-$U = "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com"
+PS C:\repo\managed_grafana_internal\02-grafana-config> $H = @{ Authorization = "Bearer $env:GRAFANA_AUTH" }
+PS C:\repo\managed_grafana_internal\02-grafana-config> $U = "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com"
+PS C:\repo\managed_grafana_internal\02-grafana-config>
+PS C:\repo\managed_grafana_internal\02-grafana-config> Invoke-RestMethod -Uri "$U/api/user"  -Headers $H | Format-List login, email, orgId, isGrafanaAdmin
 
-# 1. Kim jest token i jaka rola? (kluczowe)
-Invoke-RestMethod -Uri "$U/api/user"  -Headers $H | Format-List login, email, orgId, isGrafanaAdmin
-Invoke-RestMethod -Uri "$U/api/org"   -Headers $H | Format-List id, name
 
-# 2. Faktyczne uprawnienia SA
-Invoke-RestMethod -Uri "$U/api/access-control/user/permissions" -Headers $H
-
-# 3. Kontrolny zapis — zobacz prawdziwy status i body
-try {
-  Invoke-RestMethod -Uri "$U/api/folders" -Method Post -Headers $H `
-    -ContentType "application/json" -Body '{"title":"tf-probe-delete-me"}'
-} catch {
-  "STATUS: $($_.Exception.Response.StatusCode.value__)"
-  $_.ErrorDetails.Message
-}
+login          : sa-1-grafana-admin-sa
+email          : sa-1-grafana-admin-sa
+orgId          : 1
+isGrafanaAdmin : False
 
 
 
-# nadaj SA rolę Admin (lub stwórz nowy Admin SA), potem nowy token:
-$env:GRAFANA_AUTH = az grafana service-account token create `
-  -n gxyzck1ra0661grafadev1 -g gxyz-ck1-ra0661-resougroup-dev-1 `
-  --service-account <sa_admin_name> --token "tf-$PID" --time-to-live 1h `
-  --query key -o tsv
+PS C:\repo\managed_grafana_internal\02-grafana-config> Invoke-RestMethod -Uri "$U/api/org"   -Headers $H | Format-List id, name
 
+
+id   : 1
+name : Main Org.
+
+
+
+PS C:\repo\managed_grafana_internal\02-grafana-config> try {
+>>   Invoke-RestMethod -Uri "$U/api/folders" -Method Post -Headers $H `
+>>     -ContentType "application/json" -Body '{"title":"tf-probe-delete-me"}'
+>> } catch {
+>>   "STATUS: $($_.Exception.Response.StatusCode.value__)"
+>>   $_.ErrorDetails.Message
+>> }
+
+
+id        : 128
+uid       : cfscyud9qbif4c
+orgId     : 1
+title     : tf-probe-delete-me
+url       : /dashboards/f/cfscyud9qbif4c/tf-probe-delete-me
+hasAcl    : False
+canSave   : True
+canEdit   : True
+canAdmin  : True
+canDelete : True
+createdBy : grafana-admin-sa
+created   : 2026-07-17T07:12:40Z
+updatedBy : grafana-admin-sa
+updated   : 2026-07-17T07:12:40Z
+version   : 1
 
 
 #######
 
 
-# 1. Czy w ogóle dobijasz do instancji z tej sieci?
-# uwaga: wołaj "curl.exe" explicite, żeby nie trafić w alias PowerShella do
-# Invoke-WebRequest (ma inne flagi i rzuca wyjątkiem na 4xx/5xx)
-curl.exe -i "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/health"
-
-# 2. Czy publiczny dostęp faktycznie jest wyłączony?
-az grafana show -n gxyzck1ra0661grafadev1 -g gxyz-ck1-ra0661-resougroup-dev-1 --query "properties.publicNetworkAccess" -o tsv
-Jeśli wolisz natywny PowerShell bez curl.exe (np. gdyby go nie było w PATH), alternatywa dla punktu 1, która nie wywali się wyjątkiem na 404 (domyślne zachowanie Invoke-WebRequest):
-
-
-try {
-    $resp = Invoke-WebRequest -Uri "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/health" -UseBasicParsing
-    Write-Host "$($resp.StatusCode) $($resp.StatusDescription)"
-}
-catch {
-    Write-Host "$($_.Exception.Response.StatusCode.value__) $($_.Exception.Response.StatusDescription)"
-}
+PS C:\repo\sync\grafana-poc-example\terraform> try {
+>>     $resp = Invoke-WebRequest -Uri "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/health"
+ -UseBasicParsing
+>>     Write-Host "$($resp.StatusCode) $($resp.StatusDescription)"
+>> }
+>> catch {
+>>     Write-Host "$($_.Exception.Response.StatusCode.value__) $($_.Exception.Response.StatusDescription)"
+>> }
+401 Unauthorized
+PS C:\repo\sync\grafana-poc-example\terraform> az grafana show -n gxyzck1ra0661grafadev1 -g gxyz-ck1-ra0661-resougroup-dev-1 --query "properties.publicNetworkAccess" -o tsv
+Disabled
 
 
