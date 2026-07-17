@@ -1,14 +1,1 @@
-At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:33 char:37
-+         throw "FATAL: '$What' zakoĹ„czone kodem $LASTEXITCODE"
-+                                     ~~~~~
-Unexpected token 'czone' in expression or statement.
-At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:32 char:30
-+     if ($LASTEXITCODE -ne 0) {
-+                              ~
-Missing closing '}' in statement block or type definition.
-At C:\repo\sync\grafana-poc-example\terraform\k8s\deploy-k8s.ps1:30 char:26
-+ function Assert-ExitCode {
-+                          ~
-Missing closing '}' in statement block or type definition.
-    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
-    + FullyQualifiedErrorId : UnexpectedToken
+error: error validating "STDIN": error validating data: failed to download openapi: Get "https://pzu-grafmon-lab-zynzauef.hcp.westeurope.azmk8s.io:443/openapi/v2?timeout=32s": tls: failed to verify certificate: x509: certificate signed by unknown authority; if you choose to ignore these errors, turn validation off with --validate=false
