@@ -4,19 +4,19 @@
 
 .DESCRIPTION
   Co robi po kolei:
-    1. Wyciąga z outputs Terraforma dane do remote_write (endpoint DCE-B,
-       immutableId DCR-B, client_id tożsamości kubeleta) i skleja z nich URL.
-    2. Wstrzykuje je do prometheus-values.yaml w miejsce placeholderów.
-    3. Instaluje Prometheusa Helmem do namespace "monitoring" — metryki lecą do
-       AMW-B przez remote_write (auth: azuread / tożsamość kubeleta z IMDS).
-       Adnotacje usługi tworzą przy okazji Private Link Service (pls-prometheus) do S1.6.
-    4. Wrzuca pod diagnostyczny (netshoot) do prób DNS/łączności (S1.3).
+    1. Wyciaga z outputs Terraforma dane do remote_write (endpoint DCE-B,
+       immutableId DCR-B, client_id tozsamosci kubeleta) i skleja z nich URL.
+    2. Wstrzykuje je do prometheus-values.yaml w miejsce placeholderow.
+    3. Instaluje Prometheusa Helmem do namespace "monitoring" - metryki leca do
+       AMW-B przez remote_write (auth: azuread / tozsamosc kubeleta z IMDS).
+       Adnotacje uslugi tworza przy okazji Private Link Service (pls-prometheus) do S1.6.
+    4. Wrzuca pod diagnostyczny (netshoot) do prob DNS/lacznosci (S1.3).
   Potrzebne: kubectl, helm >= 3, jq, zalogowany az CLI.
-  Uruchamiać z katalogu terraform/ po `terraform apply`.
+  Uruchamiac z katalogu terraform/ po `terraform apply`.
 
 .PARAMETER KubectlPath
-  Ścieżka do kubectl (np. C:\k8s\kubectl.exe). Jeśli pominięta, skrypt zapyta
-  interaktywnie; jeśli i wtedy nic nie podasz — użyje "kubectl" z PATH.
+  Sciezka do kubectl (np. C:\k8s\kubectl.exe). Jesli pominieta, skrypt zapyta
+  interaktywnie; jesli i wtedy nic nie podasz - uzyje "kubectl" z PATH.
 #>
 
 [CmdletBinding()]
@@ -26,37 +26,37 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-# Zatrzymaj skrypt, jeśli ostatnie wywołanie zewnętrznego narzędzia zwróciło błąd.
+# Zatrzymaj skrypt, jesli ostatnie wywolanie zewnetrznego narzedzia zwrocilo blad.
 function Assert-ExitCode {
     param([string]$What)
     if ($LASTEXITCODE -ne 0) {
-        throw "FATAL: '$What' zakończone kodem $LASTEXITCODE"
+        throw "FATAL: '$What' zakonczone kodem $LASTEXITCODE"
     }
 }
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $TfDir     = Split-Path -Parent $ScriptDir
 
-# ── 0. Ścieżka do kubectl ─────────────────────────────────────────────────────
+# -- 0. Sciezka do kubectl -----------------------------------------------------
 # Priorytet: parametr -KubectlPath > pytanie interaktywne > "kubectl" z PATH.
-# Jeśli podasz pełną ścieżkę (np. C:\k8s\kubectl.exe), wszystkie wywołania robimy
-# tą pełną ścieżką (operator wywołania &).
+# Jesli podasz pelna sciezke (np. C:\k8s\kubectl.exe), wszystkie wywolania robimy
+# ta pelna sciezka (operator wywolania &).
 if (-not $KubectlPath) {
-    $KubectlPath = Read-Host "Podaj ścieżkę do kubectl (Enter = weź z PATH)"
+    $KubectlPath = Read-Host "Podaj sciezke do kubectl (Enter = wez z PATH)"
 }
 if ([string]::IsNullOrWhiteSpace($KubectlPath)) {
     $KubectlPath = "kubectl"
 }
 Write-Host "kubectl:           $KubectlPath"
 
-# ── 1. Pull values from terraform outputs ────────────────────────────────────
+# -- 1. Pull values from terraform outputs ------------------------------------
 $AksName        = terraform -chdir="$TfDir" output -raw aks_name;                Assert-ExitCode "terraform output aks_name"
 $Rg             = terraform -chdir="$TfDir" output -raw resource_group_name;     Assert-ExitCode "terraform output resource_group_name"
 $DceBId         = terraform -chdir="$TfDir" output -raw dce_b_id;                Assert-ExitCode "terraform output dce_b_id"
 $DcrBId         = terraform -chdir="$TfDir" output -raw dcr_b_id;                Assert-ExitCode "terraform output dcr_b_id"
 $KubeletClientId = terraform -chdir="$TfDir" output -raw aks_kubelet_client_id;  Assert-ExitCode "terraform output aks_kubelet_client_id"
 
-# Pin the subscription to the one Terraform actually deployed into — it's embedded
+# Pin the subscription to the one Terraform actually deployed into - it's embedded
 # in every resource ID (/subscriptions/<id>/...). Passing it explicitly to az stops
 # it from falling back to the SPN's default subscription context (which may differ).
 $SubscriptionId = ($DceBId -replace '^/subscriptions/', '') -replace '/.*$', ''
@@ -78,10 +78,10 @@ $DcrBImmutable = az resource show --ids "$DcrBId" --api-version "$Api" `
     --query "properties.immutableId" -o tsv
 Assert-ExitCode "az resource show (DCR-B)"
 
-# Uwaga: az zwraca 0 przy polach null → pusta wartość skleiłaby zły URL remote_write,
-# a wtedy AMW-B nigdy nie przyjmie metryk. Dlatego jawne guardy poniżej.
-if ([string]::IsNullOrWhiteSpace($DceBMetrics))    { throw "FATAL: DCE-B metricsIngestion.endpoint is empty (api-version $Api?)" }
-if ([string]::IsNullOrWhiteSpace($DcrBImmutable))  { throw "FATAL: DCR-B immutableId is empty" }
+# Uwaga: az zwraca 0 przy polach null -> pusta wartosc skleilaby zly URL remote_write,
+# a wtedy AMW-B nigdy nie przyjmie metryk. Dlatego jawne guardy ponizej.
+if ([string]::IsNullOrWhiteSpace($DceBMetrics))     { throw "FATAL: DCE-B metricsIngestion.endpoint is empty (api-version $Api?)" }
+if ([string]::IsNullOrWhiteSpace($DcrBImmutable))   { throw "FATAL: DCR-B immutableId is empty" }
 if ([string]::IsNullOrWhiteSpace($KubeletClientId)) { throw "FATAL: aks_kubelet_client_id output is empty" }
 
 $RemoteWriteUrl = "$DceBMetrics/dataCollectionRules/$DcrBImmutable/streams/Microsoft-PrometheusMetrics/api/v1/write?api-version=2023-04-24"
@@ -93,12 +93,12 @@ Write-Host "DCR-B immutableId: $DcrBImmutable"
 Write-Host "kubelet client_id: $KubeletClientId"
 Write-Host "remote_write URL:  $RemoteWriteUrl"
 
-# ── 2. Kubeconfig ─────────────────────────────────────────────────────────────
+# -- 2. Kubeconfig -------------------------------------------------------------
 az aks get-credentials --subscription "$SubscriptionId" `
     --resource-group "$Rg" --name "$AksName" --overwrite-existing
 Assert-ExitCode "az aks get-credentials"
 
-# ── 3. Prometheus (prometheus-community/prometheus, not kube-prometheus-stack) ─
+# -- 3. Prometheus (prometheus-community/prometheus, not kube-prometheus-stack) -
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts 2>$null
 helm repo update prometheus-community
 Assert-ExitCode "helm repo update"
@@ -128,7 +128,7 @@ Write-Host "Prometheus installed. Verify metrics ingestion:"
 Write-Host "  $KubectlPath -n monitoring get pods"
 Write-Host "  $KubectlPath -n monitoring logs -l app=prometheus,component=server --tail=20"
 
-# ── 4. Debug pod (dig + curl for DNS white-box probes, S1.3) ─────────────────
+# -- 4. Debug pod (dig + curl for DNS white-box probes, S1.3) ------------------
 & $KubectlPath apply -f "$ScriptDir\debug-pod.yaml"
 Assert-ExitCode "kubectl apply debug-pod"
 Write-Host "Debug pod applied. Shell in: $KubectlPath exec -it debug -- bash"

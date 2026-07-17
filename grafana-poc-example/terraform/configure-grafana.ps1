@@ -3,14 +3,14 @@
   configure-grafana.ps1 - konfiguracja "warstwy danych" Grafany, odpalana po apply.
 
 .DESCRIPTION
-  Terraform nie ogarnie tu wnętrza Grafany (Azure Managed Grafana wyłącza konta
-  usługowe, więc provider Grafany nie ma jak się zalogować). Dlatego lecimy przez
-  `az grafana` (na Twoim `az login`) i tworzymy 4 źródła danych:
-    AMW-A, AMW-B      : Prometheus, uwierzytelnianie tożsamością zarządzaną (MSI)
+  Terraform nie ogarnie tu wnetrza Grafany (Azure Managed Grafana wylacza konta
+  uslugowe, wiec provider Grafany nie ma jak sie zalogowac). Dlatego lecimy przez
+  `az grafana` (na Twoim `az login`) i tworzymy 4 zrodla danych:
+    AMW-A, AMW-B      : Prometheus, uwierzytelnianie tozsamoscia zarzadzana (MSI)
     AzMon-CurrentUser : Azure Monitor (zalogowany user + zapasowo SP)
-    OSS-Prometheus-PLS: prywatna ścieżka do self-hosted Prometheusa przez MPE->PLS (S1.6)
-  Skrypt jest idempotentny - najpierw kasuje źródło o tej samej nazwie, potem tworzy.
-  Kolejność: `terraform apply` -> k8s/deploy-k8s.ps1 -> ten skrypt.
+    OSS-Prometheus-PLS: prywatna sciezka do self-hosted Prometheusa przez MPE->PLS (S1.6)
+  Skrypt jest idempotentny - najpierw kasuje zrodlo o tej samej nazwie, potem tworzy.
+  Kolejnosc: `terraform apply` -> k8s/deploy-k8s.ps1 -> ten skrypt.
 
 .EXAMPLE
   ./configure-grafana.ps1
@@ -23,7 +23,7 @@ $ErrorActionPreference = 'Stop'
 
 $TfDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
-# Pomocnik: terraform output -raw, z opcjonalną wartością domyślną.
+# Pomocnik: terraform output -raw, z opcjonalna wartoscia domyslna.
 function Get-TfOutput {
     param(
         [Parameter(Mandatory)][string]$Name,
@@ -51,13 +51,13 @@ $NodeRg = Get-TfOutput -Name aks_node_resource_group
 # arbitrary; Grafana resolves it internally to the MPE IP
 $OssDomain = if ($env:OSS_DOMAIN) { $env:OSS_DOMAIN } else { 'prometheus.xyzlab.net' }
 
-# Pomocnik: kasuje istniejące źródło i tworzy je od nowa (stąd idempotencja).
+# Pomocnik: kasuje istniejace zrodlo i tworzy je od nowa (stad idempotencja).
 function Invoke-DsRecreate {
     param(
         [Parameter(Mandatory)][string]$Name,
         [Parameter(Mandatory)][string]$Definition
     )
-    # delete: błędy ignorujemy (kod != 0 nie rzuca dla natywnych narzędzi)
+    # delete: bledy ignorujemy (kod != 0 nie rzuca dla natywnych narzedzi)
     az grafana data-source delete -n $Graf -g $Rg --data-source $Name *> $null
     az grafana data-source create -n $Graf -g $Rg --definition $Definition --query name -o tsv
 }
@@ -116,7 +116,7 @@ if (-not [string]::IsNullOrWhiteSpace($PlsId)) {
     Invoke-DsRecreate -Name 'OSS-Prometheus-PLS' -Definition $defOss
 }
 else {
-    Write-Host "  PLS 'pls-prometheus' not found yet — run k8s/deploy-k8s.ps1 first (it creates the PLS via service annotations)."
+    Write-Host "  PLS 'pls-prometheus' not found yet - run k8s/deploy-k8s.ps1 first (it creates the PLS via service annotations)."
 }
 
 Write-Host "Done. Data sources:"
