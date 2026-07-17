@@ -103,7 +103,9 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update prometheus-community
 Assert-ExitCode "helm repo update"
 
-& $KubectlPath create namespace monitoring --dry-run=client -o yaml | & $KubectlPath apply -f -
+# --validate=false pomija pobieranie schematu OpenAPI z serwera API (to pobranie
+# potrafi lecac przez korporacyjne proxy z inspekcja TLS -> x509 "unknown authority").
+& $KubectlPath create namespace monitoring --dry-run=client -o yaml | & $KubectlPath apply --validate=false -f -
 Assert-ExitCode "kubectl apply namespace monitoring"
 
 # Patch the placeholder URL + kubelet client_id into the values file.
@@ -129,7 +131,7 @@ Write-Host "  $KubectlPath -n monitoring get pods"
 Write-Host "  $KubectlPath -n monitoring logs -l app=prometheus,component=server --tail=20"
 
 # -- 4. Debug pod (dig + curl for DNS white-box probes, S1.3) ------------------
-& $KubectlPath apply -f "$ScriptDir\debug-pod.yaml"
+& $KubectlPath apply --validate=false -f "$ScriptDir\debug-pod.yaml"
 Assert-ExitCode "kubectl apply debug-pod"
 Write-Host "Debug pod applied. Shell in: $KubectlPath exec -it debug -- bash"
 
