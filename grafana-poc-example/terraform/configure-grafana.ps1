@@ -19,7 +19,11 @@
 [CmdletBinding()]
 param()
 
-$ErrorActionPreference = 'Stop'
+# Uwaga: NIE ustawiamy 'Stop' globalnie. W Windows PowerShell natywne narzedzia
+# (terraform, az) piszace cokolwiek na stderr bywaja traktowane jak blad terminujacy
+# (NativeCommandError) - nawet gdy tak naprawde sie udaly. Bledy wychwytujemy jawnie
+# po $LASTEXITCODE (ponizej), a operacje niatywne konczymy 'throw'.
+$ErrorActionPreference = 'Continue'
 
 $TfDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 

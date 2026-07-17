@@ -25,7 +25,12 @@ param(
     [switch]$InsecureSkipTlsVerify
 )
 
-$ErrorActionPreference = 'Stop'
+# Uwaga: NIE ustawiamy 'Stop' globalnie. W Windows PowerShell natywne narzedzia
+# (terraform, az, kubectl, helm) piszace cokolwiek na stderr bywaja traktowane jak
+# blad terminujacy (NativeCommandError) - nawet gdy tak naprawde sie udaly. Bledy
+# wychwytujemy jawnie po $LASTEXITCODE (Assert-ExitCode), a krytyczne cmdlety maja
+# -ErrorAction Stop punktowo.
+$ErrorActionPreference = 'Continue'
 
 # Zatrzymaj skrypt, jesli ostatnie wywolanie zewnetrznego narzedzia zwrocilo blad.
 function Assert-ExitCode {
@@ -131,10 +136,10 @@ Assert-ExitCode "kubectl apply namespace monitoring"
 # Patch the placeholder URL + kubelet client_id into the values file.
 $PatchedValues = [System.IO.Path]::GetTempFileName()
 try {
-    (Get-Content -Raw "$ScriptDir\prometheus-values.yaml") `
+    (Get-Content -Raw -ErrorAction Stop "$ScriptDir\prometheus-values.yaml") `
         -replace 'PLACEHOLDER_REMOTE_WRITE_URL', $RemoteWriteUrl `
         -replace 'PLACEHOLDER_KUBELET_CLIENT_ID', $KubeletClientId |
-        Set-Content -NoNewline -Encoding utf8 $PatchedValues
+        Set-Content -NoNewline -Encoding utf8 -ErrorAction Stop $PatchedValues
 
     helm upgrade --install prometheus prometheus-community/prometheus `
         --namespace monitoring `
