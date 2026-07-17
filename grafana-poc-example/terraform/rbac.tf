@@ -89,6 +89,19 @@ resource "azurerm_role_assignment" "deployer_grafana_admin" {
   principal_id         = data.azuread_client_config.current.object_id
 }
 
+# ── Optional configurator identity (configure-grafana.sh/.ps1 runner) ─────────
+# Set configurator_object_id in tfvars if that script runs under a DIFFERENT
+# identity than the one that ran `terraform apply` (e.g. a separate az-login SPN
+# on another machine). Without this it hits AuthorizationFailed on
+# 'Microsoft.Dashboard/grafana/read' — Owner on the subscription is not enough.
+
+resource "azurerm_role_assignment" "configurator_grafana_admin" {
+  count                = var.configurator_object_id != "" ? 1 : 0
+  scope                = azurerm_dashboard_grafana.grafana.id
+  role_definition_name = "Grafana Admin"
+  principal_id         = var.configurator_object_id
+}
+
 # ── Optional test user ─────────────────────────────────────────────────────────
 # Set test_user_object_id in tfvars to enable. Grants Grafana Viewer (required
 # for the user to log into Grafana at all) and Monitoring Reader on RG (for S2 scenarios).

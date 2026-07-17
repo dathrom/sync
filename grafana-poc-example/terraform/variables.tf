@@ -40,3 +40,15 @@ variable "test_user_object_id" {
   type        = string
   default     = ""
 }
+
+# Opcjonalna tożsamość (user albo SPN), która uruchamia configure-grafana.sh/.ps1,
+# jeśli to INNE konto niż to, którym wykonano `terraform apply` (a więc inne niż
+# data.azuread_client_config.current, które dostaje Grafana Admin automatycznie —
+# patrz rbac.tf:deployer_grafana_admin). Bez tego az CLI dostanie AuthorizationFailed
+# na 'Microsoft.Dashboard/grafana/read' — sama subskrypcja/Owner nie daje dostępu do
+# danych Grafany, potrzebna jest explicit rola. Puste = pomijamy nadanie.
+variable "configurator_object_id" {
+  description = "AAD object ID of the identity running configure-grafana.sh/.ps1, if different from the terraform apply identity. If set, grants Grafana Admin on the Grafana resource (needed to manage data sources). Leave empty to skip."
+  type        = string
+  default     = ""
+}

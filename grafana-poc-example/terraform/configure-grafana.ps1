@@ -61,7 +61,20 @@ function Invoke-DsRecreate {
     )
     # delete: bledy ignorujemy (kod != 0 nie rzuca dla natywnych narzedzi)
     az grafana data-source delete -n $Graf -g $Rg --data-source $Name *> $null
-    az grafana data-source create -n $Graf -g $Rg --definition $Definition --query name -o tsv
+
+    # az CLI na Windows (uruchamiane przez cmd/python) samo re-parsuje argumenty i
+    # gubi znaki '"' przekazane jako zwykly string w PowerShell - stad
+    # "Failed to parse string as JSON" mimo poprawnego JSON-a na wejsciu. Jedyny
+    # bezpieczny, cross-platform sposob: zapisac definicje do pliku i podac przez
+    # --definition @plik (patrz link w oryginalnym komunikacie bledu az).
+    $tmpFile = [System.IO.Path]::GetTempFileName()
+    try {
+        Set-Content -LiteralPath $tmpFile -Value $Definition -Encoding utf8 -NoNewline
+        az grafana data-source create -n $Graf -g $Rg --definition "@$tmpFile" --query name -o tsv
+    }
+    finally {
+        Remove-Item -LiteralPath $tmpFile -ErrorAction SilentlyContinue
+    }
 }
 
 Write-Host "== AMW-A / AMW-B (managed Prometheus, managed-identity auth) =="

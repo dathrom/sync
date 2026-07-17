@@ -26,3 +26,9 @@ ttl = "destroy-after-demo"
 # Po ustawieniu otrzyma rolę "Grafana Viewer" na zasobie Grafany
 # oraz "Monitoring Reader" na grupie zasobów. Puste = pomijamy nadanie ról.
 test_user_object_id = ""
+
+# Opcjonalnie: AAD object ID tożsamości uruchamiającej configure-grafana.sh/.ps1,
+# jeśli to inne konto/SPN niż to, które wykonało `terraform apply`. Po ustawieniu
+# otrzyma rolę "Grafana Admin" na zasobie Grafany (wymagana do zarządzania
+# źródłami danych). Puste = pomijamy nadanie ról.
+configurator_object_id = ""
