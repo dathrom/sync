@@ -21,7 +21,8 @@
 
 [CmdletBinding()]
 param(
-    [string]$KubectlPath
+    [string]$KubectlPath,
+    [switch]$InsecureSkipTlsVerify
 )
 
 $ErrorActionPreference = 'Stop'
@@ -97,6 +98,25 @@ Write-Host "remote_write URL:  $RemoteWriteUrl"
 az aks get-credentials --subscription "$SubscriptionId" `
     --resource-group "$Rg" --name "$AksName" --overwrite-existing
 Assert-ExitCode "az aks get-credentials"
+
+# Za korporacyjnym proxy z inspekcja TLS certyfikat API serwera AKS jest podpisany
+# przez nieznane CA (x509 "unknown authority"). Ten przelacznik wylacza weryfikacje
+# TLS dla wpisu klastra w kubeconfig - dziala i dla kubectl, i dla helm.
+# UWAGA: obniza bezpieczenstwo, uzywac tylko w labie. Wlasciwe rozwiazanie to
+# dodac firmowy root CA do zaufanych certyfikatow maszyny.
+if ($InsecureSkipTlsVerify) {
+    $ctx = & $KubectlPath config current-context
+    Assert-ExitCode "kubectl config current-context"
+    $cluster = & $KubectlPath config view -o "jsonpath={.contexts[?(@.name=='$ctx')].context.cluster}"
+    if ([string]::IsNullOrWhiteSpace($cluster)) {
+        throw "FATAL: nie udalo sie ustalic nazwy klastra z kontekstu '$ctx'"
+    }
+    Write-Host "InsecureSkipTlsVerify: wylaczam weryfikacje TLS dla klastra '$cluster'"
+    # certificate-authority-data koliduje z --insecure-skip-tls-verify -> najpierw usun.
+    & $KubectlPath config unset "clusters.$cluster.certificate-authority-data" | Out-Null
+    & $KubectlPath config set-cluster $cluster --insecure-skip-tls-verify=true | Out-Null
+    Assert-ExitCode "kubectl config set-cluster --insecure-skip-tls-verify"
+}
 
 # -- 3. Prometheus (prometheus-community/prometheus, not kube-prometheus-stack) -
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts 2>$null
