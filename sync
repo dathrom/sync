@@ -1,4 +1,5 @@
- Error: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/datasources": tls: failed to parse certificate from server: x509: negative serial number
+╷
+│ Error: [POST /datasources] addDataSource (status 404): {}
 │
 │   with grafana_data_source.testdata,
 │   on content.tf line 2, in resource "grafana_data_source" "testdata":
@@ -6,7 +7,7 @@
 │
 ╵
 ╷
-│ Error: failed to create folder: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/folders": tls: failed to parse certificate from server: x509: negative serial number
+│ Error: failed to create folder: [POST /folders] createFolder (status 404): {}
 │
 │   with grafana_folder.system["RA0341-DINGO"],
 │   on folders.tf line 2, in resource "grafana_folder" "system":
@@ -14,15 +15,7 @@
 │
 ╵
 ╷
-│ Error: failed to create folder: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/folders": tls: failed to parse certificate from server: x509: negative serial number
-│
-│   with grafana_folder.system["RA0395-OCMS_KLIENT"],
-│   on folders.tf line 2, in resource "grafana_folder" "system":
-│    2: resource "grafana_folder" "system" {
-│
-╵
-╷
-│ Error: failed to create folder: Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/folders": tls: failed to parse certificate from server: x509: negative serial number
+│ Error: failed to create folder: [POST /folders] createFolder (status 404): {}
 │
 │   with grafana_folder.system["RA0766-OLIMPS"],
 │   on folders.tf line 2, in resource "grafana_folder" "system":
@@ -30,154 +23,12 @@
 │
 ╵
 ╷
-│ Error: Failed to create team
+│ Error: failed to create folder: [POST /folders] createFolder (status 404): {}
 │
-│   with grafana_team.this["self_prod_ra0395-dev_admin"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
+│   with grafana_folder.system["RA0395-OCMS_KLIENT"],
+│   on folders.tf line 2, in resource "grafana_folder" "system":
+│    2: resource "grafana_folder" "system" {
 │
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0766-resougroup-dev-1"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0341-resougroup-dev-1"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0395-resougroup-dev-1"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["namespace_app-olimps-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0766-resougroup-dev-1"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["self_prod_ra0395-dev_user"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["namespace_app-ocmsk-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0395-resougroup-dev-1"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["namespace_app-olimps-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["self_prod_ra0395-dev_owner"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["namespace_app-din-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["namespace_app-din-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0341-resougroup-dev-1"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
-╵
-╷
-│ Error: Failed to create team
-│
-│   with grafana_team.this["namespace_app-ocmsk-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
-│   on teams.tf line 2, in resource "grafana_team" "this":
-│    2: resource "grafana_team" "this" {
-│
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
 ╵
 ╷
 │ Error: Failed to create team
@@ -186,8 +37,61 @@
 │   on teams.tf line 2, in resource "grafana_team" "this":
 │    2: resource "grafana_team" "this" {
 │
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-olimps-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["self_prod_ra0395-dev_owner"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-ocmsk-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0395-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-din-dev_gxyz-ck1-ra0643-aks-nonprd-1_writer"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0766-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
 ╵
 ╷
 │ Error: Failed to create team
@@ -196,7 +100,87 @@
 │   on teams.tf line 2, in resource "grafana_team" "this":
 │    2: resource "grafana_team" "this" {
 │
-│ Post "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/teams": tls: failed to parse
-│ certificate from server: x509: negative serial number
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0766-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-olimps-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0395-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_view_gxyz-ck1-ra0341-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-din-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["self_prod_ra0395-dev_user"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["self_prod_ra0395-dev_admin"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["namespace_app-ocmsk-dev_gxyz-ck1-ra0643-aks-nonprd-1_reader"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
+╵
+╷
+│ Error: Failed to create team
+│
+│   with grafana_team.this["nonprd_contrybutor_gxyz-ck1-ra0341-resougroup-dev-1"],
+│   on teams.tf line 2, in resource "grafana_team" "this":
+│    2: resource "grafana_team" "this" {
+│
+│ [POST /teams] createTeam (status 404): {}
 ╵
 Releasing state lock. This may take a few moments...
