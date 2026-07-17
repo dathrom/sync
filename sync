@@ -1,6 +1,27 @@
-FATAL: terraform output 'app_reg_client_id' is empty
-At C:\repo\sync\grafana-poc-example\terraform\configure-grafana.ps1:40 char:9
-+         throw "FATAL: terraform output '$Name' is empty"
-+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : OperationStopped: (FATAL: terrafor...nt_id' is empty:String) [], RuntimeException
-    + FullyQualifiedErrorId : FATAL: terraform output 'app_reg_client_id' is empty
+PS C:\repo\sync\grafana-poc-example\terraform> powershell.exe -ExecutionPolicy Bypass -File .\configure-grafana.ps1
+== AMW-A / AMW-B (managed Prometheus, managed-identity auth) ==
+Failed to parse string as JSON:
+{name:AMW-A,type:prometheus,access:proxy,url:https://amw-a-h8b7b7ezged7cpa4.westeurope.prometheus.monitor.azure.com,jsonData:{httpMethod:POST,azureCredentials:{authType:msi}}}
+Error detail: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+Please provide a valid JSON file path or JSON string.
+The provided JSON string may have been parsed by the shell. See https://learn.microsoft.com/cli/azure/use-azure-cli-successfully-quoting#json-strings
+PowerShell requires additional quoting rules. See https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md
+Failed to parse string as JSON:
+{name:AMW-B,type:prometheus,access:proxy,url:https://amw-b-hvbfhjhqc3c9eydj.westeurope.prometheus.monitor.azure.com,jsonData:{httpMethod:POST,azureCredentials:{authType:msi}}}
+Error detail: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+Please provide a valid JSON file path or JSON string.
+The provided JSON string may have been parsed by the shell. See https://learn.microsoft.com/cli/azure/use-azure-cli-successfully-quoting#json-strings
+PowerShell requires additional quoting rules. See https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md
+== AzMon-CurrentUser (Azure Monitor, Current User; brak fallback SP - patrz identity.tf) ==
+Failed to parse string as JSON:
+{name:AzMon-CurrentUser,type:grafana-azure-monitor-datasource,access:proxy,jsonData:{azureAuthType:currentuser,subscriptionId:0c31f129-5f19-464d-a277-e1c8c35e6899,azureCredentials:{authType:currentuser}}}
+Error detail: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+Please provide a valid JSON file path or JSON string.
+The provided JSON string may have been parsed by the shell. See https://learn.microsoft.com/cli/azure/use-azure-cli-successfully-quoting#json-strings
+PowerShell requires additional quoting rules. See https://github.com/Azure/azure-cli/blob/dev/doc/quoting-issues-with-powershell.md
+== S1.6: Grafana MPE -> self-hosted Prometheus PLS, approve, refresh ==
+  PLS 'pls-prometheus' not found yet - run k8s/deploy-k8s.ps1 first (it creates the PLS via service annotations).
+Done. Data sources:
+(AuthorizationFailed) The client 'f0279d5c-25e1-495d-b3e8-7e352813c9c0' with object id '804a085a-4007-42f7-91cc-cbe742b7afd7' does not have authorization to perform action 'Microsoft.Dashboard/grafana/read' over scope '/subscriptions/0c31f129-5f19-464d-a277-e1c8c35e6899/resourceGroups/rg-xyz-grafmon-lab/providers/Microsoft.Dashboard/grafana/grafana-xyz-lab' or the scope is invalid. If access was recently granted, please refresh your credentials.
+Code: AuthorizationFailed
+Message: The client 'f0279d5c-25e1-495d-b3e8-7e352813c9c0' with object id '804a085a-4007-42f7-91cc-cbe742b7afd7' does not have authorization to perform action 'Microsoft.Dashboard/grafana/read' over scope '/subscriptions/0c31f129-5f19-464d-a277-e1c8c35e6899/resourceGroups/rg-xyz-grafmon-lab/providers/Microsoft.Dashboard/grafana/grafana-xyz-lab' or the scope is invalid. If access was recently granted, please refresh your credentials.
