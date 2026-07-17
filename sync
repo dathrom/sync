@@ -1,6 +1,6 @@
-terraform : ÔĽĚ
-At C:\repo\sync\grafana-poc-example\terraform\configure-grafana.ps1:33 char:12
-+     $val = terraform -chdir="$TfDir" output -raw $Name 2>$null
-+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (ÔĽĚ:String) [], RemoteException
-    + FullyQualifiedErrorId : NativeCommandError
+FATAL: terraform output 'app_reg_client_id' is empty
+At C:\repo\sync\grafana-poc-example\terraform\configure-grafana.ps1:40 char:9
++         throw "FATAL: terraform output '$Name' is empty"
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (FATAL: terrafor...nt_id' is empty:String) [], RuntimeException
+    + FullyQualifiedErrorId : FATAL: terraform output 'app_reg_client_id' is empty
