@@ -1,63 +1,40 @@
-PS C:\repo\managed_grafana_internal\02-grafana-config> $H = @{ Authorization = "Bearer $env:GRAFANA_AUTH" }
-PS C:\repo\managed_grafana_internal\02-grafana-config> $U = "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com"
-PS C:\repo\managed_grafana_internal\02-grafana-config>
-PS C:\repo\managed_grafana_internal\02-grafana-config> Invoke-RestMethod -Uri "$U/api/user"  -Headers $H | Format-List login, email, orgId, isGrafanaAdmin
+# Endpoint instancji Grafany, którą testujesz (podmień albo pobierz z terraform output)
+$GrafanaUrl = "https://<twoja-instancja>.grafana.azure.com"
+# np.: $GrafanaUrl = "https://$(terraform output -raw grafana_endpoint)"
+
+$Headers = @{ Authorization = "Bearer $env:GRAFANA_AUTH" }
+
+# Pomocnik: pokazuje status/body przy błędzie zamiast rzucać nieczytelny wyjątek
+function Invoke-GrafanaApi {
+    param([string]$Method, [string]$Path, $Body)
+    try {
+        $params = @{ Uri = "$GrafanaUrl$Path"; Headers = $Headers; Method = $Method }
+        if ($Body) { $params.Body = ($Body | ConvertTo-Json); $params.ContentType = 'application/json' }
+        Invoke-RestMethod @params
+    }
+    catch {
+        Write-Host "FAIL $Method $Path -> $($_.Exception.Response.StatusCode.value__) $($_.Exception.Response.StatusDescription)"
+        if ($_.ErrorDetails.Message) { Write-Host $_.ErrorDetails.Message }
+    }
+}
+
+# 1. Test logowania — działa dla KAŻDEJ roli (Viewer+), samo potwierdza że token jest OK
+Invoke-GrafanaApi GET "/api/org"
+
+# 1b. Pokazuje efektywne uprawnienia RBAC tej tożsamości (przydatne do diagnozy)
+Invoke-GrafanaApi GET "/api/access-control/user/permissions"
+
+# 2. Utworzenie folderu testowego — wymaga roli Editor lub Admin
+$Folder = Invoke-GrafanaApi POST "/api/folders" @{ title = "test-permissions-folder" }
+$Folder
+
+# 3. Utworzenie teamu testowego — wymaga roli Admin
+$Team = Invoke-GrafanaApi POST "/api/teams" @{ name = "test-permissions-team" }
+$Team
+
+# --- sprzątanie po teście (żeby nie zostawić śmieci w realnej instancji) ---
+if ($Folder.uid) { Invoke-GrafanaApi DELETE "/api/folders/$($Folder.uid)" }
+if ($Team.teamId) { Invoke-GrafanaApi DELETE "/api/teams/$($Team.teamId)" }
 
 
-login          : sa-1-grafana-admin-sa
-email          : sa-1-grafana-admin-sa
-orgId          : 1
-isGrafanaAdmin : False
-
-
-
-PS C:\repo\managed_grafana_internal\02-grafana-config> Invoke-RestMethod -Uri "$U/api/org"   -Headers $H | Format-List id, name
-
-
-id   : 1
-name : Main Org.
-
-
-
-PS C:\repo\managed_grafana_internal\02-grafana-config> try {
->>   Invoke-RestMethod -Uri "$U/api/folders" -Method Post -Headers $H `
->>     -ContentType "application/json" -Body '{"title":"tf-probe-delete-me"}'
->> } catch {
->>   "STATUS: $($_.Exception.Response.StatusCode.value__)"
->>   $_.ErrorDetails.Message
->> }
-
-
-id        : 128
-uid       : cfscyud9qbif4c
-orgId     : 1
-title     : tf-probe-delete-me
-url       : /dashboards/f/cfscyud9qbif4c/tf-probe-delete-me
-hasAcl    : False
-canSave   : True
-canEdit   : True
-canAdmin  : True
-canDelete : True
-createdBy : grafana-admin-sa
-created   : 2026-07-17T07:12:40Z
-updatedBy : grafana-admin-sa
-updated   : 2026-07-17T07:12:40Z
-version   : 1
-
-
-#######
-
-
-PS C:\repo\sync\grafana-poc-example\terraform> try {
->>     $resp = Invoke-WebRequest -Uri "https://gxyzck1ra0661grafadev1-che4epf0fgcpbtev.cfr.grafana.azure.com/api/health"
- -UseBasicParsing
->>     Write-Host "$($resp.StatusCode) $($resp.StatusDescription)"
->> }
->> catch {
->>     Write-Host "$($_.Exception.Response.StatusCode.value__) $($_.Exception.Response.StatusDescription)"
->> }
-401 Unauthorized
-PS C:\repo\sync\grafana-poc-example\terraform> az grafana show -n gxyzck1ra0661grafadev1 -g gxyz-ck1-ra0661-resougroup-dev-1 --query "properties.publicNetworkAccess" -o tsv
-Disabled
-
-
+az grafana service-account show -n <grafana_name> -g <grafana_resource_group> --service-account <sa_name> --query role -o tsv
