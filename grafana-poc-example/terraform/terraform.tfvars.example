@@ -31,4 +31,4 @@ test_user_object_id = ""
 # jeśli to inne konto/SPN niż to, które wykonało `terraform apply`. Po ustawieniu
 # otrzyma rolę "Grafana Admin" na zasobie Grafany (wymagana do zarządzania
 # źródłami danych). Puste = pomijamy nadanie ról.
-configurator_object_id = ""
+configurator_object_id = "804a085a-4007-42f7-91cc-cbe742b7afd7"
