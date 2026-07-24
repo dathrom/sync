@@ -1,0 +1,359 @@
+# =============================================================================
+# Architektura DOCELOWA — self-hosted stack observability (LGTM) na AKS
+# Grafana + Loki + Mimir + Tempo + Prometheus + Vector + OpenTelemetry Collector
+#
+# Wzorce bezpieczeństwa odwzorowane z realnego Terraform PoC:
+#   network.tf  -> Azure CNI overlay, VNet 10.10.0.0/16, snet-aks/snet-pe, PLS
+#   aks.tf      -> network_plugin=azure/overlay, pod_cidr 192.168.0.0/16,
+#                  service_cidr 10.240.0.0/16, SystemAssigned + kubelet identity
+#   dns.tf      -> prywatna strefa DNS privatelink.* + Private Endpoint (snet-pe)
+#   monitoring.tf -> AMW/DCE/DCR (PoC managed) -> ZASTĄPIONE przez Mimir/Loki/Tempo
+#   grafana.tf  -> managed Grafana (PoC) -> self-hosted Grafana; UI publiczne, dane prywatne
+#   rbac.tf     -> role least-privilege (Data Reader / Metrics Publisher / Network Contributor)
+#   identity.tf -> tożsamość konta; app-registration USUNIĘTY (blocker uprawnień)
+#   k8s/prometheus-values.yaml -> internal LB + PLS pls-prometheus, remote_write azuread (IMDS)
+#
+# Render:  d2 architektura-target.d2 architektura-target.svg
+# =============================================================================
+
+direction: right
+
+# --- Klasy (paleta warstw — IDENTYCZNA w Mermaid i Excalidraw) ---------------
+classes: {
+  users: {
+    style.fill: "#FFF2CC"
+    style.stroke: "#D6B656"
+    style.stroke-width: 2
+  }
+  identity: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  azure: {
+    style.fill: "#DAE8FC"
+    style.stroke: "#6C8EBF"
+    style.stroke-width: 2
+  }
+  storage: {
+    style.fill: "#D5E8D4"
+    style.stroke: "#82B366"
+    style.stroke-width: 2
+  }
+  network: {
+    style.fill: "#F5F5F5"
+    style.stroke: "#666666"
+    style.stroke-width: 2
+  }
+  workload: {
+    style.fill: "#FFE6CC"
+    style.stroke: "#D79B00"
+    style.stroke-width: 2
+  }
+  sources: {
+    style.fill: "#F8CECC"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  optional: {
+    style.fill: "#FFFFFF"
+    style.stroke: "#999999"
+    style.stroke-width: 2
+    style.stroke-dash: 4
+  }
+  note: {
+    style.fill: "#FFFBEA"
+    style.stroke: "#C9A227"
+    style.stroke-width: 1
+    style.font-size: 12
+  }
+}
+
+# =============================================================================
+# STREFA 1 — Użytkownicy i tożsamość
+# =============================================================================
+uzytkownicy: "Użytkownicy i tożsamość" {
+  style.fill: "#FFFDF5"
+  style.stroke: "#D6B656"
+  user: "Użytkownicy końcowi\n(inżynierowie / SRE)" {
+    class: users
+    shape: person
+  }
+  entra: "Entra ID (Azure AD)\nOAuth/OIDC login Grafany\napp registration\ngrupy → org / team sync" {
+    class: identity
+  }
+}
+
+# =============================================================================
+# STREFA 2 — Źródła telemetrii
+# =============================================================================
+zrodla: "Źródła telemetrii" {
+  style.fill: "#FFF6F5"
+  style.stroke: "#B85450"
+  apps: "Aplikacje\n(instrumentacja OTLP)\nlogi / metryki / traces" {
+    class: sources
+  }
+  azres: "Zasoby Azure\ndiagnostic settings → logi" {
+    class: sources
+  }
+}
+
+# =============================================================================
+# STREFA 3 — Azure: usługi zarządzane
+# =============================================================================
+azure: "Azure — usługi zarządzane" {
+  style.fill: "#F3F7FF"
+  style.stroke: "#6C8EBF"
+
+  eventhub: "Azure Event Hub\n(bufor logów; Kafka/AMQP)" {
+    class: azure
+  }
+  blob: "Storage Account (Blob)\nbackend obiektowy LGTM\nchunks / blocks / traces" {
+    class: storage
+  }
+  kv: "Key Vault\nsekrety: admin pass, OAuth secret" {
+    class: azure
+  }
+  psql: "Azure DB for PostgreSQL\nstan / HA Grafany\n[opcjonalne / do decyzji]" {
+    class: optional
+  }
+  appgw: "Application Gateway / WAF\nlub internal Load Balancer\nwejście do UI\n[opcjonalne / do decyzji]" {
+    class: optional
+  }
+
+  pe: "Private Endpoints (snet-pe)\ndla Event Hub / Blob / Key Vault / PostgreSQL" {
+    class: azure
+  }
+  pdns: "Private DNS Zones\nprivatelink.blob.core.windows.net\nprivatelink.servicebus.windows.net\nprivatelink.vaultcore.azure.net" {
+    class: azure
+  }
+}
+
+# =============================================================================
+# STREFA 4 — Sieć (VNet / CNI overlay)
+# =============================================================================
+siec: "Sieć (VNet + Azure CNI overlay)" {
+  style.fill: "#FAFAFA"
+  style.stroke: "#666666"
+
+  vnet: "VNet vnet-lab — 10.10.0.0/16" {
+    class: network
+    snet_aks: "snet-aks 10.10.0.0/24\nwęzły AKS + Private Link Service" {
+      class: network
+    }
+    snet_pe: "snet-pe 10.10.1.0/24\nPrivate Endpoints" {
+      class: network
+    }
+  }
+  cni: "Azure CNI overlay\npod_cidr 192.168.0.0/16\nservice_cidr 10.240.0.0/16\ndns_service_ip 10.240.0.10" {
+    class: network
+  }
+  api: "Prywatny API server AKS\n[opcjonalne / do decyzji]" {
+    class: optional
+  }
+  netpol: "Network Policies\n(izolacja namespace / L4)" {
+    class: network
+  }
+}
+
+# =============================================================================
+# STREFA 5 — Klaster AKS (namespace'y)
+# =============================================================================
+aks: "Klaster AKS (aks-xyz-grafmon-lab)" {
+  style.fill: "#FFF8F0"
+  style.stroke: "#D79B00"
+
+  kolektory: "namespace: kolektory (Deploymenty)" {
+    style.stroke: "#D79B00"
+    vector: "Vector\nEvent Hub → Loki\n(parse / transform)" {
+      class: workload
+    }
+    otel: "OpenTelemetry Collector\ngateway; odbiór OTLP; tail sampling\n+ opc. DaemonSet-agenci" {
+      class: workload
+    }
+    prom: "Prometheus\ntryb agent / scrape\nremote_write → Mimir" {
+      class: workload
+    }
+  }
+
+  lgtm: "namespace: backendy LGTM — ClusterIP, NIEPUBLICZNE" {
+    style.fill: "#FDEFDD"
+    style.stroke: "#B85450"
+    style.stroke-width: 3
+    loki: "Loki (logi)\ndistributor / ingester / querier\ncompactor / ruler" {
+      class: workload
+    }
+    mimir: "Mimir (metryki)\ndistributor / ingester / querier\ncompactor / store-gateway / ruler" {
+      class: workload
+    }
+    tempo: "Tempo (traces)\ndistributor / ingester / querier\ncompactor" {
+      class: workload
+    }
+  }
+
+  graf: "namespace: grafana" {
+    style.stroke: "#D79B00"
+    grafana: "Grafana (Deployment)\nUI + data sources per organizacja" {
+      class: workload
+    }
+  }
+
+  wspolne: "namespace: wspólne (platforma)" {
+    style.stroke: "#D79B00"
+    ingress: "Ingress controller /\ninternal Load Balancer" {
+      class: workload
+    }
+    csi: "CSI Secrets Store\nprovider Azure Key Vault" {
+      class: workload
+    }
+    wi: "Workload Identity\nwebhook (mutating admission)" {
+      class: workload
+    }
+    sa: "ServiceAccounts\nazure.workload.identity/client-id" {
+      class: workload
+    }
+  }
+}
+
+# =============================================================================
+# STREFA 6 — Tożsamości zarządzane (UAMI + federated credentials)
+# =============================================================================
+tozsamosci: "Tożsamości zarządzane (Workload Identity)" {
+  style.fill: "#F9F4FB"
+  style.stroke: "#9673A6"
+
+  fed: "Federated credentials\nissuer OIDC AKS →\nsystem:serviceaccount:<ns>:<sa>" {
+    class: identity
+  }
+  uami_vector: "uami-vector\nrola: Azure Event Hubs Data Receiver" {
+    class: identity
+  }
+  uami_lgtm: "uami-lgtm\nrola: Storage Blob Data Contributor" {
+    class: identity
+  }
+  uami_grafana: "uami-grafana\nrola: Key Vault Secrets User\n(+ Grafana Admin/Viewer)" {
+    class: identity
+  }
+}
+
+# =============================================================================
+# NOTATKI BEZPIECZEŃSTWA + MAPOWANIE PoC → DOCELOWE
+# =============================================================================
+adnotacje: "Adnotacje bezpieczeństwa" {
+  style.fill: "#FFFBEA"
+  style.stroke: "#C9A227"
+
+  trust: "GRANICA ZAUFANIA TENANTÓW\nLoki/Mimir/Tempo UFAJĄ nagłówkowi X-Scope-OrgID.\nDlatego są ClusterIP, niepubliczne — brak dostępu użytkowników.\nDostęp mają TYLKO: kolektory (zapis) i Grafana (odczyt)." {
+    class: note
+  }
+  priv: "PRYWATNA ŁĄCZNOŚĆ DO AZURE\nEvent Hub / Blob / Key Vault / PostgreSQL\nwyłącznie przez Private Endpoints + prywatne strefy DNS.\n(linie przerywane = ścieżka prywatna PE/PLS)" {
+    class: note
+  }
+  secrets: "ZERO SEKRETÓW W KODZIE\nTożsamość: AKS Workload Identity (UAMI + federated credential).\nSekrety: Key Vault przez CSI Secrets Store.\nRBAC least-privilege — role przy krawędziach." {
+    class: note
+  }
+  mapowanie: "MAPOWANIE PoC (managed) → DOCELOWE (self-hosted)\nManaged Grafana → Grafana na AKS\nAMW/DCR/DCE (managed Prometheus) → Mimir (+ Prometheus scraper)\nremote_write do AMW → remote_write do Mimir\nAuth kubelet/IMDS (azuread) → Workload Identity (UAMI + fed cred)\nPE + strefa DNS → Private Endpointy + prywatne strefy DNS\nPLS + Managed Private Endpoint → prywatne wystawienie UI/cross-VNet" {
+    class: note
+  }
+}
+
+# =============================================================================
+# LEGENDA
+# =============================================================================
+legenda: "Legenda" {
+  style.fill: "#FFFFFF"
+  style.stroke: "#333333"
+
+  l_users: "Użytkownicy" {class: users}
+  l_identity: "Tożsamość (Entra / UAMI)" {class: identity}
+  l_azure: "Azure — usługi zarządzane" {class: azure}
+  l_storage: "Backend obiektowy (Blob)" {class: storage}
+  l_network: "Sieć / VNet / CNI" {class: network}
+  l_workload: "Workload na AKS" {class: workload}
+  l_sources: "Źródła telemetrii" {class: sources}
+  l_optional: "Opcjonalne / do decyzji" {class: optional}
+
+  l_solid: "linia ciągła"
+  l_solid_b: "łączność w klastrze / publiczna"
+  l_solid -> l_solid_b
+
+  l_dashed: "linia przerywana"
+  l_dashed_b: "ścieżka PRYWATNA (Private Endpoint / PLS)"
+  l_dashed -> l_dashed_b: {
+    style.stroke-dash: 4
+  }
+}
+
+# =============================================================================
+# KRAWĘDZIE (protokół / auth / X-Scope-OrgID / prywatna?)
+# =============================================================================
+
+# --- Zbieranie z źródeł ---
+zrodla.azres -> azure.eventhub: "diagnostic settings → logi"
+zrodla.apps -> azure.eventhub: "logi aplikacyjne"
+zrodla.apps -> aks.kolektory.otel: "OTLP (gRPC/HTTP)"
+aks.kolektory.prom -> zrodla.apps: "scrape /metrics (pull)"
+
+# --- Kolektory → backendy / Azure ---
+aks.kolektory.vector -> azure.eventhub: "odczyt Kafka/AMQP\nWI: Event Hubs Data Receiver\nPrivate Endpoint + priv. DNS" {
+  style.stroke-dash: 4
+}
+aks.kolektory.vector -> aks.lgtm.loki: "push HTTP\nX-Scope-OrgID = tenant"
+aks.kolektory.otel -> aks.lgtm.tempo: "OTLP; tail sampling\nX-Scope-OrgID"
+aks.kolektory.prom -> aks.lgtm.mimir: "remote_write\nX-Scope-OrgID; WI"
+
+# --- Backendy LGTM → Blob (prywatnie) ---
+aks.lgtm.loki -> azure.blob: "chunks\nWI: Storage Blob Data Contributor\nPE + priv. DNS" {
+  style.stroke-dash: 4
+}
+aks.lgtm.mimir -> azure.blob: "blocks (TSDB)\nWI: Storage Blob Data Contributor\nPE + priv. DNS" {
+  style.stroke-dash: 4
+}
+aks.lgtm.tempo -> azure.blob: "trace blocks\nWI: Storage Blob Data Contributor\nPE + priv. DNS" {
+  style.stroke-dash: 4
+}
+
+# --- Grafana → backendy (odczyt) ---
+aks.graf.grafana -> aks.lgtm.loki: "LogQL; X-Scope-OrgID per DS; ClusterIP"
+aks.graf.grafana -> aks.lgtm.mimir: "PromQL; X-Scope-OrgID per DS; ClusterIP"
+aks.graf.grafana -> aks.lgtm.tempo: "TraceQL; X-Scope-OrgID per DS; ClusterIP"
+
+# --- Grafana → sekrety / login / stan ---
+aks.graf.grafana -> aks.wspolne.csi: "montaż sekretów (CSI volume)"
+aks.wspolne.csi -> azure.kv: "hasło admina + OAuth client secret\nWI: Key Vault Secrets User\nPrivate Endpoint" {
+  style.stroke-dash: 4
+}
+aks.graf.grafana -> uzytkownicy.entra: "OIDC login\norg_mapping / team sync"
+aks.graf.grafana -> azure.psql: "stan / HA (opcjonalne)\nPE + priv. DNS" {
+  style.stroke-dash: 4
+}
+
+# --- Ścieżka użytkownika do UI (tylko UI) ---
+uzytkownicy.user -> azure.appgw: "HTTPS (tylko UI Grafany)"
+azure.appgw -> aks.wspolne.ingress: "HTTPS"
+aks.wspolne.ingress -> aks.graf.grafana: "HTTP (ClusterIP)"
+
+# --- Łańcuch Workload Identity ---
+aks.wspolne.sa -> tozsamosci.fed: "projected SA token (OIDC)"
+tozsamosci.fed -> tozsamosci.uami_vector: "trust (federacja)"
+tozsamosci.fed -> tozsamosci.uami_lgtm: "trust (federacja)"
+tozsamosci.fed -> tozsamosci.uami_grafana: "trust (federacja)"
+tozsamosci.uami_vector -> uzytkownicy.entra: "wymiana tokenu (AAD)"
+tozsamosci.uami_lgtm -> uzytkownicy.entra: "wymiana tokenu (AAD)"
+tozsamosci.uami_grafana -> uzytkownicy.entra: "wymiana tokenu (AAD)"
+
+# --- Prywatny dostęp: PE realizuje łączność, DNS rozwiązuje rekordy ---
+azure.pe -> azure.eventhub: "prywatne połączenie" {
+  style.stroke-dash: 4
+}
+azure.pe -> azure.blob: "prywatne połączenie" {
+  style.stroke-dash: 4
+}
+azure.pe -> azure.kv: "prywatne połączenie" {
+  style.stroke-dash: 4
+}
+azure.pdns -> azure.pe: "rozwiązywanie prywatnych rekordów A"
+
+# --- Sieć: PE osadzone w snet-pe, węzły AKS w snet-aks ---
+siec.vnet.snet_pe -> azure.pe: "host Private Endpoints"
+siec.vnet.snet_aks -> aks: "węzły klastra AKS"

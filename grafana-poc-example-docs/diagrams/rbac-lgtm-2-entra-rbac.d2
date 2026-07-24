@@ -1,0 +1,173 @@
+# Diagram 2 — Mapowanie Entra → org/team/folder/uprawnienia
+# Wygenerowane z kanonicznego modelu (rbac-lgtm.md) — parytet 1:1 z .excalidraw
+
+direction: right
+
+classes: {
+  sources: {
+    style.fill: "#F8CECC"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  collector: {
+    style.fill: "#FFE6CC"
+    style.stroke: "#D79B00"
+    style.stroke-width: 2
+  }
+  azure: {
+    style.fill: "#DAE8FC"
+    style.stroke: "#6C8EBF"
+    style.stroke-width: 2
+  }
+  backend: {
+    style.fill: "#FDEBD0"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  tenant: {
+    style.fill: "#FFF2CC"
+    style.stroke: "#D6B656"
+    style.stroke-width: 2
+  }
+  org: {
+    style.fill: "#D9D2E9"
+    style.stroke: "#8E7CC3"
+    style.stroke-width: 2
+  }
+  datasource: {
+    style.fill: "#D0E0E3"
+    style.stroke: "#45818E"
+    style.stroke-width: 2
+  }
+  folder: {
+    style.fill: "#D5E8D4"
+    style.stroke: "#82B366"
+    style.stroke-width: 2
+  }
+  dashboard: {
+    style.fill: "#FCE5CD"
+    style.stroke: "#E69138"
+    style.stroke-width: 2
+  }
+  team: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  identity: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  network: {
+    style.fill: "#F5F5F5"
+    style.stroke: "#666666"
+    style.stroke-width: 2
+  }
+  note: {
+    style.fill: "#FFFBEA"
+    style.stroke: "#C9A227"
+    style.stroke-width: 2
+  }
+  optional: {
+    style.fill: "#FFFFFF"
+    style.stroke: "#999999"
+    style.stroke-width: 2
+    style.stroke-dash: 4
+  }
+}
+
+entra: "ENTRA ID — GRUPY (reprezentatywne z rbac_input.csv)" {
+  style.stroke: "#9673A6"
+  style.fill: "#FFFFFF"
+  g_ocms_reader: "namespace_app-ocmsk-dev_..._reader\n(RA0395 / OCMS_KLIENT DEV)" {class: identity}
+  g_ocms_writer: "namespace_app-ocmsk-dev_..._writer" {class: identity}
+  g_ocms_admin: "self_prod_ra0395-dev_admin" {class: identity}
+  g_olimps_view: "nonprd_view_...ra0766...dev-1\n(RA0766 / OLIMPS DEV)" {class: identity}
+  g_olimps_contrib: "nonprd_contrybutor_...ra0766...dev-1" {class: identity}
+}
+
+mapping: "MAPOWANIE TOŻSAMOŚCI" {
+  style.stroke: "#666666"
+  style.fill: "#FFFFFF"
+  oss_map: "OSS: org_mapping\n[auth.azuread]\ngrupa → ORG + rola" {class: collector}
+  ent_sync: "Enterprise: team sync\ngrupa → team (automat)" {class: optional}
+}
+
+grafana: "GRAFANA — ORGANIZACJE / TEAMY / FOLDERY" {
+  style.stroke: "#8E7CC3"
+  style.fill: "#FFFFFF"
+  org_ocms: "Org OCMS_KLIENT" {
+    class: org
+    team_ocms_reader: "team = ..._reader" {class: team}
+    team_ocms_writer: "team = ..._writer" {class: team}
+    team_ocms_admin: "team = self_prod_ra0395-dev_admin" {class: team}
+    folder_ocms: "Folder: RA0395 - OCMS_KLIENT" {
+      class: folder
+      subf_ocms_dev: "Podfolder: OCMS_KLIENT-DEV" {class: folder}
+      subf_ocms_uat: "Podfolder: OCMS_KLIENT-UAT" {class: folder}
+    }
+    ds_loki_ocms_dev: "Loki–OCMS-DEV\nX-Scope-OrgID: ra0395-ocms_klient-dev" {class: datasource}
+  }
+  org_olimps: "Org OLIMPS" {
+    class: org
+    team_olimps_view: "team = nonprd_view_...dev-1" {class: team}
+    team_olimps_contrib: "team = nonprd_contrybutor_...dev-1" {class: team}
+    folder_olimps: "Folder: RA0766 - OLIMPS" {
+      class: folder
+      subf_olimps_dev: "Podfolder: OLIMPS-DEV" {class: folder}
+    }
+    ds_loki_olimps_dev: "Loki–OLIMPS-DEV\nX-Scope-OrgID: ra0766-olimps-dev" {class: datasource}
+  }
+}
+
+security: "ADNOTACJE — OSS vs ENTERPRISE" {
+  style.stroke: "#C9A227"
+  style.fill: "#FFFFFF"
+  note_oss: "OSS (MODEL GŁÓWNY): izolacja = brzeg ORGANIZACJI;\norg_mapping; rola zgrubna Viewer/Editor/Admin;\nDS powielany w każdej org (dok. 16 §1)" {class: note}
+  note_ent: "ENTERPRISE (WARIANT): JEDNA org + team sync +\ndatasource permissions / LBAC; foldery per team;\ncustom roles (dok. 16 §2)" {class: note}
+  note_folders: "Folder = (ra, system); podfolder = (ra, system, env);\nnadrzędny → View dla wszystkich teamów systemu;\npodfolder → View/Edit/Admin per wiersz CSV (folders.tf)" {class: note}
+}
+
+legenda: "LEGENDA" {
+  class: legenda
+  lg_sources: "Źródła telemetrii" {class: sources}
+  lg_collector: "Kolektory na AKS (ustawiają X-Scope-OrgID)" {class: collector}
+  lg_azure: "Azure — usługi zarządzane" {class: azure}
+  lg_backend: "Backendy LGTM (ClusterIP, tylko wewnętrznie)" {class: backend}
+  lg_tenant: "Tenant — X-Scope-OrgID (partycja backendu)" {class: tenant}
+  lg_org: "Organizacja Grafany" {class: org}
+  lg_ds: "Data source (z przypiętym X-Scope-OrgID)" {class: datasource}
+  lg_folder: "Folder / podfolder" {class: folder}
+  lg_dash: "Dashboard" {class: dashboard}
+  lg_team: "Team = grupa Entra ID" {class: team}
+  lg_note: "Adnotacja / ustalenie ze spotkania" {class: note}
+  lg_opt: "Wariant Enterprise (team sync + DS perms / LBAC)" {class: optional}
+  lg_solid: "linia CIĄGŁA = łączność w klastrze / publiczna" {class: note}
+  lg_dash_l: "linia PRZERYWANA = ścieżka PRYWATNA (Private Endpoint / ClusterIP)" {class: note}
+  lg_model: "MODEL GŁÓWNY = OSS multi-org (org_mapping); Enterprise = wariant-adnotacja" {class: note}
+}
+
+# --- KRAWĘDZIE (protokół / auth / X-Scope-OrgID / prywatna?) ---
+entra.g_ocms_reader -> grafana.org_ocms.team_ocms_reader: "org_mapping → Org OCMS + rola\n(Enterprise: team sync)"
+entra.g_ocms_writer -> grafana.org_ocms.team_ocms_writer: "org_mapping / team sync"
+entra.g_ocms_admin -> grafana.org_ocms.team_ocms_admin: "org_mapping / team sync"
+entra.g_olimps_view -> grafana.org_olimps.team_olimps_view: "org_mapping → Org OLIMPS"
+entra.g_olimps_contrib -> grafana.org_olimps.team_olimps_contrib: "org_mapping / team sync"
+mapping.oss_map -> grafana.org_ocms: "grupa → ORG + rola (Viewer/Editor/Admin)"
+mapping.ent_sync -> grafana.org_ocms: "grupa → team (jedna org)" {style.stroke: "#999999"}
+grafana.org_ocms.team_ocms_reader -> grafana.org_ocms.folder_ocms: "View (folder nadrzędny — cały system)"
+grafana.org_ocms.team_ocms_writer -> grafana.org_ocms.folder_ocms: "View (nadrzędny)"
+grafana.org_ocms.team_ocms_admin -> grafana.org_ocms.folder_ocms: "View (nadrzędny)"
+grafana.org_olimps.team_olimps_view -> grafana.org_olimps.folder_olimps: "View (nadrzędny)"
+grafana.org_olimps.team_olimps_contrib -> grafana.org_olimps.folder_olimps: "View (nadrzędny)"
+grafana.org_ocms.team_ocms_reader -> grafana.org_ocms.folder_ocms.subf_ocms_dev: "View"
+grafana.org_ocms.team_ocms_writer -> grafana.org_ocms.folder_ocms.subf_ocms_dev: "Edit"
+grafana.org_ocms.team_ocms_admin -> grafana.org_ocms.folder_ocms.subf_ocms_dev: "Admin"
+grafana.org_olimps.team_olimps_view -> grafana.org_olimps.folder_olimps.subf_olimps_dev: "View"
+grafana.org_olimps.team_olimps_contrib -> grafana.org_olimps.folder_olimps.subf_olimps_dev: "Edit"
+grafana.org_ocms.team_ocms_reader -> grafana.org_ocms.ds_loki_ocms_dev: "Query (Enterprise: DS permission)" {style.stroke: "#999999"}
+grafana.org_ocms.team_ocms_writer -> grafana.org_ocms.ds_loki_ocms_dev: "Edit (Enterprise)" {style.stroke: "#999999"}
+grafana.org_ocms.team_ocms_admin -> grafana.org_ocms.ds_loki_ocms_dev: "Admin (Enterprise)" {style.stroke: "#999999"}
+grafana.org_olimps.team_olimps_view -> grafana.org_olimps.ds_loki_olimps_dev: "Query (Enterprise)" {style.stroke: "#999999"}
+grafana.org_olimps.team_olimps_contrib -> grafana.org_olimps.ds_loki_olimps_dev: "Edit (Enterprise)" {style.stroke: "#999999"}

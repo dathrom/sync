@@ -84,6 +84,27 @@ Wspólne dla obu skryptów: potrzebny zalogowany `az CLI`, a dla `deploy-k8s` do
 `kubectl` i `helm` (>= 3). Skrypty czytają dane z `terraform output`, więc odpalaj je
 z katalogu, w którym leży stan Terraform.
 
+### Uprawnienia i service account dla `configure-grafana.*`
+
+Skrypt działa przez `az grafana`, czyli tożsamością z `az login` — **nie** używa
+service accountu Grafany. Tożsamość wykonująca musi mieć rolę **Grafana Admin** na
+instancji: osoba robiąca `terraform apply` dostaje ją automatycznie (`rbac.tf`,
+`deployer_grafana_admin`); jeśli skrypt uruchamia inna tożsamość, wpisz jej object_id
+w `configurator_object_id` w `terraform.tfvars`.
+
+Jeżeli konfigurację ma zamiast tego wykonywać **service account Grafany** (token
+zamiast `az login`, jak w `managed_grafana_internal/02-grafana-config`), SA tworzy
+się **na samej instancji Grafany** (nie w Entra ID i nie w subskrypcji Azure):
+
+- UI Grafany: *Administration → Users and access → Service accounts*, albo
+- CLI: `az grafana service-account create -n grafana-xyz-lab -g <resource_group> --service-account <nazwa> --role Admin`
+
+Uwaga: instancja z `grafana.tf` ma service accounty **wyłączone**
+(`azurerm_dashboard_grafana` bez `api_key_enabled = true` — stąd provider `grafana`
+Terraforma nie ma się jak zalogować i wnętrze konfigurują skrypty). Żeby SA dało się
+utworzyć, najpierw włącz je: `api_key_enabled = true` w `grafana.tf` + `terraform apply`,
+albo doraźnie `az grafana update -n grafana-xyz-lab -g <resource_group> --api-key Enabled`.
+
 ### Uruchamianie na Windows (PowerShell)
 
 ```powershell
@@ -118,5 +139,7 @@ powershell.exe -ExecutionPolicy Bypass -File .\configure-grafana.ps1
   `azuread` w remote_write, rola *Monitoring Metrics Publisher* na DCR-B.
 - **Źródło Azure Monitor (Obszar 2)**: tożsamość zalogowanego użytkownika, a awaryjnie
   service principal z pliku `identity.tf`.
+- **`configure-grafana.*` → Grafana**: tożsamość z `az login` z rolą *Grafana Admin*
+  na instancji (patrz sekcja o uprawnieniach i service accouncie wyżej).
 
 Więcej szczegółów siedzi w komentarzach po polsku, w poszczególnych plikach.

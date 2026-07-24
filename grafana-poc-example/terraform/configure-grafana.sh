@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 # configure-grafana.sh - konfiguracja "warstwy danych" Grafany, odpalana po apply.
-# Terraform nie ogarnie tu wnętrza Grafany (Azure Managed Grafana wyłącza konta
-# usługowe, więc provider Grafany nie ma jak się zalogować). Dlatego lecimy przez
-# `az grafana` (na Twoim `az login`) i tworzymy 4 źródła danych:
+# Terraform nie ogarnie tu wnętrza Grafany (instancja ma wyłączone service accounty —
+# grafana.tf nie ustawia api_key_enabled — więc provider Grafany nie ma jak się
+# zalogować). Dlatego lecimy przez `az grafana` (na Twoim `az login`) i tworzymy
+# 4 źródła danych:
 #   AMW-A, AMW-B      : Prometheus, uwierzytelnianie tożsamością zarządzaną (MSI)
 #   AzMon-CurrentUser : Azure Monitor (zalogowany user; BEZ fallbacku SP — środowisko
 #                       nie ma uprawnień do tworzenia app registration, patrz identity.tf)
 #   OSS-Prometheus-PLS: prywatna ścieżka do self-hosted Prometheusa przez MPE→PLS (S1.6)
 # Skrypt jest idempotentny - najpierw kasuje źródło o tej samej nazwie, potem tworzy.
 # Kolejność: `terraform apply` -> k8s/deploy-k8s.sh -> ten skrypt.
-# Codifies the Grafana data-plane config that Terraform can't manage here (Azure Managed Grafana
-# disables service accounts, so the Grafana TF provider can't authenticate). Uses `az grafana`
+#
+# Tożsamość: `az login` z rolą "Grafana Admin" na instancji (deployer dostaje ją w
+# rbac.tf; dla innej tożsamości ustaw configurator_object_id w tfvars). Gdyby zamiast
+# tego miał działać service account Grafany, tworzy się go NA SAMEJ INSTANCJI
+# (Administration -> Service accounts albo `az grafana service-account create`), po
+# wcześniejszym włączeniu api_key_enabled — szczegóły w README.pl.md.
+#
+# Codifies the Grafana data-plane config that Terraform can't manage here (this instance
+# has service accounts disabled — api_key_enabled not set in grafana.tf — so the Grafana
+# TF provider can't authenticate). Uses `az grafana`
 # (your az login). Run AFTER `terraform apply` and `k8s/deploy-k8s.sh`.
 #
 # Creates the 4 data sources used by the lab and wires the OSS-Prometheus private path (S1.6).

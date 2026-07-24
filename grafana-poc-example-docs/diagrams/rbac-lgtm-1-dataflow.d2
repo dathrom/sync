@@ -1,0 +1,203 @@
+# Diagram 1 — Przepływ danych i tenanci LGTM
+# Wygenerowane z kanonicznego modelu (rbac-lgtm.md) — parytet 1:1 z .excalidraw
+
+direction: right
+
+classes: {
+  sources: {
+    style.fill: "#F8CECC"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  collector: {
+    style.fill: "#FFE6CC"
+    style.stroke: "#D79B00"
+    style.stroke-width: 2
+  }
+  azure: {
+    style.fill: "#DAE8FC"
+    style.stroke: "#6C8EBF"
+    style.stroke-width: 2
+  }
+  backend: {
+    style.fill: "#FDEBD0"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  tenant: {
+    style.fill: "#FFF2CC"
+    style.stroke: "#D6B656"
+    style.stroke-width: 2
+  }
+  org: {
+    style.fill: "#D9D2E9"
+    style.stroke: "#8E7CC3"
+    style.stroke-width: 2
+  }
+  datasource: {
+    style.fill: "#D0E0E3"
+    style.stroke: "#45818E"
+    style.stroke-width: 2
+  }
+  folder: {
+    style.fill: "#D5E8D4"
+    style.stroke: "#82B366"
+    style.stroke-width: 2
+  }
+  dashboard: {
+    style.fill: "#FCE5CD"
+    style.stroke: "#E69138"
+    style.stroke-width: 2
+  }
+  team: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  identity: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  network: {
+    style.fill: "#F5F5F5"
+    style.stroke: "#666666"
+    style.stroke-width: 2
+  }
+  note: {
+    style.fill: "#FFFBEA"
+    style.stroke: "#C9A227"
+    style.stroke-width: 2
+  }
+  optional: {
+    style.fill: "#FFFFFF"
+    style.stroke: "#999999"
+    style.stroke-width: 2
+    style.stroke-dash: 4
+  }
+}
+
+zrodla: "ŹRÓDŁA TELEMETRII" {
+  style.stroke: "#B85450"
+  style.fill: "#FFFFFF"
+  src_azres: "Logi zasobów Azure\n(Diagnostic Settings)" {class: sources}
+  src_akslogs: "Logi podów / kontenerów\n(AKS)" {class: sources}
+  src_onpremlogs: "Logi on-prem" {class: sources}
+  src_aksmetrics: "Metryki workloadów AKS\n(endpoint /metrics)" {class: sources}
+  src_azmon: "Metryki zasobów Azure\n(Azure Monitor)" {class: sources}
+  src_onprommetrics: "Exporter metryk on-prem" {class: sources}
+  src_appA: "Aplikacja A\n(OTel SDK — ślady)" {class: sources}
+  src_appB: "Aplikacja B\n(OTel SDK — ślady)" {class: sources}
+}
+
+azure: "AZURE" {
+  style.stroke: "#6C8EBF"
+  style.fill: "#FFFFFF"
+  eventhub: "Azure Event Hub\n(bufor logów)" {class: azure}
+}
+
+kolektory: "KOLEKTORY (AKS) — USTAWIAJĄ X-Scope-OrgID" {
+  style.stroke: "#D79B00"
+  style.fill: "#FFFFFF"
+  vector: "Vector\n(Event Hub → Loki)" {class: collector}
+  azmon_exp: "Azure Monitor exporter\n(→ Prometheus)" {class: collector}
+  prometheus: "Prometheus\n(scrape + remote_write)" {class: collector}
+  otel: "OTel Collector\n(OTLP + tail sampling)" {class: collector}
+}
+
+backendy: "BACKENDY LGTM (AKS, ClusterIP — TYLKO WEWNĘTRZNIE)" {
+  style.stroke: "#B85450"
+  style.fill: "#FFFFFF"
+  loki: "Loki (logi)" {class: backend}
+  mimir: "Mimir (metryki)" {class: backend}
+  tempo: "Tempo (ślady)" {class: backend}
+}
+
+tenanci: "TENANCI — X-Scope-OrgID (partycje backendów)" {
+  style.stroke: "#D6B656"
+  style.fill: "#FFFFFF"
+  t_ocms_dev: "ra0395-ocms_klient-dev" {class: tenant}
+  t_ocms_uat: "ra0395-ocms_klient-uat" {class: tenant}
+  t_olimps_dev: "ra0766-olimps-dev" {class: tenant}
+  t_dingo_dev: "ra0341-dingo-dev\n(opcjonalny 3. system)" {class: tenant}
+  t_shared: "shared\n(metryki dla wszystkich)" {class: tenant}
+}
+
+grafana: "GRAFANA — ORGANIZACJE I DATA SOURCE'Y" {
+  style.stroke: "#8E7CC3"
+  style.fill: "#FFFFFF"
+  org_ocms: "Org OCMS_KLIENT" {
+    class: org
+    ds_loki_ocms_dev: "Loki–OCMS-DEV\nX-Scope-OrgID: ra0395-ocms_klient-dev" {class: datasource}
+    ds_mimir_ocms_dev: "Mimir–OCMS-DEV\nX-Scope-OrgID: ra0395-ocms_klient-dev" {class: datasource}
+    ds_tempo_ocms_dev: "Tempo–OCMS-DEV\nX-Scope-OrgID: ra0395-ocms_klient-dev" {class: datasource}
+    ds_loki_ocms_uat: "Loki–OCMS-UAT\nX-Scope-OrgID: ra0395-ocms_klient-uat" {class: datasource}
+  }
+  org_olimps: "Org OLIMPS" {
+    class: org
+    ds_loki_olimps_dev: "Loki–OLIMPS-DEV\nX-Scope-OrgID: ra0766-olimps-dev" {class: datasource}
+    ds_mimir_olimps_dev: "Mimir–OLIMPS-DEV\nX-Scope-OrgID: ra0766-olimps-dev" {class: datasource}
+    ds_tempo_olimps_dev: "Tempo–OLIMPS-DEV\nX-Scope-OrgID: ra0766-olimps-dev" {class: datasource}
+  }
+  org_platform: "Org Platform / Shared" {
+    class: org
+    ds_mimir_shared: "Mimir–shared\nX-Scope-OrgID: shared" {class: datasource}
+    ds_loki_cross: "Loki–OCMS|OLIMPS (cross-tenant)\nX-Scope-OrgID:\nra0395-ocms_klient-dev|ra0766-olimps-dev" {class: datasource}
+  }
+}
+
+security: "ADNOTACJE BEZPIECZEŃSTWA" {
+  style.stroke: "#C9A227"
+  style.fill: "#FFFFFF"
+  note_trust: "GRANICA ZAUFANIA: backendy L/M/T ufają nagłówkowi\nX-Scope-OrgID → ClusterIP, nieosiągalne z sieci userów\n(dok. 16 §0)" {class: note}
+  note_wi: "Workload Identity (UAMI + federated credential) — BRAK SEKRETÓW;\nPrivate Endpoint + prywatna strefa DNS do Event Hub / Azure Monitor" {class: note}
+  note_flow: "Event Hub → Vector → Loki [L639];\nexporter → Prometheus → Mimir [L664];\naplikacje → OTel → Tempo [L699]" {class: note}
+  note_hdr: "X-Scope-OrgID ustawiany przez kolektor, nienadpisywalny [L625];\nLoki bez row/index-level security [L810-813]" {class: note}
+}
+
+legenda: "LEGENDA" {
+  class: legenda
+  lg_sources: "Źródła telemetrii" {class: sources}
+  lg_collector: "Kolektory na AKS (ustawiają X-Scope-OrgID)" {class: collector}
+  lg_azure: "Azure — usługi zarządzane" {class: azure}
+  lg_backend: "Backendy LGTM (ClusterIP, tylko wewnętrznie)" {class: backend}
+  lg_tenant: "Tenant — X-Scope-OrgID (partycja backendu)" {class: tenant}
+  lg_org: "Organizacja Grafany" {class: org}
+  lg_ds: "Data source (z przypiętym X-Scope-OrgID)" {class: datasource}
+  lg_folder: "Folder / podfolder" {class: folder}
+  lg_dash: "Dashboard" {class: dashboard}
+  lg_team: "Team = grupa Entra ID" {class: team}
+  lg_note: "Adnotacja / ustalenie ze spotkania" {class: note}
+  lg_opt: "Wariant Enterprise (team sync + DS perms / LBAC)" {class: optional}
+  lg_solid: "linia CIĄGŁA = łączność w klastrze / publiczna" {class: note}
+  lg_dash_l: "linia PRZERYWANA = ścieżka PRYWATNA (Private Endpoint / ClusterIP)" {class: note}
+  lg_model: "MODEL GŁÓWNY = OSS multi-org (org_mapping); Enterprise = wariant-adnotacja" {class: note}
+}
+
+# --- KRAWĘDZIE (protokół / auth / X-Scope-OrgID / prywatna?) ---
+zrodla.src_azres -> azure.eventhub: "Diagnostic Settings → logi\nPrivate Endpoint + priv. DNS" {style.stroke-dash: 4}
+azure.eventhub -> kolektory.vector: "odczyt AMQP, WI (brak sekretów)\nPrivate Endpoint [L639]" {style.stroke-dash: 4}
+zrodla.src_akslogs -> kolektory.vector: "logi podów (w klastrze)"
+zrodla.src_onpremlogs -> kolektory.vector: "logi on-prem"
+zrodla.src_aksmetrics -> kolektory.prometheus: "scrape /metrics (pull)"
+zrodla.src_azmon -> kolektory.azmon_exp: "Azure Monitor API, WI\nprywatna" {style.stroke-dash: 4}
+kolektory.azmon_exp -> kolektory.prometheus: "scrape exportera [L664]"
+zrodla.src_onprommetrics -> kolektory.prometheus: "scrape / remote"
+zrodla.src_appA -> kolektory.otel: "OTLP (gRPC)"
+zrodla.src_appB -> kolektory.otel: "OTLP (gRPC) [L699]"
+kolektory.vector -> backendy.loki: "push HTTP, X-Scope-OrgID: <ra-system-env>\nnienadpisywalny [L625], w klastrze"
+kolektory.prometheus -> backendy.mimir: "remote_write, WI, X-Scope-OrgID: <tenant> lub shared\nw klastrze"
+kolektory.otel -> backendy.tempo: "OTLP, X-Scope-OrgID: <tenant>\nw klastrze"
+backendy.loki -> tenanci: "partycje per X-Scope-OrgID\nbrak row/index-level security [L810-813]"
+backendy.mimir -> tenanci: "partycje per X-Scope-OrgID (+ shared) [L808]"
+backendy.tempo -> tenanci: "partycje per X-Scope-OrgID"
+grafana.org_ocms.ds_loki_ocms_dev -> tenanci.t_ocms_dev: "LogQL, X-Scope-OrgID: ra0395-ocms_klient-dev\nClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_ocms.ds_mimir_ocms_dev -> tenanci.t_ocms_dev: "PromQL, ClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_ocms.ds_tempo_ocms_dev -> tenanci.t_ocms_dev: "TraceQL, ClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_ocms.ds_loki_ocms_uat -> tenanci.t_ocms_uat: "LogQL, X-Scope-OrgID: ra0395-ocms_klient-uat\nClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_olimps.ds_loki_olimps_dev -> tenanci.t_olimps_dev: "LogQL, X-Scope-OrgID: ra0766-olimps-dev\nClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_olimps.ds_mimir_olimps_dev -> tenanci.t_olimps_dev: "PromQL, ClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_olimps.ds_tempo_olimps_dev -> tenanci.t_olimps_dev: "TraceQL, ClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_platform.ds_mimir_shared -> tenanci.t_shared: "PromQL, X-Scope-OrgID: shared\n(metryki dla wszystkich) [L808,1302]" {style.stroke-dash: 4}
+grafana.org_platform.ds_loki_cross -> tenanci.t_ocms_dev: "LogQL, X-Scope-OrgID: ...ocms-dev|... (pipe)\ncross-tenant, ClusterIP" {style.stroke-dash: 4}
+grafana.org_platform.ds_loki_cross -> tenanci.t_olimps_dev: "LogQL, X-Scope-OrgID: ...|ra0766-olimps-dev\ncross-tenant, ClusterIP" {style.stroke-dash: 4}

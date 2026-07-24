@@ -3,15 +3,22 @@
   configure-grafana.ps1 - konfiguracja "warstwy danych" Grafany, odpalana po apply.
 
 .DESCRIPTION
-  Terraform nie ogarnie tu wnetrza Grafany (Azure Managed Grafana wylacza konta
-  uslugowe, wiec provider Grafany nie ma jak sie zalogowac). Dlatego lecimy przez
-  `az grafana` (na Twoim `az login`) i tworzymy 4 zrodla danych:
+  Terraform nie ogarnie tu wnetrza Grafany (instancja ma wylaczone service accounty -
+  grafana.tf nie ustawia api_key_enabled - wiec provider Grafany nie ma jak sie
+  zalogowac). Dlatego lecimy przez `az grafana` (na Twoim `az login`) i tworzymy
+  4 zrodla danych:
     AMW-A, AMW-B      : Prometheus, uwierzytelnianie tozsamoscia zarzadzana (MSI)
     AzMon-CurrentUser : Azure Monitor (zalogowany user; BEZ fallbacku SP - srodowisko
                         nie ma uprawnien do tworzenia app registration, patrz identity.tf)
     OSS-Prometheus-PLS: prywatna sciezka do self-hosted Prometheusa przez MPE->PLS (S1.6)
   Skrypt jest idempotentny - najpierw kasuje zrodlo o tej samej nazwie, potem tworzy.
   Kolejnosc: `terraform apply` -> k8s/deploy-k8s.ps1 -> ten skrypt.
+
+  Tozsamosc: `az login` z rola "Grafana Admin" na instancji (deployer dostaje ja w
+  rbac.tf; dla innej tozsamosci ustaw configurator_object_id w tfvars). Gdyby zamiast
+  tego mial dzialac service account Grafany, tworzy sie go NA SAMEJ INSTANCJI
+  (Administration -> Service accounts albo `az grafana service-account create`), po
+  wczesniejszym wlaczeniu api_key_enabled - szczegoly w README.pl.md.
 
 .EXAMPLE
   ./configure-grafana.ps1

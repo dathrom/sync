@@ -1,0 +1,159 @@
+# Diagram 3 — Dashboard cross-tenant + OSS vs Enterprise
+# Wygenerowane z kanonicznego modelu (rbac-lgtm.md) — parytet 1:1 z .excalidraw
+
+direction: right
+
+classes: {
+  sources: {
+    style.fill: "#F8CECC"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  collector: {
+    style.fill: "#FFE6CC"
+    style.stroke: "#D79B00"
+    style.stroke-width: 2
+  }
+  azure: {
+    style.fill: "#DAE8FC"
+    style.stroke: "#6C8EBF"
+    style.stroke-width: 2
+  }
+  backend: {
+    style.fill: "#FDEBD0"
+    style.stroke: "#B85450"
+    style.stroke-width: 2
+  }
+  tenant: {
+    style.fill: "#FFF2CC"
+    style.stroke: "#D6B656"
+    style.stroke-width: 2
+  }
+  org: {
+    style.fill: "#D9D2E9"
+    style.stroke: "#8E7CC3"
+    style.stroke-width: 2
+  }
+  datasource: {
+    style.fill: "#D0E0E3"
+    style.stroke: "#45818E"
+    style.stroke-width: 2
+  }
+  folder: {
+    style.fill: "#D5E8D4"
+    style.stroke: "#82B366"
+    style.stroke-width: 2
+  }
+  dashboard: {
+    style.fill: "#FCE5CD"
+    style.stroke: "#E69138"
+    style.stroke-width: 2
+  }
+  team: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  identity: {
+    style.fill: "#E1D5E7"
+    style.stroke: "#9673A6"
+    style.stroke-width: 2
+  }
+  network: {
+    style.fill: "#F5F5F5"
+    style.stroke: "#666666"
+    style.stroke-width: 2
+  }
+  note: {
+    style.fill: "#FFFBEA"
+    style.stroke: "#C9A227"
+    style.stroke-width: 2
+  }
+  optional: {
+    style.fill: "#FFFFFF"
+    style.stroke: "#999999"
+    style.stroke-width: 2
+    style.stroke-dash: 4
+  }
+}
+
+entra: "ENTRA ID" {
+  style.stroke: "#9673A6"
+  style.fill: "#FFFFFF"
+  g_platform: "platform_observability\n(grupa Entra — centralny zespół)" {class: identity}
+}
+
+grafana: "GRAFANA — Org Platform / Shared" {
+  style.stroke: "#8E7CC3"
+  style.fill: "#FFFFFF"
+  org_platform: "Org Platform / Shared" {
+    class: org
+    team_platform: "team platform_observability" {class: team}
+    folder_platform: "Folder: Platform / Cross-system" {
+      class: folder
+      dash_cross: "Dashboard: OCMS + OLIMPS\n(logi z 2 tenantów + metryki shared)" {class: dashboard}
+    }
+    ds_loki_cross: "Loki–OCMS|OLIMPS (cross-tenant)\nX-Scope-OrgID:\nra0395-ocms_klient-dev|ra0766-olimps-dev" {class: datasource}
+    ds_mimir_shared: "Mimir–shared\nX-Scope-OrgID: shared" {class: datasource}
+  }
+}
+
+backendy: "BACKENDY LGTM (AKS, ClusterIP)" {
+  style.stroke: "#B85450"
+  style.fill: "#FFFFFF"
+  loki: "Loki (logi)" {
+    class: backend
+    t_ocms_dev: "ra0395-ocms_klient-dev" {class: tenant}
+    t_olimps_dev: "ra0766-olimps-dev" {class: tenant}
+  }
+  mimir: "Mimir (metryki)" {
+    class: backend
+    t_shared: "shared" {class: tenant}
+  }
+}
+
+enterprise: "WARIANT ENTERPRISE (adnotacja)" {
+  style.stroke: "#999999"
+  style.fill: "#FFFFFF"
+  ent_box: "Zamiast multi-org + cross-tenant DS:\nJEDNA org + LBAC — 1 DS Loki,\nfiltr etykiet per team" {class: optional}
+  ent_lbac: "LBAC: reguły etykietowe per team\n(namespace / cluster); ⚠ fail-open\ngdy brak reguły (dok. 16 §2)" {class: optional}
+}
+
+security: "ADNOTACJE — CROSS-TENANT I KONCESJE" {
+  style.stroke: "#C9A227"
+  style.fill: "#FFFFFF"
+  note_cross: "Cross-tenant query = feature backendu (OSS i Enterprise,\nlicense-free): X-Scope-OrgID: A|B, multi_tenant_queries_enabled\n(dok. 16 §3.1; L884, L893, L898)" {class: note}
+  note_shared: "Koncesja: metryki „shared\" widoczne dla wszystkich [L808, L1302];\nlogi = wiele data source'ów, bo Loki bez row-level security [L810-813]" {class: note}
+  note_trust: "Backendy ufają nagłówkowi → tylko ClusterIP / wewnętrznie;\nuser nie nadpisze X-Scope-OrgID przez Grafanę (backend przypina) [L625]\n(dok. 16 §0, §3.3)" {class: note}
+}
+
+legenda: "LEGENDA" {
+  class: legenda
+  lg_sources: "Źródła telemetrii" {class: sources}
+  lg_collector: "Kolektory na AKS (ustawiają X-Scope-OrgID)" {class: collector}
+  lg_azure: "Azure — usługi zarządzane" {class: azure}
+  lg_backend: "Backendy LGTM (ClusterIP, tylko wewnętrznie)" {class: backend}
+  lg_tenant: "Tenant — X-Scope-OrgID (partycja backendu)" {class: tenant}
+  lg_org: "Organizacja Grafany" {class: org}
+  lg_ds: "Data source (z przypiętym X-Scope-OrgID)" {class: datasource}
+  lg_folder: "Folder / podfolder" {class: folder}
+  lg_dash: "Dashboard" {class: dashboard}
+  lg_team: "Team = grupa Entra ID" {class: team}
+  lg_note: "Adnotacja / ustalenie ze spotkania" {class: note}
+  lg_opt: "Wariant Enterprise (team sync + DS perms / LBAC)" {class: optional}
+  lg_solid: "linia CIĄGŁA = łączność w klastrze / publiczna" {class: note}
+  lg_dash_l: "linia PRZERYWANA = ścieżka PRYWATNA (Private Endpoint / ClusterIP)" {class: note}
+  lg_model: "MODEL GŁÓWNY = OSS multi-org (org_mapping); Enterprise = wariant-adnotacja" {class: note}
+}
+
+# --- KRAWĘDZIE (protokół / auth / X-Scope-OrgID / prywatna?) ---
+entra.g_platform -> grafana.org_platform.team_platform: "org_mapping / team sync → Org Platform"
+grafana.org_platform.team_platform -> grafana.org_platform.folder_platform: "Admin / Edit (folder Platform)"
+grafana.org_platform.team_platform -> grafana.org_platform.folder_platform.dash_cross: "View (dashboard cross-tenant)"
+grafana.org_platform.team_platform -> grafana.org_platform.ds_loki_cross: "Query (Enterprise: DS permission)" {style.stroke: "#999999"}
+grafana.org_platform.folder_platform.dash_cross -> grafana.org_platform.ds_loki_cross: "panel logów (2 tenanty)"
+grafana.org_platform.folder_platform.dash_cross -> grafana.org_platform.ds_mimir_shared: "panel metryk shared"
+grafana.org_platform.ds_loki_cross -> backendy.loki.t_ocms_dev: "LogQL, X-Scope-OrgID: ...ocms-dev|... (pipe)\nmulti_tenant_queries_enabled, ClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_platform.ds_loki_cross -> backendy.loki.t_olimps_dev: "LogQL, X-Scope-OrgID: ...|ra0766-olimps-dev (pipe)\nClusterIP (prywatna)" {style.stroke-dash: 4}
+grafana.org_platform.ds_mimir_shared -> backendy.mimir.t_shared: "PromQL, X-Scope-OrgID: shared\nmetryki dla wszystkich [L808,1302]" {style.stroke-dash: 4}
+enterprise.ent_box -> enterprise.ent_lbac: "reguły LBAC" {style.stroke: "#999999"}
